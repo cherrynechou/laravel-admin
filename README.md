@@ -1,12 +1,12 @@
-<h1 align="center"> laravel-upload </h1>
+<h1 align="center"> laravel-admin </h1>
 
-<p align="center"> dcat-admin upload extend.</p>
+<p align="center">laravel admin api</p>
 
 
 ## Installing
 
 ```shell
-$ composer require cherrynechou/laravel-upload -vvv
+$ composer require cherrynechou/laravel-admin -vvv
 ```
 
 ## Usage
@@ -15,7 +15,7 @@ TODO
 
 ## Contributing
 
-php artisan vendor:publish --provider="CherryneChou\LaravelUpload\UploadServiceProvider"
+php artisan vendor:publish --provider="CherryneChou\admin\AdminServiceProvider"
 
 
 php artisan migrate
