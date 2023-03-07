@@ -1,0 +1,30 @@
+{
+  "name": "cherrynechou/laravel-antd-admin",
+  "description": "laravel admin api",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "cherrynechou",
+      "email": "iboy_2008@163.com"
+    }
+  ],
+  "require": {
+    "php": "^8.0.2",
+    "laravel/framework": "~9.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "CherryneChou\\Admin\\": "src"
+    },
+    "files": [
+      "src/helpers.php"
+    ]
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "CherryneChou\\Admin\\AdminServiceProvider"
+      ]
+    }
+  }
+}
