@@ -82,4 +82,22 @@ class Helper
 
         return $tree;
     }
+
+    /**
+     * 删除数组中的元素.
+     *
+     * @param  array  $array
+     * @param  mixed  $value
+     * @param  bool  $strict
+     */
+    public static function deleteByValue(&$array, $value, bool $strict = false)
+    {
+        $value = (array) $value;
+
+        foreach ($array as $index => $item) {
+            if (in_array($item, $value, $strict)) {
+                unset($array[$index]);
+            }
+        }
+    }
 }
