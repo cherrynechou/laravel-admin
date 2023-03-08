@@ -2,11 +2,13 @@
 
 namespace CherryneChou\Admin\Http\Controllers;
 
-use CherryneChou\Admin\Admin;
+use CherryneChou\Serializer\DataArraySerializer;
+use CherryneChou\Admin\Transformers\AdministratorTransformer;
 use CherryneChou\Admin\Models\Administrator;
 use CherryneChou\Admin\Traits\RestfulResponse;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
+use League\Fractal\Pagination\IlluminatePaginatorAdapter;
 
 class UserController extends Controller
 {
@@ -14,17 +16,69 @@ class UserController extends Controller
 
     public function index()
     {
+        $adminPaginator = Administrator::query()->paginate();
 
+        $resources = $adminPaginator->getCollection();
+
+        $admins = fractal()
+            ->collection($resources)
+            ->transformWith(new AdministratorTransformer())
+            ->paginateWith(new IlluminatePaginatorAdapter($adminPaginator))
+            ->parseIncludes(['roles'])
+            ->toArray();
+
+        return $this->success($admins);
     }
 
     public function store()
     {
+        $validator = $this->validateForm();
 
+        if($validator->failed()){
+            return $this->failed($validator->messages());
+        }
+
+        $requestData = request()->only(['name','username','avatar']);
+        $password = request()->input('password') || '';
+
+        if(!empty($password)){
+            $requestData['password'] = bcrypt($password);
+        }
+
+        $roles = request()->input('roles') ?: [];
+
+
+        try {
+            DB::beginTransaction();
+
+            $user = Administrator::create($requestData);
+
+            if(count($roles)>0){
+                $user->roles()->sync($roles);
+            }
+
+            DB::commit();
+
+            return $this->success();
+
+        }catch (\Exception $exception){
+            DB::rollBack();
+
+            return $this->failed($exception->getMessage());
+        }
     }
 
     public function show($id)
     {
+        $resource = Administrator::query()->find($id);
+        $admin = fractal()
+            ->item($resource)
+            ->transformWith(new AdministratorTransformer())
+            ->serializeWith(new DataArraySerializer())
+            ->parseIncludes(['roles'])
+            ->toArray();
 
+        return $this->success($admin);
     }
 
     public function update($id)

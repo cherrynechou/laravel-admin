@@ -49,7 +49,6 @@ class ResetPasswordCommand extends Command
         }
 
         $user->password = bcrypt($password);
-
         $user->save();
 
         $this->info('User password reset successfully.');

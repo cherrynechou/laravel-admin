@@ -12,15 +12,14 @@ class AuthController extends Controller
 {
     use RestfulResponse;
 
-
+    /**
+     * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\Resources\Json\JsonResource
+     */
     public function postLogin()
     {
-        $username = request()->username;
-        $password = request()->password;
-
         try {
 
-            $admin = Administrator::query()->where('username',$username)->first();
+            $admin = Administrator::query()->where('username',request()->username)->first();
 
             //判断用户名密码
             if (!$admin || !Hash::check(request()->password, $admin->password)) {
