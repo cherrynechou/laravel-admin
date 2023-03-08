@@ -118,6 +118,18 @@ class InstallCommand extends Command
         $this->laravel['files']->put($file, str_replace('DummyNamespace', $this->namespace('Controllers'), $contents));
         $this->line('<info>Routes file was created:</info> '.str_replace(base_path(), '', $file));
     }
+    
+
+    /**
+     * @param  string  $name
+     * @return string
+     */
+    protected function namespace($name = null)
+    {
+        $base = str_replace('\\Controllers', '\\', config('admin.route.namespace'));
+
+        return trim($base, '\\').($name ? "\\{$name}" : '');
+    }
 
 
     /**

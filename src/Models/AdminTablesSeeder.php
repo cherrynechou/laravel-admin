@@ -47,8 +47,7 @@ class AdminTablesSeeder extends Seeder
                 'parent_id'   => 0,
                 'order'       => 1,
                 'created_at'  => $createdAt,
-            ],
-            [
+            ],[
                 'id'          => 2,
                 'name'        => 'Users',
                 'slug'        => 'users',
@@ -57,8 +56,7 @@ class AdminTablesSeeder extends Seeder
                 'parent_id'   => 1,
                 'order'       => 2,
                 'created_at'  => $createdAt,
-            ],
-            [
+            ],[
                 'id'          => 3,
                 'name'        => 'Roles',
                 'slug'        => 'roles',
@@ -67,8 +65,7 @@ class AdminTablesSeeder extends Seeder
                 'parent_id'   => 1,
                 'order'       => 3,
                 'created_at'  => $createdAt,
-            ],
-            [
+            ],[
                 'id'          => 4,
                 'name'        => 'Permissions',
                 'slug'        => 'permissions',
@@ -77,8 +74,7 @@ class AdminTablesSeeder extends Seeder
                 'parent_id'   => 1,
                 'order'       => 4,
                 'created_at'  => $createdAt,
-            ],
-            [
+            ],[
                 'id'          => 5,
                 'name'        => 'Menu',
                 'slug'        => 'menu',
@@ -87,8 +83,7 @@ class AdminTablesSeeder extends Seeder
                 'parent_id'   => 1,
                 'order'       => 5,
                 'created_at'  => $createdAt,
-            ],
-            [
+            ],[
                 'id'          => 6,
                 'name'        => 'Extension',
                 'slug'        => 'extension',
@@ -108,55 +103,49 @@ class AdminTablesSeeder extends Seeder
             [
                 'parent_id'     => 0,
                 'order'         => 1,
-                'title'         => 'Index',
+                'name'         => 'Index',
                 'icon'          => 'feather icon-bar-chart-2',
                 'uri'           => '/',
                 'created_at'    => $createdAt,
-            ],
-            [
+            ],[
                 'parent_id'     => 0,
                 'order'         => 2,
-                'title'         => 'Admin',
+                'name'         => 'Admin',
                 'icon'          => 'feather icon-settings',
                 'uri'           => '',
                 'created_at'    => $createdAt,
-            ],
-            [
+            ],[
                 'parent_id'     => 2,
                 'order'         => 3,
-                'title'         => 'Users',
+                'name'         => 'Users',
                 'icon'          => '',
                 'uri'           => 'auth/users',
                 'created_at'    => $createdAt,
-            ],
-            [
+            ],[
                 'parent_id'     => 2,
                 'order'         => 4,
-                'title'         => 'Roles',
+                'name'         => 'Roles',
                 'icon'          => '',
                 'uri'           => 'auth/roles',
                 'created_at'    => $createdAt,
-            ],
-            [
+            ],[
                 'parent_id'     => 2,
                 'order'         => 5,
-                'title'         => 'Permission',
+                'name'         => 'Permission',
                 'icon'          => '',
                 'uri'           => 'auth/permissions',
                 'created_at'    => $createdAt,
-            ],
-            [
+            ],[
                 'parent_id'     => 2,
                 'order'         => 6,
-                'title'         => 'Menu',
+                'name'         => 'Menu',
                 'icon'          => '',
                 'uri'           => 'auth/menu',
                 'created_at'    => $createdAt,
-            ],
-            [
+            ],[
                 'parent_id'     => 2,
                 'order'         => 7,
-                'title'         => 'Extensions',
+                'name'         => 'Extensions',
                 'icon'          => '',
                 'uri'           => 'auth/extensions',
                 'created_at'    => $createdAt,
