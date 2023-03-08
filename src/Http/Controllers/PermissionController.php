@@ -9,6 +9,7 @@ use CherryneChou\Admin\Models\Permission;
 use CherryneChou\Admin\Traits\RestfulResponse;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
+use Illuminate\Routing\Controller;
 
 class PermissionController extends Controller
 {

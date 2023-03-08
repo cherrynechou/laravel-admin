@@ -9,6 +9,7 @@ use CherryneChou\Admin\Traits\RestfulResponse;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use League\Fractal\Pagination\IlluminatePaginatorAdapter;
+use Illuminate\Routing\Controller;
 
 class UserController extends Controller
 {

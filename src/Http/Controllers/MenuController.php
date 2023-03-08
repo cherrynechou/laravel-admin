@@ -9,6 +9,7 @@ use CherryneChou\Admin\Models\Menu;
 use CherryneChou\Admin\Traits\RestfulResponse;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Routing\Controller;
 
 class MenuController extends Controller
 {

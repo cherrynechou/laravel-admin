@@ -7,6 +7,7 @@ use CherryneChou\Admin\Traits\RestfulResponse;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Routing\Controller;
 
 class AuthController extends Controller
 {
