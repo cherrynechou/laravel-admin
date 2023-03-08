@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Storage;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Support\Facades\URL;
+use CherryneChou\Admin\Traits\HasPermissions;
 
 class Administrator extends Model
 {

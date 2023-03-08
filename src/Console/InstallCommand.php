@@ -118,4 +118,26 @@ class InstallCommand extends Command
         $this->laravel['files']->put($file, str_replace('DummyNamespace', $this->namespace('Controllers'), $contents));
         $this->line('<info>Routes file was created:</info> '.str_replace(base_path(), '', $file));
     }
+
+
+    /**
+     * Get stub contents.
+     *
+     * @param $name
+     * @return string
+     */
+    protected function getStub($name)
+    {
+        return $this->laravel['files']->get(__DIR__."/stubs/$name.stub");
+    }
+
+    /**
+     * Make new directory.
+     *
+     * @param  string  $path
+     */
+    protected function makeDir($path = '')
+    {
+        $this->laravel['files']->makeDirectory("{$this->directory}/$path", 0755, true, true);
+    }
 }

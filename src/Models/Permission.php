@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
-class Permission
+class Permission extends Model
 {
     protected $guarded = ['id'];
 

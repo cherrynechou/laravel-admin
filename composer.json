@@ -25,7 +25,10 @@
     "laravel": {
       "providers": [
         "CherryneChou\\Admin\\AdminServiceProvider"
-      ]
+      ],
+      "aliases": {
+         "Admin": "CherryneChou\\Admin\\Facades\\Admin"
+      }
     }
   }
 }
