@@ -73,7 +73,7 @@ return new class extends Migration
             $table->string('path')->nullable()->default('');
             $table->bigInteger('parent_id')->default(0);
             $table->string('target')->nullable()->default('')->comment('浏览器跳转类型');
-            $table->string('url')->nullable()->default('')->comment('浏览器跳转地址');
+            $table->string('uri')->nullable()->default('')->comment('浏览器跳转地址');
             $table->string('icon', 50)->default('')->nullable();
             $table->integer('order')->default(0)->nullable();
             $table->boolean('status')->default(1)->comment('隐藏菜单: 0:不隐藏, 1:隐藏');

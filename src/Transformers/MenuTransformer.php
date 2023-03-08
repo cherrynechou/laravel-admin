@@ -44,7 +44,7 @@ class MenuTransformer extends TransformerAbstract
             'path'          =>          $model->path,
             'order'         =>          $model->order,
             'target'        =>          $model->target,
-            'url'           =>          $model->url,
+            'uri'           =>          $model->uri,
             'icon'          =>          $model->icon,
             'status'        =>          $model->status,
             'created_at'    =>          Carbon::parse($model->created_at)->toDateTimeString(),
