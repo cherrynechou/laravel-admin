@@ -170,7 +170,7 @@ class PermissionController extends Controller
 
             DB::beginTransaction();
 
-            Permission::query()->find($id)->delete();
+            Permission::destroy($id);
 
             DB::commit();
 

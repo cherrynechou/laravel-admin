@@ -178,9 +178,27 @@ class MenuController extends Controller
         }
     }
 
-
+    /**
+     * @param $id
+     * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\Resources\Json\JsonResource
+     */
     public function destroy($id)
     {
 
+        try {
+            DB::beginTransaction();
+
+
+            Menu::destroy($id);
+
+            DB::commit();
+
+            return $this->success();
+
+        }catch (\Exception $exception){
+            DB::rollBack();
+
+            return $this->failed($exception->getTraceAsString());
+        }
     }
 }

@@ -1,6 +1,8 @@
 <?php
 namespace CherryneChou\Admin;
 
+use Illuminate\Routing\Router;
+
 class Admin
 {
     const VERSION = '1.0.0';
@@ -15,6 +17,7 @@ class Admin
         $attributes = [
             'prefix'     => config('admin.route.prefix'),
             'middleware' => config('admin.route.middleware'),
+            'as'         => config('admin.route.prefix')
         ];
 
         app('router')->group($attributes, function ($router) {
@@ -22,18 +25,54 @@ class Admin
             /* @var \Illuminate\Support\Facades\Route $router */
             $router->namespace('\CherryneChou\Admin\Http\Controllers')->group(function ($router) {
 
-                /* @var \Illuminate\Routing\Router $router */
-                $router->resource('auth/users', 'UserController')->names('admin.auth.users');
-                $router->resource('auth/roles', 'RoleController')->names('admin.auth.roles');
-                $router->resource('auth/permissions', 'PermissionController')->names('admin.auth.permissions');
-                $router->resource('auth/menu', 'MenuController', ['except' => ['create']])->names('admin.auth.menu');
+                //权限管理
+                $router->group([
+                    'prefix'        => 'auth',
+                    'namespace'     => 'Auth'
+                ],function(Router $router){
+                    //用户管理
+                    $router->resources([
+                        'users'         =>          UserController::class,
+                        'roles'         =>          RoleController::class,
+                        'permissions'   =>          PermissionController::class,
+                        'menu'          =>          MenuController::class,
+                    ], [
+                        'only' => ['index','store', 'show' , 'update', 'destroy']
+                    ]);
+
+                    //非分页列表
+                    $router->get('/role/all','RoleController@all')->name('roles.all');
+
+                    //非树型结构列表
+                    $router->get('/permission/all','PermissionController@all')->name('permissions.all');
+
+                    //获取权限路由
+                    $router->get('/permission/routes','PermissionController@routes')->name('permissions.routes');
+
+                    //更改菜单的状态
+                    $router->patch('/menu/{menu}/switch','MenuController@switchStatus');
+
+                    //重置用户密码
+                    $router->patch('/user/{user}/resetPassword','UserController@resetPassword');
+
+                    //阻止用户登录
+                    $router->patch('/user/{user}/block','UserController@block');
+                });
 
             });
 
-            $authController = config('admin.auth.controller', AuthController::class);
 
+            //登录
+            $authController = config('admin.auth.controller', AuthController::class);
             /* @var \Illuminate\Routing\Router $router */
-            $router->post('auth/login', $authController.'@postLogin');
+            $router->post('auth/login', $authController . '@postLogin');
+            //当前用户
+            $router->get('/currentUser', $authController . '@currentUser');
+            //菜单
+            $router->get('/getMenuList', $authController . '@getMenuList');
+
+
+
         });
     }
 }

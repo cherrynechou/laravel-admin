@@ -152,6 +152,8 @@ class RoleController extends Controller
         try {
             DB::beginTransaction();
 
+            Role::destroy($id);
+
             DB::commit();
 
             return $this->success();

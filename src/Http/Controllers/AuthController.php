@@ -3,7 +3,11 @@
 namespace CherryneChou\Admin\Http\Controllers;
 
 use CherryneChou\Admin\Models\Administrator;
+use CherryneChou\Admin\Serializer\DataArraySerializer;
+use CherryneChou\Admin\Services\AuthorizationService;
 use CherryneChou\Admin\Traits\RestfulResponse;
+use CherryneChou\Admin\Transformers\MenuTransformer;
+use CherryneChou\Admin\Support\Helper;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Hash;
@@ -12,6 +16,20 @@ use Illuminate\Routing\Controller;
 class AuthController extends Controller
 {
     use RestfulResponse;
+
+    /**
+     * @var AuthorizationService
+     */
+    protected $authorizationService;
+
+    /**
+     * @param AuthorizationService $authorizationService
+     */
+    public function __construct(AuthorizationService $authorizationService)
+    {
+        $this->authorizationService = $authorizationService;
+    }
+
 
     /**
      * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\Resources\Json\JsonResource
@@ -55,6 +73,42 @@ class AuthController extends Controller
 
         }
 
+    }
+
+    /**
+     * 当前用户
+     * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\Resources\Json\JsonResource
+     */
+    public function currentUser()
+    {
+        $user =  [
+            'userid'        =>  request()->user()->id,
+            'username'      =>  request()->user()->username,
+            'name'          =>  request()->user()->name,
+            'avatar'        =>  request()->user()->getAvatar()
+        ];
+
+        return $this->success($user);
+    }
+
+
+    /**
+     * 获取用户菜单列表
+     */
+    public function getMenuList()
+    {
+
+        $filter_resources = $this->authorizationService->filterAuthMenus();
+
+        $menuResources = fractal()
+                    ->collection($filter_resources)
+                    ->transformWith(new MenuTransformer())
+                    ->serializeWith(new DataArraySerializer())
+                    ->toArray();
+
+        $menus = Helper::listToTree($menuResources,'routes');
+
+        return $this->success($menus);
     }
 
 
