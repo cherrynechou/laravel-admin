@@ -8,6 +8,7 @@ return [
 
         'middleware' => [ 'auth:sanctum' ],
     ],
+
     /*
     |--------------------------------------------------------------------------
     |
@@ -18,7 +19,6 @@ return [
     */
     'directory' => app_path('Admin'),
 
-
     /*
     |--------------------------------------------------------------------------
     | Access via `https`
@@ -28,6 +28,19 @@ return [
     |
     */
     'https' => env('ADMIN_HTTPS', false),
+
+    /*
+    | Authentication settings for all admin pages. Include an authentication
+    | guard and a user provider setting of authentication driver.
+    |
+    | You can specify a controller for `login` `logout` and other auth routes.
+    |
+    */
+    'auth' => [
+        'enable' => true,
+
+        'controller' => App\Admin\Controllers\AuthController::class,
+    ],
 
     /*
     |--------------------------------------------------------------------------

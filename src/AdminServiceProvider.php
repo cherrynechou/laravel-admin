@@ -2,6 +2,7 @@
 namespace CherryneChou\Admin;
 
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Arr;
 use CherryneChou\Admin\Support\Helper;
 
 class AdminServiceProvider extends ServiceProvider
@@ -34,6 +35,7 @@ class AdminServiceProvider extends ServiceProvider
 
     public function register()
     {
+        $this->loadAdminAuthConfig();
         $this->registerRouteMiddleware();
         $this->commands($this->commands);
     }
@@ -46,6 +48,16 @@ class AdminServiceProvider extends ServiceProvider
 
         $this->ensureHttps();
         $this->registerPublishing();
+    }
+
+    /**
+     * Setup auth configuration.
+     *
+     * @return void
+     */
+    protected function loadAdminAuthConfig()
+    {
+        config(Arr::dot(config('admin.auth', []), 'auth.'));
     }
 
     /**
@@ -71,7 +83,11 @@ class AdminServiceProvider extends ServiceProvider
     {
         if ($this->app->runningInConsole()) {
             $this->publishes([__DIR__.'/../config' => config_path()], 'laravel-admin-config');
-            $this->publishes([__DIR__.'/../resources/lang' => lang_path()], 'laravel-admin-lang');
+            if (version_compare($this->app->version(), '9.0.0', '>=')) {
+                $this->publishes([__DIR__.'/../resources/lang' => base_path('lang')], 'laravel-admin-lang');
+            } else {
+                $this->publishes([__DIR__.'/../resources/lang' => resource_path('lang')], 'laravel-admin-lang');
+            }
             $this->publishes([__DIR__.'/../database/migrations' => database_path('migrations')], 'laravel-admin-migrations');
         }
     }
