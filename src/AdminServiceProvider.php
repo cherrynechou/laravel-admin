@@ -18,7 +18,6 @@ class AdminServiceProvider extends ServiceProvider
      * @var array
      */
     protected $routeMiddleware = [
-        'admin.auth'       => Http\Middleware\Authenticate::class,
         'admin.permission' => Http\Middleware\Permission::class,
     ];
 
@@ -27,7 +26,6 @@ class AdminServiceProvider extends ServiceProvider
      */
     protected $middlewareGroups = [
         'admin' => [
-            'admin.auth',
             'admin.permission',
         ],
     ];
@@ -37,13 +35,12 @@ class AdminServiceProvider extends ServiceProvider
     public function register()
     {
         $this->registerRouteMiddleware();
-
         $this->commands($this->commands);
     }
 
     public function boot()
     {
-
+        $this->ensureHttps();
     }
 
     /**

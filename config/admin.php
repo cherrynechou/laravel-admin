@@ -6,9 +6,9 @@ return [
 
         'namespace' => 'App\\Admin\\Controllers',
 
-        'middleware' => ['api'],
+        'middleware' => [ 'api' ],
 
-        'auth_middleware' => ['auth:sanctum','admin.permission'],
+        'auth_middleware' => [ 'auth:sanctum' , 'admin.permission' ],
     ],
     /*
     |--------------------------------------------------------------------------
@@ -19,6 +19,17 @@ return [
     |
     */
     'directory' => app_path('Admin'),
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | Access via `https`
+    |--------------------------------------------------------------------------
+    |
+    | If your page is going to be accessed via https, set it to `true`.
+    |
+    */
+    'https' => env('ADMIN_HTTPS', false),
 
     /*
     |--------------------------------------------------------------------------
@@ -79,19 +90,19 @@ return [
 
         // User tables and model.
         'users_table' => 'admin_users',
-        'users_model' => App\Models\Administrator::class,
+        'users_model' => CherryneChou\Admin\Models\Administrator::class,
 
         // Role table and model.
         'roles_table' => 'admin_roles',
-        'roles_model' => App\Models\Role::class,
+        'roles_model' => CherryneChou\Admin\Models\Role::class,
 
         // Permission table and model.
         'permissions_table' => 'admin_permissions',
-        'permissions_model' => App\Models\Permission::class,
+        'permissions_model' => CherryneChou\Admin\Models\Permission::class,
 
         // Menu table and model.
         'menu_table' => 'admin_menu',
-        'menu_model' => App\Models\Menu::class,
+        'menu_model' => CherryneChou\Admin\Models\Menu::class,
 
         // Pivot table for table above.
         'role_users_table'       => 'admin_role_users',

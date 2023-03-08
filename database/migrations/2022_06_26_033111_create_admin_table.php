@@ -30,6 +30,7 @@ return new class extends Migration
             $table->string('name')->nullable()->default('');
             $table->string('email',50)->nullable()->default('');
             $table->timestamp('email_verified_at')->nullable();
+
             $table->string('phone',11)->nullable()->unique();
             $table->string('avatar')->nullable();
 

@@ -1,4 +1,5 @@
 <?php
+namespace CherryneChou\Admin\Models;
 
 use DateTimeInterface;
 use Illuminate\Database\Eloquent\Factories\HasFactory;

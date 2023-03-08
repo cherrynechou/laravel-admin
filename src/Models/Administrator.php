@@ -32,6 +32,15 @@ class Administrator extends Model
     ];
 
     /**
+     * The attributes that should be hidden for arrays.
+     *
+     * @var array
+     */
+    protected $hidden = [
+        'password'
+    ];
+
+    /**
      * Create a new Eloquent model instance.
      *
      * @param array $attributes
@@ -43,16 +52,6 @@ class Administrator extends Model
         $this->setConnection($connection);
         $this->setTable(config('admin.database.users_table'));
     }
-
-    /**
-     * The attributes that should be hidden for arrays.
-     *
-     * @var array
-     */
-    protected $hidden = [
-        'password'
-    ];
-
 
     /**
      * Get avatar attribute.

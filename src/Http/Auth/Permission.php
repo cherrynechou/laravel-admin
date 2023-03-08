@@ -1,10 +1,8 @@
 <?php
 
-namespace Dcat\Admin\Http\Auth;
+namespace CherryneChou\Admin\Http\Auth;
 
-use Dcat\Admin\Admin;
-use Dcat\Admin\Layout\Content;
-use Dcat\Admin\Support\Helper;
+use CherryneChou\Admin\Admin;
 use Illuminate\Contracts\Support\Arrayable;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -26,10 +24,10 @@ class Permission
 
         if (is_array($permission) || $permission instanceof Arrayable) {
             collect($permission)->each(function ($permission) {
-                static::check($permission);
+                call_user_func([self::class, 'check'], $permission);
             });
 
-            return true;
+            return false;
         }
 
         if (Admin::user()->cannot($permission)) {
@@ -53,6 +51,12 @@ class Permission
             static::error();
         }
     }
+
+    public static function error()
+    {
+        abort(403, '没有权限');
+    }
+
 
     /**
      * Don't check permission.
@@ -81,25 +85,6 @@ class Permission
         }
     }
 
-    /**
-     * Send error response page.
-     *
-     * @throws \Illuminate\Http\Exceptions\HttpResponseException
-     */
-    public static function error()
-    {
-        if ($error = static::$errorHandler) {
-            admin_exit($error());
-        }
-
-        if (Helper::isAjaxRequest()) {
-            abort(403, trans('admin.deny'));
-        }
-
-        admin_exit(
-            Content::make()->withError(trans('admin.deny'))
-        );
-    }
 
     /**
      * If current user is administrator.
