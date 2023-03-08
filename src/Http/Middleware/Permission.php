@@ -3,7 +3,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Auth\Access\AuthorizationException;
-use App\Admin\Authorization\Permission as Checker;
+use CherryneChou\Admin\Http\Auth\Permission as Checker;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 

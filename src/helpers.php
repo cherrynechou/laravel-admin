@@ -2,6 +2,20 @@
 
 use Illuminate\Support\Str;
 
+
+if (! function_exists('admin_path')) {
+    /**
+     * Get admin path.
+     *
+     * @param  string  $path
+     * @return string
+     */
+    function admin_path($path = '')
+    {
+        return ucfirst(config('admin.directory')).($path ? DIRECTORY_SEPARATOR.$path : $path);
+    }
+}
+
 if (! function_exists('admin_base_path')) {
     /**
      * Get admin url.
@@ -34,23 +48,6 @@ if (! function_exists('admin_asset')) {
     function admin_asset($path)
     {
         return (config('admin.https') || config('admin.secure')) ? secure_asset($path) : asset($path);
-    }
-}
-
-/**
- * 找到 值
- */
-if (! function_exists('search_column_key')) {
-
-    function search_column_key($searches,$marker){
-
-        $index = collect($searches)->search(function($item) use ($marker){
-            return Str::endsWith($item, $marker );
-        });
-
-        $column = $searches[$index];
-
-        return Str::replace($marker, '', $column);
     }
 }
 

@@ -30,7 +30,7 @@ class Permission
             return false;
         }
 
-        if (Admin::user()->cannot($permission)) {
+        if (request()->user()->cannot($permission)) {
             static::error();
         }
     }
@@ -80,7 +80,7 @@ class Permission
             return true;
         }
 
-        if (Admin::user()->inRoles($roles)) {
+        if (request()->user()->inRoles($roles)) {
             static::error();
         }
     }
@@ -95,7 +95,7 @@ class Permission
     {
         $roleModel = config('admin.database.roles_model');
 
-        return ! config('admin.permission.enable') || Admin::user()->isRole($roleModel::ADMINISTRATOR);
+        return ! config('admin.permission.enable') || request()->user()->isRole($roleModel::ADMINISTRATOR);
     }
 
     /**

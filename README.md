@@ -15,7 +15,7 @@ TODO
 
 ## Contributing
 
-php artisan vendor:publish --provider="CherryneChou\admin\AdminServiceProvider"
+php artisan vendor:publish --provider="CherryneChou\Admin\AdminServiceProvider"
 
 
 php artisan migrate

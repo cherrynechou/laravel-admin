@@ -31,7 +31,6 @@ class AdminServiceProvider extends ServiceProvider
     ];
 
 
-
     public function register()
     {
         $this->registerRouteMiddleware();
@@ -40,7 +39,12 @@ class AdminServiceProvider extends ServiceProvider
 
     public function boot()
     {
+        if (file_exists($routes = admin_path('routes.php'))) {
+            $this->loadRoutesFrom($routes);
+        }
+
         $this->ensureHttps();
+        $this->registerPublishing();
     }
 
     /**
@@ -53,6 +57,20 @@ class AdminServiceProvider extends ServiceProvider
         if (config('admin.https') || config('admin.secure')) {
             \URL::forceScheme('https');
             $this->app['request']->server->set('HTTPS', true);
+        }
+    }
+
+
+    /**
+     * 资源发布注册.
+     *
+     * @return void
+     */
+    protected function registerPublishing()
+    {
+        if ($this->app->runningInConsole()) {
+            $this->publishes([__DIR__.'/../config' => config_path()], 'laravel-admin-config');
+            $this->publishes([__DIR__.'/../database/migrations' => database_path('migrations')], 'laravel-admin-migrations');
         }
     }
 
