@@ -70,6 +70,7 @@ class AdminServiceProvider extends ServiceProvider
     {
         if ($this->app->runningInConsole()) {
             $this->publishes([__DIR__.'/../config' => config_path()], 'laravel-admin-config');
+            $this->publishes([__DIR__.'/../resources/lang' => lang_path()], 'laravel-admin-lang');
             $this->publishes([__DIR__.'/../database/migrations' => database_path('migrations')], 'laravel-admin-migrations');
         }
     }
