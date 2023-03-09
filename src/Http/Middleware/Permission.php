@@ -1,5 +1,6 @@
 <?php
-namespace App\Http\Middleware;
+
+namespace CherryneChou\Admin\Http\Middleware;
 
 use Closure;
 use Illuminate\Auth\Access\AuthorizationException;

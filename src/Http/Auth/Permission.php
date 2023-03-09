@@ -2,7 +2,6 @@
 
 namespace CherryneChou\Admin\Http\Auth;
 
-use CherryneChou\Admin\Admin;
 use Illuminate\Contracts\Support\Arrayable;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -47,7 +46,7 @@ class Permission
             return true;
         }
 
-        if (! Admin::user()->inRoles($roles)) {
+        if (! request()->user()->inRoles($roles)) {
             static::error();
         }
     }
