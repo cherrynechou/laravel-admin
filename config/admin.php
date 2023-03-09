@@ -6,7 +6,9 @@ return [
 
         'namespace' => 'App\\Admin\\Controllers',
 
-        'middleware' => [ 'auth:sanctum' ],
+        'middleware' => ['api'],
+
+        'auth_middleware' => ['auth:sanctum','admin.permission'],
     ],
 
     /*

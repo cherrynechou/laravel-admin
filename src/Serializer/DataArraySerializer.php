@@ -19,6 +19,7 @@ class DataArraySerializer extends ArraySerializer
         if ($resourceKey) {
             return [$resourceKey => $data];
         }
+
         return $data;
     }
 
@@ -32,6 +33,7 @@ class DataArraySerializer extends ArraySerializer
         if ($resourceKey) {
             return [$resourceKey => $data];
         }
+
         return $data;
     }
 
