@@ -19,9 +19,9 @@ class AuthorizationService
 
         //用户角色
 
-        $resources = Menu::query()->orderBy('order','ASC')->scopeQuery(function($query){
+        $resources = Menu::query()->orderBy('order','ASC')->where(function($query){
             return $query->where('status',1);
-        })->all();
+        })->get();
 
         $permissionIds = $user->allPermissions()->pluck('id')->toArray();
         $userRolesIds = $user->roles()->pluck('id')->toArray();
