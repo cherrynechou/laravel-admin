@@ -2,6 +2,7 @@
 
 namespace CherryneChou\Admin\Models;
 
+use CherryneChou\Admin\Abstracts\QueryFilter;
 use DateTimeInterface;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -27,6 +28,12 @@ class Role extends Model
         $connection = config('admin.database.connection') ?: config('database.default');
         $this->setConnection($connection);
         $this->setTable(config('admin.database.roles_table'));
+    }
+
+
+    public function scopeFilter($query, QueryFilter $filters)
+    {
+        return $filters->apply($query);
     }
 
     /**

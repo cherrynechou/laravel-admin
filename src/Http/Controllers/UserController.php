@@ -2,6 +2,7 @@
 
 namespace CherryneChou\Admin\Http\Controllers;
 
+use CherryneChou\Admin\Filters\AdministratorFilter;
 use CherryneChou\Serializer\DataArraySerializer;
 use CherryneChou\Admin\Transformers\AdministratorTransformer;
 use CherryneChou\Admin\Models\Administrator;
@@ -15,9 +16,9 @@ class UserController extends Controller
 {
     use RestfulResponse;
 
-    public function index()
+    public function index(AdministratorFilter $filter)
     {
-        $adminPaginator = Administrator::query()->paginate();
+        $adminPaginator = Administrator::filter($filter)->paginate();
 
         $resources = $adminPaginator->getCollection();
 

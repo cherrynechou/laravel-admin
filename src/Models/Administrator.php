@@ -2,6 +2,7 @@
 
 namespace CherryneChou\Admin\Models;
 
+use CherryneChou\Admin\Abstracts\QueryFilter;
 use DateTimeInterface;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -54,6 +55,11 @@ class Administrator extends Model
         $this->setTable(config('admin.database.users_table'));
     }
 
+    public function scopeFilter($query, QueryFilter $filters)
+    {
+        return $filters->apply($query);
+    }
+
     /**
      * Get avatar attribute.
      *
@@ -71,7 +77,7 @@ class Administrator extends Model
             return $avatar;
         }
 
-        return admin_asset(config('admin.default_avatar') ?: '@admin/images/default-avatar.jpg');
+        return admin_asset(config('admin.default_avatar') ?: '/vender/laravel-admin/dist/images/user2-160x160.jpg');
     }
 
     /**

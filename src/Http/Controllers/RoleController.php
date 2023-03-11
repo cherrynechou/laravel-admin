@@ -2,6 +2,7 @@
 
 namespace CherryneChou\Admin\Http\Controllers;
 
+use CherryneChou\Admin\Filters\RoleFilter;
 use CherryneChou\Admin\Models\Role;
 use CherryneChou\Admin\Serializer\DataArraySerializer;
 use CherryneChou\Admin\Transformers\RoleTransformer;
@@ -18,9 +19,9 @@ class RoleController extends Controller
     /**
      * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\Resources\Json\JsonResource
      */
-    public function index()
+    public function index(RoleFilter $filter)
     {
-        $rolePaginator = Role::query()->paginate();
+        $rolePaginator = Role::filter($filter)->paginate();
 
         $resources = $rolePaginator->getCollection();
 

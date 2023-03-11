@@ -2,9 +2,9 @@
 
 namespace CherryneChou\Admin\Http\Controllers;
 
-use App\Serializer\DataArraySerializer;
-use App\Support\Helper;
-use App\Transformers\MenuTransformer;
+use CherryneChou\Admin\Serializer\DataArraySerializer;
+use CherryneChou\Admin\Support\Helper;
+use CherryneChou\Admin\Transformers\MenuTransformer;
 use CherryneChou\Admin\Models\Menu;
 use CherryneChou\Admin\Traits\RestfulResponse;
 use Illuminate\Support\Facades\DB;
@@ -17,7 +17,7 @@ class MenuController extends Controller
 
     public function index()
     {
-        $resources = Menu::query()->orderBy('order','ASC')->all();
+        $resources = Menu::query()->orderBy('order','ASC')->get();
 
         $menuResources = fractal()
                         ->collection($resources)

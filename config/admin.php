@@ -52,7 +52,7 @@ return [
     | Set a default avatar for newly created users.
     |
     */
-    'default_avatar' => '/vendor/dist/images/user2-160x160.png',
+    'default_avatar' => '/vendor/laravel-admin/dist/images/user2-160x160.png',
 
     /*
     |
