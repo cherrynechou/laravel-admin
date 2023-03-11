@@ -15,7 +15,7 @@ class Admin
         app('router')->group([
             'prefix'     => config('admin.route.prefix'),
             'middleware' => config('admin.route.middleware'),
-            'as'         => config('admin.route.prefix')
+            'as'         => config('admin.route.prefix') . '.',
         ], function ($router) {
             //登录
             $authController = config('admin.auth.controller', AuthController::class);
@@ -27,7 +27,7 @@ class Admin
         app('router')->group([
             'prefix'     => config('admin.route.prefix'),
             'middleware' => config('admin.route.auth_middleware'),
-            'as'         => config('admin.route.prefix')
+            'as'         => config('admin.route.prefix') . '.',
         ], function ($router) {
 
             if (config('admin.auth.enable', true)) {
