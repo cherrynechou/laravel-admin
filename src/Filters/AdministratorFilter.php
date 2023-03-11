@@ -6,12 +6,12 @@ use CherryneChou\Admin\Abstracts\QueryFilter;
 class AdministratorFilter extends QueryFilter
 {
     /**
-     * @param $name
+     * @param $username
      * @return mixed
      */
-    public function name($name)
+    public function username($username)
     {
-        return $this->builder->where('name', 'like', "%{$name}%");
+        return $this->builder->where('username', 'like', "%{$username}%");
     }
 
     /**

@@ -21,7 +21,7 @@ class RoleController extends Controller
      */
     public function index(RoleFilter $filter)
     {
-        $rolePaginator = Role::filter($filter)->paginate();
+        $rolePaginator = Role::query()->filter($filter)->paginate();
 
         $resources = $rolePaginator->getCollection();
 
@@ -51,7 +51,7 @@ class RoleController extends Controller
 
             DB::beginTransaction();
 
-            $role = Role::query()->create($validated);
+            $role = Role::create($validated);
 
             if($permissions){
                 $permissionIds = json_decode($permissions,true);

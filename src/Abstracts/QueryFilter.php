@@ -1,7 +1,7 @@
 <?php
 namespace CherryneChou\Admin\Abstracts;
 
-use Illuminate\Database\Query\Builder;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 
 /**
@@ -30,13 +30,15 @@ abstract class QueryFilter
      * @param Builder $builder
      * @return Builder
      */
-    public function apply(Builder $builder)
+    public function apply(Builder $builder): Builder
     {
         $this->builder = $builder;
 
         foreach ($this->filters() as $name => $value) {
-            if (method_exists($this, $name)) {
-                call_user_func_array([$this, $name], array_filter([$value]));
+            if($value){
+                if (method_exists($this, $name)) {
+                    call_user_func_array([$this, $name], array_filter([$value]));
+                }
             }
         }
 

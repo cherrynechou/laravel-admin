@@ -190,7 +190,6 @@ class UserController extends Controller
      */
     public function resetPassword($id)
     {
-
         $admin = Administrator::find($id);
         $admin->password = bcrypt(config('admin.default_password'));
         $admin->save();
