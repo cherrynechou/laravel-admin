@@ -20,7 +20,7 @@ class Admin
             //登录
             $authController = config('admin.auth.controller', AuthController::class);
             /* @var \Illuminate\Routing\Router $router */
-            $router->post('/oauth/login', $authController . '@postLogin');
+            $router->post('/oauth/login', $authController . '@postLogin')->name('oauth.login');
         });
 
 
@@ -53,7 +53,7 @@ class Admin
                     $router->patch('/menu/{menu}/switch','MenuController@switchStatus')->name('menu.switch');
 
                     //重置用户密码
-                    $router->patch('/user/{user}/resetPassword','UserController@resetPassword')->name('user.resetpassword');
+                    $router->patch('/user/{user}/resetPassword','UserController@resetPassword')->name('user.reset.password');
 
                     //阻止用户登录
                     $router->patch('/user/{user}/block','UserController@block')->name('user.block');
@@ -63,9 +63,9 @@ class Admin
             //登录
             $authController = config('admin.auth.controller', AuthController::class);
             //当前用户
-            $router->get('/currentUser', $authController . '@currentUser');
+            $router->get('/currentUser', $authController . '@currentUser')->name('current.user');
             //菜单
-            $router->get('/getMenuList', $authController . '@getMenuList');
+            $router->get('/getMenuList', $authController . '@getMenuList')->name('menu.list');
         });
     }
 }
