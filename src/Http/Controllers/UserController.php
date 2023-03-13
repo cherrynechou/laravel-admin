@@ -3,7 +3,7 @@
 namespace CherryneChou\Admin\Http\Controllers;
 
 use CherryneChou\Admin\Filters\AdministratorFilter;
-use CherryneChou\Serializer\DataArraySerializer;
+use CherryneChou\Admin\Serializer\DataArraySerializer;
 use CherryneChou\Admin\Transformers\AdministratorTransformer;
 use CherryneChou\Admin\Models\Administrator;
 use CherryneChou\Admin\Traits\RestfulResponse;
@@ -16,6 +16,10 @@ class UserController extends Controller
 {
     use RestfulResponse;
 
+    /**
+     * @param AdministratorFilter $filter
+     * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\Resources\Json\JsonResource
+     */
     public function index(AdministratorFilter $filter)
     {
         $adminPaginator = Administrator::filter($filter)->paginate();
@@ -32,6 +36,9 @@ class UserController extends Controller
         return $this->success($admins);
     }
 
+    /**
+     * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\Resources\Json\JsonResource
+     */
     public function store()
     {
         $validator = $this->validateForm();
@@ -70,6 +77,10 @@ class UserController extends Controller
         }
     }
 
+    /**
+     * @param $id
+     * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\Resources\Json\JsonResource
+     */
     public function show($id)
     {
         $resource = Administrator::query()->find($id);
@@ -83,6 +94,10 @@ class UserController extends Controller
         return $this->success($admin);
     }
 
+    /**
+     * @param $id
+     * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\Resources\Json\JsonResource
+     */
     public function update($id)
     {
         $validator = $this->validateForm();

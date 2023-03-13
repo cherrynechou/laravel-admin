@@ -34,6 +34,9 @@ class RoleController extends Controller
         return $this->success($roles);
     }
 
+    /**
+     * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\Resources\Json\JsonResource
+     */
     public function store()
     {
         $validator = $this->validateForm();
@@ -70,6 +73,10 @@ class RoleController extends Controller
         }
     }
 
+    /**
+     * @param $id
+     * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\Resources\Json\JsonResource
+     */
     public function show($id)
     {
         $resource = Role::query()->find($id);
@@ -173,7 +180,7 @@ class RoleController extends Controller
      */
     public function all()
     {
-        $resources = Role::query()->all();
+        $resources = Role::query()->get();
 
         $roles =  fractal()
                 ->collection($resources)

@@ -12,7 +12,9 @@ class Admin
      */
     public function routes()
     {
-        app('router')->group([
+        $router = app('router');
+
+        $router->group([
             'prefix'     => config('admin.route.prefix'),
             'middleware' => config('admin.route.middleware'),
             'as'         => config('admin.route.prefix') . '.',
@@ -24,7 +26,7 @@ class Admin
         });
 
 
-        app('router')->group([
+        $router->group([
             'prefix'     => config('admin.route.prefix'),
             'middleware' => config('admin.route.auth_middleware'),
             'as'         => config('admin.route.prefix') . '.',

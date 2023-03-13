@@ -15,6 +15,9 @@ abstract class QueryFilter
      */
     protected $request;
 
+    /**
+     * @var
+     */
     protected $builder;
 
     /**

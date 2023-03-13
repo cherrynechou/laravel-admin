@@ -15,6 +15,9 @@ class MenuController extends Controller
 {
     use RestfulResponse;
 
+    /**
+     * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\Resources\Json\JsonResource
+     */
     public function index()
     {
         $resources = Menu::query()->orderBy('order','ASC')->get();
