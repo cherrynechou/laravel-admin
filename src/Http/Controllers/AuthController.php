@@ -42,11 +42,11 @@ class AuthController extends Controller
 
             //判断用户名密码
             if (!$admin || !Hash::check(request()->password, $admin->password)) {
-                return $this->failed('用户名或者密码不正确');
+                return $this->failed(trans('admin.username_or_password_is_wrong'));
             }
 
             if($admin->status == 1){
-                return $this->failed('用户禁止登录');
+                return $this->failed(trans('admin.user_forbidden_login'));
             }
 
             //保存登录 状态
@@ -65,7 +65,7 @@ class AuthController extends Controller
 
         }catch (ModelNotFoundException $exception){
 
-            return $this->failed('用户不存在');
+            return $this->failed(trans('admin.user_not_exists'));
 
         }catch (\Exception $exception){
 

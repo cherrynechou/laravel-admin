@@ -127,7 +127,7 @@ class PermissionController extends Controller
      */
     public function all()
     {
-        $resources = Permission::query()->all();
+        $resources = Permission::query()->get();
 
         $permissions = fractal()
                         ->collection($resources)

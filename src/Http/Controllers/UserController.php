@@ -118,7 +118,8 @@ class UserController extends Controller
         try {
             DB::beginTransaction();
 
-            $user = Administrator::update($requestData,$id);
+            $user = Administrator::query()->find($id);
+            $user->update($requestData);
 
             if(count($roles)>0){
                 $user->roles()->sync($roles);
