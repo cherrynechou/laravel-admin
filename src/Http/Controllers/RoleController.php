@@ -111,7 +111,8 @@ class RoleController extends Controller
         try {
             DB::beginTransaction();
 
-            $role = Role::query()->update($validated, $id);
+            $role = Role::query()->find($id);
+            $role->update($validated);
 
             if($permissions){
                 $permissionIds = json_decode($permissions,true);
