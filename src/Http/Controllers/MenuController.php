@@ -112,7 +112,9 @@ class MenuController extends Controller
         try {
             DB::beginTransaction();
 
-            $menu = Menu::query()->find($id)->update($requestData);
+            $menu = Menu::query()->find($id);
+
+            $menu->update($requestData);
 
             if(count($roles)>0){
                 $menu->roles()->sync($roles);
@@ -190,7 +192,6 @@ class MenuController extends Controller
 
         try {
             DB::beginTransaction();
-
 
             Menu::destroy($id);
 
