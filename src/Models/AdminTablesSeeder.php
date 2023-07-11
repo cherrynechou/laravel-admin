@@ -115,7 +115,7 @@ class AdminTablesSeeder extends Seeder
                 'name'          => 'Admin',
                 'icon'          => 'WindowsOutlined',
                 'uri'           => '',
-                'path'          => '/admin',
+                'path'          => '/auth',
                 'status'        => 1,
                 'created_at'    => $createdAt,
             ],[
@@ -124,7 +124,7 @@ class AdminTablesSeeder extends Seeder
                 'name'         => 'Users',
                 'icon'          => '',
                 'uri'           => '',
-                'path'          => '/admin/users',
+                'path'          => '/auth/users',
                 'status'        => 1,
                 'created_at'    => $createdAt,
             ],[
@@ -133,7 +133,7 @@ class AdminTablesSeeder extends Seeder
                 'name'          => 'Roles',
                 'icon'          => '',
                 'uri'           => '',
-                'path'          => '/admin/roles',
+                'path'          => '/auth/roles',
                 'status'        => 1,
                 'created_at'    => $createdAt,
             ],[
@@ -142,7 +142,7 @@ class AdminTablesSeeder extends Seeder
                 'name'         => 'Permission',
                 'icon'          => '',
                 'uri'           => 'permissions',
-                'path'          => '/admin/permissions',
+                'path'          => '/auth/permissions',
                 'status'        => 1,
                 'created_at'    => $createdAt,
             ],[
@@ -151,7 +151,7 @@ class AdminTablesSeeder extends Seeder
                 'name'         => 'Menu',
                 'icon'          => '',
                 'uri'           => '',
-                'path'          => '/admin/menu',
+                'path'          => '/auth/menu',
                 'status'        => 1,
                 'created_at'    => $createdAt,
             ],

@@ -55,7 +55,7 @@ class Helper
      * @param int $root
      * @return array
      */
-    public static function listToTree($list, $children = 'children', $pk='id', $pid = 'parent_id', $root=0)
+    public static function listToTree($list, $children = 'children', $pk='id', $pid = 'parent_id', $root=0): array
     {
         // 创建Tree
         $tree = [];
@@ -90,7 +90,7 @@ class Helper
      * @param  mixed  $value
      * @param  bool  $strict
      */
-    public static function deleteByValue(&$array, $value, bool $strict = false)
+    public static function deleteByValue(&$array, $value, bool $strict = false): bool
     {
         $value = (array) $value;
 
