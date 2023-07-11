@@ -90,7 +90,7 @@ class Helper
      * @param  mixed  $value
      * @param  bool  $strict
      */
-    public static function deleteByValue(&$array, $value, bool $strict = false): bool
+    public static function deleteByValue(&$array, $value, bool $strict = false): void
     {
         $value = (array) $value;
 
