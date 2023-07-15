@@ -9,6 +9,7 @@ use CherryneChou\Admin\Models\Administrator;
 use CherryneChou\Admin\Traits\RestfulResponse;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Hash;
 use League\Fractal\Pagination\IlluminatePaginatorAdapter;
 use Illuminate\Routing\Controller;
 
@@ -51,7 +52,7 @@ class UserController extends Controller
         $password = request()->input('password') || '';
 
         if(!empty($password)){
-            $requestData['password'] = bcrypt($password);
+            $requestData['password'] = Hash::make($password);
         }
 
         $roles = request()->input('roles') ?: [];
@@ -110,7 +111,7 @@ class UserController extends Controller
         $password = request()->input('password') || '';
 
         if(!empty($password)){
-            $requestData['password'] = bcrypt($password);
+            $requestData['password'] = Hash::make($password);
         }
 
         $roles = request()->input('roles') ?: [];
@@ -207,7 +208,7 @@ class UserController extends Controller
     public function resetPassword($id)
     {
         $admin = Administrator::find($id);
-        $admin->password = bcrypt(config('admin.default_password'));
+        $admin->password = Hash::make(config('admin.default_password'));
         $admin->save();
 
         return $this->success();
