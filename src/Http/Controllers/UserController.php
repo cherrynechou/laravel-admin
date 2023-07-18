@@ -44,7 +44,7 @@ class UserController extends Controller
     {
         $validator = $this->validateForm();
 
-        if($validator->failed()){
+        if($validator->fails()){
             return $this->failed($validator->messages());
         }
 
@@ -103,7 +103,7 @@ class UserController extends Controller
     {
         $validator = $this->validateForm();
 
-        if($validator->failed()){
+        if($validator->fails()){
             return $this->failed($validator->messages());
         }
 

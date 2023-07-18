@@ -41,7 +41,7 @@ class MenuController extends Controller
     {
         $validator = $this->validateForm();
 
-        if($validator->failed()){
+        if($validator->fails()){
             return $this->failed($validator->messages());
         }
 
@@ -99,7 +99,7 @@ class MenuController extends Controller
     {
         $validator = $this->validateForm();
 
-        if($validator->failed()){
+        if($validator->fails()){
             return $this->failed($validator->messages());
         }
 
