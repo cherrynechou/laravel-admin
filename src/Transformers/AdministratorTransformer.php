@@ -41,7 +41,8 @@ class AdministratorTransformer extends TransformerAbstract
             'phone'             =>          $model->phone,
             'name'              =>          $model->name,
             'email'             =>          $model->email,
-            'avatar'            =>          $model->getAvatar(),
+            'avatar'            =>          $model->avatar,
+            'avater_url'        =>          $model->getAvatar(),
             'login_count'       =>          $model->login_count,
             'is_administrator'  =>          $model->isAdministrator(),    //是否是管理员
             'status'            =>          $model->status,

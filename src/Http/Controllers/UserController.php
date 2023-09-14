@@ -49,7 +49,7 @@ class UserController extends Controller
         }
 
         $requestData = request()->only(['name','username','avatar']);
-        $password = request()->input('password') || '';
+        $password = request()->input('password') ?? '';
 
         if(!empty($password)){
             $requestData['password'] = Hash::make($password);
@@ -108,7 +108,7 @@ class UserController extends Controller
         }
 
         $requestData = request()->only(['name','username','avatar']);
-        $password = request()->input('password') || '';
+        $password = request()->input('password') ?? '';
 
         if(!empty($password)){
             $requestData['password'] = Hash::make($password);

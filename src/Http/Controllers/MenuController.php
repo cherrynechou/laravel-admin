@@ -138,20 +138,23 @@ class MenuController extends Controller
      */
     protected function validateForm()
     {
-        $rules = [
+                $rules = [
             'name'      => 'required',
             'parent_id' => 'required',
             'path'      => 'required',
+            'icon'      => 'required_if:parent_id,0'
         ];
 
         $message = [
-            "required"      => ":attribute 不能为空",
+            'required'      => ':attribute 不能为空',
+            'required_if'   => '根节点:attribute 不能为空',
         ];
 
         $attributes = [
-            "name"                      => '菜单名称',
-            "parent_id"                 => '菜单父对象',
-            "path"                      => '菜单路径',
+            'name'                      => '菜单名称',
+            'parent_id'                 => '菜单父对象',
+            'path'                      => '菜单路径',
+            'icon'                      => '菜单图标'
         ];
 
         return Validator::make(request()->all(), $rules, $message, $attributes);
