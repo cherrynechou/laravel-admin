@@ -162,14 +162,7 @@ class UserController extends Controller
             'roles'                 => '角色'
         ];
 
-        $validator = Validator::make(request()->all(), $rules, $message, $attributes);
-
-        $validator->sometimes('password', "required", function ($id) {
-            return !$id;
-        });
-
-        return $validator;
-
+        return Validator::make(request()->all(), $rules, $message, $attributes);
 
     }
 

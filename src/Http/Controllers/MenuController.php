@@ -41,7 +41,7 @@ class MenuController extends Controller
     {
         $validator = $this->validateForm();
 
-         if($validator->fails()){
+        if($validator->fails()){
             $warnings = $validator->messages();
             $show_warning = $warnings->first();
             return $this->failed($show_warning);
@@ -102,7 +102,9 @@ class MenuController extends Controller
         $validator = $this->validateForm();
 
         if($validator->fails()){
-            return $this->failed($validator->messages());
+            $warnings = $validator->messages();
+            $show_warning = $warnings->first();
+            return $this->failed($show_warning);
         }
 
         $requestData = request()->only([
