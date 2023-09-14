@@ -41,8 +41,10 @@ class MenuController extends Controller
     {
         $validator = $this->validateForm();
 
-        if($validator->fails()){
-            return $this->failed($validator->messages());
+         if($validator->fails()){
+            $warnings = $validator->messages();
+            $show_warning = $warnings->first();
+            return $this->failed($show_warning);
         }
 
         $requestData = request()->only([
@@ -138,7 +140,7 @@ class MenuController extends Controller
      */
     protected function validateForm()
     {
-                $rules = [
+        $rules = [
             'name'      => 'required',
             'parent_id' => 'required',
             'path'      => 'required',

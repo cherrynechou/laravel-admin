@@ -45,7 +45,9 @@ class UserController extends Controller
         $validator = $this->validateForm();
 
         if($validator->fails()){
-            return $this->failed($validator->messages());
+            $warnings = $validator->messages();
+            $show_warning = $warnings->first();
+            return $this->failed($show_warning);
         }
 
         $requestData = request()->only(['name','username','avatar']);
@@ -101,10 +103,12 @@ class UserController extends Controller
      */
     public function update($id)
     {
-        $validator = $this->validateForm();
+        $validator = $this->validateForm($id);
 
         if($validator->fails()){
-            return $this->failed($validator->messages());
+            $warnings = $validator->messages();
+            $show_warning = $warnings->first();
+            return $this->failed($show_warning);
         }
 
         $requestData = request()->only(['name','username','avatar']);
@@ -140,12 +144,11 @@ class UserController extends Controller
     /**
      * @return \Illuminate\Contracts\Validation\Validator|\Illuminate\Validation\Validator
      */
-    protected function validateForm()
+    protected function validateForm($id = 0)
     {
         $rules = [
             'name'      => 'required',
             'username'  => 'required',
-            'password'  => 'required',
             'roles'     => 'required',
         ];
 
@@ -156,11 +159,18 @@ class UserController extends Controller
         $attributes = [
             'name'                  => '名称',
             'username'              => '用户名',
-            'password'              => '密码',
             'roles'                 => '角色'
         ];
 
-        return Validator::make(request()->all(), $rules, $message, $attributes);
+        $validator = Validator::make(request()->all(), $rules, $message, $attributes);
+
+        $validator->sometimes('password', "required", function ($id) {
+            return !$id;
+        });
+
+        return $validator;
+
+
     }
 
     /**+

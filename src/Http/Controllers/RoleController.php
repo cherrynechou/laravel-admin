@@ -42,7 +42,9 @@ class RoleController extends Controller
         $validator = $this->validateForm();
 
         if($validator->fails()){
-            return $this->failed($validator->messages());
+            $warnings = $validator->messages();
+            $show_warning = $warnings->first();
+            return $this->failed($show_warning);
         }
 
         // 获取通过验证的数据...
@@ -99,8 +101,10 @@ class RoleController extends Controller
     {
         $validator = $this->validateForm();
 
-        if($validator->fails()){
-            return $this->failed($validator->messages());
+         if($validator->fails()){
+            $warnings = $validator->messages();
+            $show_warning = $warnings->first();
+            return $this->failed($show_warning);
         }
 
         // 获取通过验证的数据...
