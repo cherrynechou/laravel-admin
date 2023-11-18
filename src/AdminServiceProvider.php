@@ -21,6 +21,7 @@ class AdminServiceProvider extends ServiceProvider
      */
     protected $routeMiddleware = [
         'admin.permission' => Http\Middleware\Permission::class,
+        'admin.app'        => Http\Middleware\Application::class,
     ];
 
     /**
@@ -35,19 +36,34 @@ class AdminServiceProvider extends ServiceProvider
 
     public function register()
     {
+        $this->aliasAdmin();
         $this->loadAdminAuthConfig();
         $this->registerRouteMiddleware();
+        $this->registerServices();
         $this->commands($this->commands);
     }
 
     public function boot()
     {
-        if (file_exists($routes = admin_path('routes.php'))) {
-            $this->loadRoutesFrom($routes);
-        }
-
         $this->ensureHttps();
+        $this->bootApplication();
         $this->registerPublishing();
+    }
+
+    protected function aliasAdmin()
+    {
+        if (! class_exists(\Admin::class)) {
+            class_alias(Admin::class, \Admin::class);
+        }
+    }
+
+
+    /**
+     * 路由注册.
+     */
+    protected function bootApplication()
+    {
+        Admin::app()->boot();
     }
 
     /**
@@ -58,6 +74,12 @@ class AdminServiceProvider extends ServiceProvider
     protected function loadAdminAuthConfig()
     {
         config(Arr::dot(config('admin.auth', []), 'auth.'));
+
+        foreach ((array) config('admin.multi_app') as $app => $enable) {
+            if ($enable) {
+                config(Arr::dot(config($app.'.auth', []), 'auth.'));
+            }
+        }
     }
 
     /**
@@ -71,6 +93,13 @@ class AdminServiceProvider extends ServiceProvider
             \URL::forceScheme('https');
             $this->app['request']->server->set('HTTPS', true);
         }
+    }
+
+
+    
+    public function registerServices()
+    {
+        $this->app->singleton('admin.app', Application::class);
     }
 
 

@@ -14,11 +14,13 @@ class Admin
     {
         $router = app('router');
 
-        $router->group([
+        $attributes = [
             'prefix'     => config('admin.route.prefix'),
             'middleware' => config('admin.route.middleware'),
             'as'         => config('admin.route.prefix') . '.',
-        ], function ($router) {
+        ];
+
+        $router->group($attributes, function ($router) {
             //登录
             $authController = config('admin.auth.controller', AuthController::class);
             /* @var \Illuminate\Routing\Router $router */
@@ -26,11 +28,13 @@ class Admin
         });
 
 
-        $router->group([
+        $auth_attributes = [
             'prefix'     => config('admin.route.prefix'),
             'middleware' => config('admin.route.auth_middleware'),
             'as'         => config('admin.route.prefix') . '.',
-        ], function ($router) {
+        ];
+
+        $router->group($auth_attributes, function ($router) {
 
             if (config('admin.auth.enable', true)) {
                 /* @var \Illuminate\Support\Facades\Route $router */

@@ -100,4 +100,18 @@ class Helper
             }
         }
     }
+
+    /**
+     * @param  string  $name
+     * @param  string  $symbol
+     * @return mixed
+     */
+    public static function slug(string $name, string $symbol = '-')
+    {
+        $text = preg_replace_callback('/([A-Z])/', function ($text) use ($symbol) {
+            return $symbol.strtolower($text[1]);
+        }, $name);
+
+        return str_replace('_', $symbol, ltrim($text, $symbol));
+    }
 }
