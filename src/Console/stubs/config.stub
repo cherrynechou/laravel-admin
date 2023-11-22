@@ -13,7 +13,7 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | dcat-admin route settings
+    | antd-admin route settings
     |--------------------------------------------------------------------------
     |
     | The routing configuration of the admin page, including the path prefix,
@@ -22,11 +22,12 @@ return [
     |
     */
     'route' => [
+
         'domain' => env('ADMIN_ROUTE_DOMAIN'),
 
-        'prefix' => 'supply-admin',
+        'prefix' => 'DummyApp',
 
-        'namespace' => 'App\\SupplyAdmin\\Controllers',
+        'namespace' => 'App\\DummyNamespace\\Controllers',
 
         'middleware' => ['api'],
 
@@ -35,7 +36,7 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | dcat-admin install directory
+    | antd-admin install directory
     |--------------------------------------------------------------------------
     |
     | The installation directory of the controller and routing configuration
@@ -43,7 +44,7 @@ return [
     | be set before running `artisan admin::install` to take effect.
     |
     */
-    'directory' => app_path('SupplyAdmin'),
+    'directory' => app_path('DummyNamespace'),
 
     /*
     |--------------------------------------------------------------------------
@@ -65,7 +66,7 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | dcat-admin auth setting
+    | antd-admin auth setting
     |--------------------------------------------------------------------------
     |
     | Authentication settings for all admin pages. Include an authentication
@@ -77,13 +78,13 @@ return [
     'auth' => [
         'enable' => true,
 
-        'controller' => App\SupplyAdmin\Controllers\AuthController::class,
+        'controller' => App\DummyNamespace\Controllers\AuthController::class,
 
     ],
 
     /*
     |--------------------------------------------------------------------------
-    | dcat-admin permission setting
+    | antd-admin permission setting
     |--------------------------------------------------------------------------
     |
     | Permission settings for all admin pages.
@@ -96,7 +97,7 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | dcat-admin upload setting
+    | antd-admin upload setting
     |--------------------------------------------------------------------------
     |
     | File system configuration for form upload files and images, including
@@ -117,7 +118,7 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | dcat-admin database settings
+    | antd-admin database settings
     |--------------------------------------------------------------------------
     |
     | Here are database settings for dcat-admin builtin model & tables.

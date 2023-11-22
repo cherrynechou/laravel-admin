@@ -2,6 +2,7 @@
 
 namespace CherryneChou\Admin\Console;
 
+use CherryneChou\Admin\Support\Helper;
 use Illuminate\Filesystem\Filesystem;
 
 class AppCommand extends InstallCommand
