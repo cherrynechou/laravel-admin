@@ -3,7 +3,7 @@ namespace CherryneChou\Admin;
 
 class Admin
 {
-    const VERSION = '1.0.0';
+    const VERSION = '2.0.1';
 
     /**
      * Register the laravel-admin builtin routes.
