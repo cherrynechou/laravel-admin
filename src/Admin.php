@@ -6,6 +6,17 @@ class Admin
     const VERSION = '2.0.1';
 
     /**
+     * 应用管理.
+     *
+     * @return Application
+     */
+    public static function app()
+    {
+        return app('admin.app');
+    }
+
+
+    /**
      * Register the laravel-admin builtin routes.
      *
      * @return void
