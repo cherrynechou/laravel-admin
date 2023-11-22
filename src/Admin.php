@@ -17,7 +17,6 @@ class Admin
         $attributes = [
             'prefix'     => config('admin.route.prefix'),
             'middleware' => config('admin.route.middleware'),
-            'as'         => config('admin.route.prefix') . '.',
         ];
 
         $router->group($attributes, function ($router) {
@@ -31,7 +30,6 @@ class Admin
         $auth_attributes = [
             'prefix'     => config('admin.route.prefix'),
             'middleware' => config('admin.route.auth_middleware'),
-            'as'         => config('admin.route.prefix') . '.',
         ];
 
         $router->group($auth_attributes, function ($router) {

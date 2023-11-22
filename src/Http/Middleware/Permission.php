@@ -31,7 +31,6 @@ class Permission
         if (
             !$user
             || ! config('admin.permission.enable')
-            || $this->shouldPassThrough($request)
             || $user->isAdministrator()
             || $this->checkRoutePermission($request)
         ){
@@ -73,34 +72,5 @@ class Permission
         call_user_func_array([Checker::class, $method], [$args]);
 
         return true;
-    }
-
-
-    /**
-     * Determine if the request has a URI that should pass through verification.
-     *
-     * @param \Illuminate\Http\Request $request
-     *
-     * @return bool
-     */
-    protected function shouldPassThrough($request)
-    {
-        // 下面这些路由不验证权限
-        $excepts = array_merge(
-            config('admin.permission.except', []),
-            [
-                'oauth/login',
-                'oauth/logout',
-            ]);
-
-        return collect($excepts)
-            ->map('admin_base_path')
-            ->contains(function ($except) use ($request) {
-                if ($except !== '/') {
-                    $except = trim($except, '/');
-                }
-
-                return $request->is($except);
-            });
     }
 }

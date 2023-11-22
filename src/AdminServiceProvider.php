@@ -13,6 +13,8 @@ class AdminServiceProvider extends ServiceProvider
     protected $commands = [
         Console\InstallCommand::class,
         Console\PublishCommand::class,
+        Console\AppCommand::class,
+        Console\UninstallCommand::class,
         Console\ResetPasswordCommand::class,
     ];
 

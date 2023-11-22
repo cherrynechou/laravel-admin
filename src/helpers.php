@@ -52,4 +52,33 @@ if (! function_exists('admin_asset')) {
 }
 
 
+if (! function_exists('admin_route')) {
+    /**
+     * 根据路由别名获取url.
+     *
+     * @param  string|null  $route
+     * @param  array  $params
+     * @param  bool  $absolute
+     * @return string
+     */
+    function admin_route(?string $route, array $params = [], $absolute = true)
+    {
+        return Admin::app()->getRoute($route, $params, $absolute);
+    }
+}
+
+if (! function_exists('admin_route_name')) {
+    /**
+     * 获取路由别名.
+     *
+     * @param  string|null  $route
+     * @return string
+     */
+    function admin_route_name(?string $route)
+    {
+        return Admin::app()->getRoutePrefix().$route;
+    }
+}
+
+
 

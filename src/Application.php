@@ -112,7 +112,7 @@ class Application
     {
         $app = $app ?: $this->getName();
 
-        return 'dcat.'.$app.'.';
+        return 'lantd.'.$app.'.';
     }
 
     public function getRoute(?string $route, array $params = [], $absolute = true)
