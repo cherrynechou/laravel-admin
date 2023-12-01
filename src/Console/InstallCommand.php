@@ -118,6 +118,26 @@ class InstallCommand extends Command
         $this->laravel['files']->put($file, str_replace('DummyNamespace', $this->namespace('Controllers'), $contents));
         $this->line('<info>Routes file was created:</info> '.str_replace(base_path(), '', $file));
     }
+
+    /**
+     * Create basecontroller file.
+     *
+     */
+    protected function createBaseController()
+    {
+        $baseController = $this->directory.'/Controllers/BaseController.php';
+        $contents = $this->getStub('BaseController');
+
+        $this->laravel['files']->put(
+            $baseController,
+            str_replace(
+                ['DummyNamespace'],
+                [$this->namespace('Controllers')],
+                $contents
+            )
+        );
+        $this->line('<info>AuthController file was created:</info> '.str_replace(base_path(), '', $baseController));
+    }
     
 
     /**
