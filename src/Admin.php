@@ -3,7 +3,7 @@ namespace CherryneChou\Admin;
 
 class Admin
 {
-    const VERSION = '2.0.1';
+    const VERSION = '2.0.2';
 
     /**
      * 应用管理.

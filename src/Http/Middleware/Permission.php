@@ -7,6 +7,7 @@ use Illuminate\Auth\Access\AuthorizationException;
 use CherryneChou\Admin\Http\Auth\Permission as Checker;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use CherryneChou\Admin\Support\Helper;
 
 /**
  * 权限 验证中间件
@@ -24,13 +25,15 @@ class Permission
      * @return mixed
      * @throws AuthorizationException
      */
-    public function handle($request, Closure $next)
+    public function handle(Request $request, Closure $next, ...$args)
     {
         $user = $request->user();
 
         if (
             !$user
+            || ! empty($args)
             || ! config('admin.permission.enable')
+            || $this->shouldPassThrough($request)
             || $user->isAdministrator()
             || $this->checkRoutePermission($request)
         ){
@@ -72,5 +75,36 @@ class Permission
         call_user_func_array([Checker::class, $method], [$args]);
 
         return true;
+    }
+
+    /**
+     * Determine if the request has a URI that should pass through verification.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return bool
+     */
+    public function shouldPassThrough($request)
+    {
+        $excepts = array_merge(
+            (array) config('admin.permission.except', []),
+        );
+
+        foreach ($excepts as $except) {
+            if ($request->routeIs($except) || $request->routeIs(admin_route_name($except))) {
+                return true;
+            }
+
+            $except = admin_base_path($except);
+
+            if ($except !== '/') {
+                $except = trim($except, '/');
+            }
+
+            if (Helper::matchRequestPath($except)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }

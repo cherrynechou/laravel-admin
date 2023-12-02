@@ -3,6 +3,7 @@ namespace CherryneChou\Admin\Support;
 
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Contracts\Support\Jsonable;
+use Illuminate\Support\Str;
 
 class Helper
 {
@@ -113,5 +114,47 @@ class Helper
         }, $name);
 
         return str_replace('_', $symbol, ltrim($text, $symbol));
+    }
+
+    /**
+     * 匹配请求路径.
+     *
+     * @example
+     *      Helper::matchRequestPath(admin_base_path('auth/user'))
+     *      Helper::matchRequestPath(admin_base_path('auth/user*'))
+     *      Helper::matchRequestPath(admin_base_path('auth/user/* /edit'))
+     *      Helper::matchRequestPath('GET,POST:auth/user')
+     *
+     * @param  string  $path
+     * @param  null|string  $current
+     * @return bool
+     */
+    public static function matchRequestPath($path, ?string $current = null)
+    {
+        $request = request();
+        $current = $current ?: $request->decodedPath();
+
+        if (Str::contains($path, ':')) {
+            [$methods, $path] = explode(':', $path);
+
+            $methods = array_map('strtoupper', explode(',', $methods));
+
+            if (! empty($methods) && ! in_array($request->method(), $methods)) {
+                return false;
+            }
+        }
+
+        // 判断路由名称
+        if ($request->routeIs($path) || $request->routeIs(admin_route_name($path))) {
+            return true;
+        }
+
+        if (! Str::contains($path, '*')) {
+            return $path === $current;
+        }
+
+        $path = str_replace(['*', '/'], ['([0-9a-z-_,])*', "\/"], $path);
+
+        return preg_match("/$path/i", $current);
     }
 }

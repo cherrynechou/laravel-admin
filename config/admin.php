@@ -8,7 +8,7 @@ return [
 
         'middleware' => ['api'],
 
-        'auth_middleware' => ['auth:sanctum','admin.permission'],
+        'auth_middleware' => ['auth:sanctum','admin'],
     ],
 
     /*
@@ -67,7 +67,6 @@ return [
         // or specific method to path like: get:auth/users.
         'except' => [
             '/',
-            'oauth/login',
             'oauth/logout',
             'currentUser',
             'getMenuList',

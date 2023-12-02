@@ -39,7 +39,6 @@ class MenuTransformer extends TransformerAbstract
             //
             'id'            =>          $model->id,
             'name'          =>          $model->name,
-            'locale'        =>          $model->locale,
             'parent_id'     =>          $model->parent_id,
             'path'          =>          $model->path,
             'order'         =>          $model->order,
