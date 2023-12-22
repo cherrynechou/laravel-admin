@@ -38,6 +38,15 @@ class PermissionController extends Controller
      */
     public function store()
     {
+
+        $validator = $this->validateForm();
+
+        if($validator->fails()){
+            $warnings = $validator->messages();
+            $show_warning = $warnings->first();
+            return $this->failed($show_warning);
+        }
+
         try {
             DB::beginTransaction();
 
@@ -136,6 +145,36 @@ class PermissionController extends Controller
                         ->toArray();
 
         return $this->success($permissions);
+    }
+
+        /**
+     * @return \Illuminate\Contracts\Validation\Validator|\Illuminate\Validation\Validator
+     */
+    protected function validateForm()
+    {
+        $rules = [
+            'name'      => [
+                'required',
+                Rule::unique(config('admin.database.permissions_model'))->where('name',request()->input('name'))
+            ],
+            'slug'      => [
+                'required',
+                Rule::unique(config('admin.database.permissions_model'))->where('slug',request()->input('slug'))
+            ],
+        ];
+
+        $message = [
+            'required'      => ':attribute 不能为空',
+            'name.unique'   => ':attribute 已存在',
+            'slug.unique'   => ':attribute 已存在'
+        ];
+
+        $attributes = [
+            'name'                      => '权限名称',
+            'slug'                      => '权限标识'
+        ];
+
+        return Validator::make(request()->all(), $rules, $message, $attributes);
     }
 
     /**

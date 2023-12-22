@@ -148,12 +148,16 @@ class UserController extends Controller
     {
         $rules = [
             'name'      => 'required',
-            'username'  => 'required',
+            'username'  => [
+                'required',
+                Rule::unique(config('admin.database.roles_model'))->where('username',request()->input('username'))
+            ],
             'roles'     => 'required',
         ];
 
         $message = [
-            "required"      => ":attribute 不能为空",
+            "required"              => ":attribute 不能为空",
+            'username.unique'       => ':attribute 已存在'
         ];
 
         $attributes = [

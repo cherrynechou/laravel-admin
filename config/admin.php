@@ -2,7 +2,7 @@
 return [
     //版本一用于后台
     'route'     =>  [
-        'prefix' => env('ADMIN_ROUTE_PREFIX', 'v1'),
+        'prefix' => env('ADMIN_ROUTE_PREFIX', 'admin'),
 
         'namespace' => 'App\\Admin\\Controllers',
 

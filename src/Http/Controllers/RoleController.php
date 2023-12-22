@@ -140,16 +140,24 @@ class RoleController extends Controller
     protected function validateForm()
     {
         $rules = [
-            'name'      => 'required',
-            'slug'      => 'required',
+           'name'      => [
+                'required',
+                Rule::unique(config('admin.database.roles_model'))->where('name',request()->input('name'))
+            ],
+            'slug'      => [
+                'required',
+                Rule::unique(config('admin.database.roles_model'))->where('slug',request()->input('slug'))
+            ],
         ];
 
         $message = [
-            'required'   => ':attribute 不能为空',
+            'required'              => ':attribute 不能为空',
+            'name.unique'           => ':attribute 已存在',
+            'slug.unique'           => ':attribute 已存在'
         ];
 
         $attributes = [
-            'name'       => '菜单名称',
+            'name'       => '角色名称',
             'slug'       => '标识名称',
         ];
 

@@ -122,6 +122,8 @@ class MenuController extends Controller
 
             if(count($roles)>0){
                 $menu->roles()->sync($roles);
+            }else{
+                $menu->roles()->detach();
             }
 
             DB::commit();
@@ -143,7 +145,10 @@ class MenuController extends Controller
     protected function validateForm()
     {
         $rules = [
-            'name'      => 'required',
+            'name'      => [
+                'required',
+                Rule::unique(config('admin.database.menu_table'))->where('name',request()->input('name'))
+            ],
             'parent_id' => 'required',
             'path'      => 'required',
             'icon'      => 'required_if:parent_id,0'
@@ -151,6 +156,7 @@ class MenuController extends Controller
 
         $message = [
             'required'      => ':attribute 不能为空',
+            'name.unique'   => ':attribute 已存在',
             'required_if'   => '根节点:attribute 不能为空',
         ];
 
