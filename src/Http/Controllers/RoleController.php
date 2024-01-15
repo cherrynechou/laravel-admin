@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use League\Fractal\Pagination\IlluminatePaginatorAdapter;
 use Illuminate\Routing\Controller;
+use Illuminate\Validation\Rule;
 
 class RoleController extends Controller
 {

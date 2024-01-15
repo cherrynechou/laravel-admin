@@ -161,4 +161,5 @@ return [
         'role_menu_table'        => 'admin_role_menu',
         'permission_menu_table'  => 'admin_permission_menu',
     ],
+    'default_password'      =>      env('DEFAULT_PASSWORD', '123456'),
 ];
