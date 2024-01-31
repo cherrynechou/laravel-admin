@@ -43,9 +43,8 @@ class RoleController extends Controller
         $validator = $this->validateForm();
 
         if($validator->fails()){
-            $warnings = $validator->messages();
-            $show_warning = $warnings->first();
-            return $this->failed($show_warning);
+            $warning =$validator->messages()->first();
+            return $this->failed($warning);
         }
 
         // 获取通过验证的数据...
@@ -100,16 +99,8 @@ class RoleController extends Controller
      */
     public function update($id)
     {
-        $validator = $this->validateForm();
 
-         if($validator->fails()){
-            $warnings = $validator->messages();
-            $show_warning = $warnings->first();
-            return $this->failed($show_warning);
-        }
-
-        // 获取通过验证的数据...
-        $validated = $validator->safe()->only(['name', 'slug']);
+        $requestData = request()->only(['name', 'slug']);
 
         $permissions = request()->input('permissions') ?: '';
 
@@ -117,7 +108,7 @@ class RoleController extends Controller
             DB::beginTransaction();
 
             $role = Role::query()->find($id);
-            $role->update($validated);
+            $role->update($requestData);
 
             if($permissions){
                 $permissionIds = json_decode($permissions,true);

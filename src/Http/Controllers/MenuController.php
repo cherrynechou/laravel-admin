@@ -43,9 +43,8 @@ class MenuController extends Controller
         $validator = $this->validateForm();
 
         if($validator->fails()){
-            $warnings = $validator->messages();
-            $show_warning = $warnings->first();
-            return $this->failed($show_warning);
+            $warning = $validator->messages()->first();
+            return $this->failed($warning);
         }
 
         $requestData = request()->only([
@@ -100,14 +99,6 @@ class MenuController extends Controller
      */
     public function update($id)
     {
-        $validator = $this->validateForm();
-
-        if($validator->fails()){
-            $warnings = $validator->messages();
-            $show_warning = $warnings->first();
-            return $this->failed($show_warning);
-        }
-
         $requestData = request()->only([
             'name','path','parent_id','target','url','icon','order','status'
         ]);

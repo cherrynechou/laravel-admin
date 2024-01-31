@@ -46,9 +46,8 @@ class UserController extends Controller
         $validator = $this->validateForm();
 
         if($validator->fails()){
-            $warnings = $validator->messages();
-            $show_warning = $warnings->first();
-            return $this->failed($show_warning);
+            $warning = $validator->messages()->first();
+            return $this->failed($warning);
         }
 
         $requestData = request()->only(['name','username','avatar']);
@@ -104,14 +103,6 @@ class UserController extends Controller
      */
     public function update($id)
     {
-        $validator = $this->validateForm($id);
-
-        if($validator->fails()){
-            $warnings = $validator->messages();
-            $show_warning = $warnings->first();
-            return $this->failed($show_warning);
-        }
-
         $requestData = request()->only(['name','username','avatar']);
         $password = request()->input('password') ?? '';
 

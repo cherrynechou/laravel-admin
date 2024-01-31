@@ -40,13 +40,11 @@ class PermissionController extends Controller
      */
     public function store()
     {
-
         $validator = $this->validateForm();
 
         if($validator->fails()){
-            $warnings = $validator->messages();
-            $show_warning = $warnings->first();
-            return $this->failed($show_warning);
+            $warning = $validator->messages()->first();
+            return $this->failed($warning);
         }
 
         try {
