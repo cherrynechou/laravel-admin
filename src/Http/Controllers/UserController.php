@@ -136,7 +136,7 @@ class UserController extends Controller
     /**
      * @return \Illuminate\Contracts\Validation\Validator|\Illuminate\Validation\Validator
      */
-    protected function validateForm($id = 0)
+    protected function validateForm()
     {
         $rules = [
             'name'      => 'required',

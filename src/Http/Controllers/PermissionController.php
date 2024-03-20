@@ -22,7 +22,7 @@ class PermissionController extends Controller
      */
     public function index()
     {
-        $resources = Permission::query()->orderBy('order','DESC')->get();
+        $resources = Permission::query()->orderBy('order')->get();
 
         $permissionResources = fractal()
             ->collection($resources)

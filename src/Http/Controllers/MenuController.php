@@ -21,7 +21,7 @@ class MenuController extends Controller
      */
     public function index()
     {
-        $resources = Menu::query()->orderBy('order','ASC')->get();
+        $resources = Menu::query()->orderBy('order')->get();
 
         $menuResources = fractal()
                         ->collection($resources)
