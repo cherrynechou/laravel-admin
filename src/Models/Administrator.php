@@ -112,18 +112,6 @@ class Administrator extends Model
     }
 
 
-    /**
-     * 获取用户权限
-     * @return Attribute
-     */
-    public function allPermission() : Attribute
-    {
-        return Attribute::make(
-          get: fn() => $this->allPermissions()
-        );
-    }
-
-
     /* Prepare a date for array / JSON serialization.
      *
      * @param  \DateTimeInterface  $date

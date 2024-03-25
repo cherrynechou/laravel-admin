@@ -39,7 +39,7 @@ class AuthController extends Controller
     {
         try {
 
-            $admin = Administrator::query()->where('username',request()->username)->first();
+            $admin = Administrator::query()->where('username', request()->username)->first();
 
             //判断用户名密码
             if (!$admin || !Hash::check(request()->password, $admin->password)) {
@@ -88,7 +88,7 @@ class AuthController extends Controller
             'name'              =>  request()->user()->name,
             'avatar'            =>  request()->user()->getAvatar(),
             'roles'             =>  request()->user()->roles->pluck('slug'),
-            'all_permissions'   =>  request()->user()->all_permission,
+            'allPermissions'    =>  request()->user()->allPermissions(),
         ];
 
         return $this->success($user);
