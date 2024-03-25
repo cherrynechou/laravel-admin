@@ -2,12 +2,13 @@
 
 namespace CherryneChou\Admin\Http\Controllers;
 
-use CherryneChou\Admin\Traits\HasUploadedFile;
+use Illuminate\Routing\Controller;
 use Illuminate\Support\Str;
+use CherryneChou\Admin\Traits\HasUploadedFile;
 
-class UploadController extends BaseController
+class UploadController extends Controller
 {
-	use HasUploadedFile;
+	use RestfulResponse,HasUploadedFile;
 
     /**
      * 处理图片
