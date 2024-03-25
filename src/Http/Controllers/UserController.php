@@ -59,6 +59,8 @@ class UserController extends Controller
 
         $roles = request()->input('roles') ?: [];
 
+        $permissions = request()->input('permissions') ?: '';
+
 
         try {
             DB::beginTransaction();
@@ -67,6 +69,12 @@ class UserController extends Controller
 
             if(count($roles)>0){
                 $user->roles()->sync($roles);
+            }
+
+
+            if($permissions){
+                $permissionIds = json_decode($permissions,true);
+                $user->permissions()->sync($permissionIds);
             }
 
             DB::commit();
@@ -91,7 +99,7 @@ class UserController extends Controller
             ->item($resource)
             ->transformWith(new AdministratorTransformer())
             ->serializeWith(new DataArraySerializer())
-            ->parseIncludes(['roles'])
+            ->parseIncludes(['roles','permissions'])
             ->toArray();
 
         return $this->success($admin);
@@ -112,6 +120,8 @@ class UserController extends Controller
 
         $roles = request()->input('roles') ?: [];
 
+        $permissions = request()->input('permissions') ?: '';
+
         try {
             DB::beginTransaction();
 
@@ -120,6 +130,11 @@ class UserController extends Controller
 
             if(count($roles)>0){
                 $user->roles()->sync($roles);
+            }
+
+            if($permissions){
+                $permissionIds = json_decode($permissions,true);
+                $user->permissions()->sync($permissionIds);
             }
 
             DB::commit();

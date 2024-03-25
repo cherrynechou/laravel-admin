@@ -24,7 +24,7 @@ class AdministratorTransformer extends TransformerAbstract
      */
     protected array $availableIncludes = [
         //
-        'roles'
+         'roles','permissions'
     ];
 
     /**
@@ -45,7 +45,6 @@ class AdministratorTransformer extends TransformerAbstract
             'avatar_url'        =>          $model->getAvatar(),
             'login_count'       =>          $model->login_count,
             'is_administrator'  =>          $model->isAdministrator(),    //是否是管理员
-            'all_permission'    =>          $model->all_permission,
             'status'            =>          $model->status,
             'created_at'        =>          Carbon::parse($model->created_at)->toDateTimeString(),
             'updated_at'        =>          Carbon::parse($model->updated_at)->toDateTimeString(),
@@ -59,5 +58,15 @@ class AdministratorTransformer extends TransformerAbstract
     public function includeRoles(Administrator $model)
     {
         return $this->collection($model->roles, new RoleTransformer(), '');
+    }
+
+
+    /**
+     * @param Administrator $model
+     * @return \League\Fractal\Resource\Collection
+     */
+    public function includePermissions(Administrator $model)
+    {
+        return $this->collection($model->permissions, new PermissionTransformer(),'');
     }
 }

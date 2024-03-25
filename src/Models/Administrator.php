@@ -58,10 +58,16 @@ class Administrator extends Model
         $this->setTable(config('admin.database.users_table'));
     }
 
+    /**
+     * @param $query
+     * @param QueryFilter $filters
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
     public function scopeFilter($query, QueryFilter $filters)
     {
         return $filters->apply($query);
     }
+
 
     /**
      * Get avatar attribute.
@@ -82,6 +88,7 @@ class Administrator extends Model
 
         return admin_asset(config('admin.default_avatar') ?: '/vender/laravel-admin/dist/images/user2-160x160.jpg');
     }
+    
 
     /**
      * A user has and belongs to many roles.

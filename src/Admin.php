@@ -81,6 +81,8 @@ class Admin
             $router->get('/currentUser', $authController . '@currentUser')->name('current.user');
             //菜单
             $router->get('/getMenuList', $authController . '@getMenuList')->name('menu.list');
+            //图片上传
+            $router->any('/upload/imageFiles','UploadController@handleImage')->name('upload.image');
         });
     }
 }

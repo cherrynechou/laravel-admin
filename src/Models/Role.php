@@ -113,6 +113,24 @@ class Role extends Model
 
 
     /**
+     * Detach models from the relationship.
+     *
+     * @return void
+     */
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::deleting(function ($model) {
+
+            $model->administrators()->detach();
+
+            $model->permissions()->detach();
+        });
+    }
+
+
+    /**
      * Prepare a date for array / JSON serialization.
      *
      * @param  \DateTimeInterface  $date
