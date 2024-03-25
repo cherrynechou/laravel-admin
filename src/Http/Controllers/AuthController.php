@@ -87,7 +87,7 @@ class AuthController extends Controller
             'username'          =>  request()->user()->username,
             'name'              =>  request()->user()->name,
             'avatar'            =>  request()->user()->getAvatar(),
-            'roles'             =>  request()->user()->roles->pluck('name'),
+            'roles'             =>  request()->user()->roles->pluck('slug'),
             'all_permissions'   =>  request()->user()->all_permission,
         ];
 
