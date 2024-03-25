@@ -24,6 +24,7 @@ trait HasPermissions
             $this->roles
                 ->pluck('permissions')
                 ->flatten()
+                ->merge($this->permissions)
                 ->keyBy($this->getKeyName());
     }
 

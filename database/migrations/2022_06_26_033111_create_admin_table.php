@@ -97,6 +97,15 @@ return new class extends Migration
             $table->timestamps();
         });
 
+
+        Schema::create(config('admin.database.user_permissions_table'), function (Blueprint $table) {
+            $table->integer('user_id');
+            $table->integer('permission_id');
+            $table->index(['user_id', 'permission_id']);
+            $table->timestamps();
+        });
+
+
         Schema::create($this->config('database.role_menu_table'), function (Blueprint $table) {
             $table->bigInteger('role_id');
             $table->bigInteger('menu_id');

@@ -45,6 +45,7 @@ class AdministratorTransformer extends TransformerAbstract
             'avatar_url'        =>          $model->getAvatar(),
             'login_count'       =>          $model->login_count,
             'is_administrator'  =>          $model->isAdministrator(),    //是否是管理员
+            'all_permission'    =>          $model->all_permission,
             'status'            =>          $model->status,
             'created_at'        =>          Carbon::parse($model->created_at)->toDateTimeString(),
             'updated_at'        =>          Carbon::parse($model->updated_at)->toDateTimeString(),

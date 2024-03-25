@@ -6,6 +6,7 @@ use CherryneChou\Admin\Models\Administrator;
 use CherryneChou\Admin\Serializer\DataArraySerializer;
 use CherryneChou\Admin\Services\AuthorizationService;
 use CherryneChou\Admin\Traits\RestfulResponse;
+use CherryneChou\Admin\Transformers\AdministratorTransformer;
 use CherryneChou\Admin\Transformers\MenuTransformer;
 use CherryneChou\Admin\Support\Helper;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
@@ -82,10 +83,12 @@ class AuthController extends Controller
     public function currentUser()
     {
         $user =  [
-            'userid'        =>  request()->user()->id,
-            'username'      =>  request()->user()->username,
-            'name'          =>  request()->user()->name,
-            'avatar'        =>  request()->user()->getAvatar()
+            'userid'            =>  request()->user()->id,
+            'username'          =>  request()->user()->username,
+            'name'              =>  request()->user()->name,
+            'avatar'            =>  request()->user()->getAvatar(),
+            'roles'             =>  request()->user()->roles->pluck('name'),
+            'all_permissions'   =>  request()->user()->all_permission,
         ];
 
         return $this->success($user);

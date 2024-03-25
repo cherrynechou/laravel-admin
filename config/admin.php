@@ -117,6 +117,7 @@ return [
         'menu_model' => CherryneChou\Admin\Models\Menu::class,
 
         // Pivot table for table above.
+        'user_permissions_table' => 'admin_user_permissions',
         'role_users_table'       => 'admin_role_users',
         'role_permissions_table' => 'admin_role_permissions',
         'role_menu_table'        => 'admin_role_menu',
