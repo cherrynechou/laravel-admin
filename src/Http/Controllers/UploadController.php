@@ -3,6 +3,7 @@
 namespace CherryneChou\Admin\Http\Controllers;
 
 use CherryneChou\Admin\Traits\HasUploadedFile;
+use Illuminate\Support\Str;
 
 class UploadController extends BaseController
 {
