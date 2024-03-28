@@ -131,7 +131,7 @@ Trait RestfulResponse
      */
     public function success($data = [], string $message = '',int $status = Response::HTTP_OK, array $headers = [], $option = 0)
     {
-         return $this->response($this->formatData($data, $message, $status), $status, $headers, $option);
+        return $this->response($this->formatData($data, $message, $status), $status, $headers, $option);
     }
 
     /**

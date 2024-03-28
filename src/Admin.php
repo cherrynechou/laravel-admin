@@ -3,7 +3,7 @@ namespace CherryneChou\Admin;
 
 class Admin
 {
-    const VERSION = '2.1.3';
+    const VERSION = '2.0.6';
 
     /**
      * 应用管理.
@@ -44,32 +44,24 @@ class Admin
         ];
 
         $router->group($auth_attributes, function ($router) {
-
             if (config('admin.auth.enable', true)) {
                 /* @var \Illuminate\Support\Facades\Route $router */
                 $router->namespace('\CherryneChou\Admin\Http\Controllers')->group(function ($router) {
-
                     /* @var \Illuminate\Routing\Router $router */
                     $router->resource('auth/users', 'UserController',['except'=>['create','edit']])->names('auth.users');
                     $router->resource('auth/roles', 'RoleController',['except'=>['create','edit']])->names('auth.roles');
                     $router->resource('auth/permissions', 'PermissionController',['except'=>['create','edit']])->names('auth.permissions');
                     $router->resource('auth/menu', 'MenuController', ['except' => ['create','edit']])->names('auth.menu');
-
                     //非分页列表
                     $router->get('/role/all','RoleController@all')->name('roles.all');
-
                     //非树型结构列表
                     $router->get('/permission/all','PermissionController@all')->name('permissions.all');
-
                     //获取权限路由
                     $router->get('/permission/routes','PermissionController@routes')->name('permissions.routes');
-
                     //更改菜单的状态
                     $router->patch('/menu/{menu}/switch','MenuController@switchStatus')->name('menu.switch');
-
                     //重置用户密码
                     $router->patch('/user/{user}/resetPassword','UserController@resetPassword')->name('user.reset.password');
-
                     //阻止用户登录
                     $router->patch('/user/{user}/block','UserController@block')->name('user.block');
                 });
@@ -81,7 +73,7 @@ class Admin
             $router->get('/currentUser', $authController . '@currentUser')->name('current.user');
             //菜单
             $router->get('/getMenuList', $authController . '@getMenuList')->name('menu.list');
-            
+
             $router->namespace('\CherryneChou\Admin\Http\Controllers')->group(function ($router) {
                 //图片上传
                 $router->any('/upload/imageFiles','UploadController@handleImage')->name('upload.image');

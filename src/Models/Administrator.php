@@ -25,16 +25,14 @@ class Administrator extends Model
     protected $guarded = ['id'];
 
     /**
-     * Get the attributes that should be cast.
+     * The attributes that should be cast.
      *
-     * @return array<string, string>
+     * @var array<string, string>
      */
-    protected function casts(): array
-    {
-        return [
-            'email_verified_at' => 'datetime',
-        ];
-    }
+    protected $casts = [
+        'email_verified_at' => 'datetime',
+    ];
+
 
     /**
      * The attributes that should be hidden for arrays.
@@ -118,6 +116,13 @@ class Administrator extends Model
         return $this->belongsToMany($relatedModel, $pivotTable, 'user_id', 'permission_id');
     }
 
+    /**
+     * @return \Illuminate\Support\Collection|mixed
+     */
+    public function getAllPermissions()
+    {
+        return $this->allPermissions()->pluck('slug');
+    }
 
     /* Prepare a date for array / JSON serialization.
      *
