@@ -135,6 +135,7 @@ return new class extends Migration
         Schema::dropIfExists($this->config('database.menu_table'));
         Schema::dropIfExists($this->config('database.role_users_table'));
         Schema::dropIfExists($this->config('database.role_permissions_table'));
+        Schema::dropIfExists($this->config('database.user_permissions_table'));
         Schema::dropIfExists($this->config('database.role_menu_table'));
         Schema::dropIfExists($this->config('database.permission_menu_table'));
     }
