@@ -96,14 +96,14 @@ Trait RestfulResponse
         } else {
             $statusText = 'success';
         }
-
+   
         $message = !$message ? ( isset(Response::$statusTexts[$status]) ? Response::$statusTexts[$status] : 'Service error') : $message;
 
         return [
             'statusText'    => $statusText,
             'status'        => $originalStatus,
             'message'       => $message,
-            'data'          => $data ?: (object) $data,
+            'data'          => $data,
         ];
     }
 
