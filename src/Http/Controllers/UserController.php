@@ -51,7 +51,7 @@ class UserController extends Controller
         }
 
         $requestData = request()->only(['name','username','avatar']);
-        $password = request()->input('password') ?? '';
+        $password = request()->input('password');
 
         if(!empty($password)){
             $requestData['password'] = Hash::make($password);
@@ -112,7 +112,7 @@ class UserController extends Controller
     public function update($id)
     {
         $requestData = request()->only(['name','username','avatar']);
-        $password = request()->input('password') ?? '';
+        $password = request()->input('password');
 
         if(!empty($password)){
             $requestData['password'] = Hash::make($password);
@@ -159,6 +159,7 @@ class UserController extends Controller
                 'required',
                 Rule::unique(config('admin.database.roles_model'))->where('username',request()->input('username'))
             ],
+            'password'  => 'required', 
             'roles'     => 'required',
         ];
 
@@ -169,6 +170,7 @@ class UserController extends Controller
 
         $attributes = [
             'name'                  => '名称',
+            'password'              => '密码',
             'username'              => '用户名',
             'roles'                 => '角色'
         ];
