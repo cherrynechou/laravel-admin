@@ -164,15 +164,15 @@ class UserController extends Controller
         ];
 
         $message = [
-            "required"              => ":attribute 不能为空",
-            'username.unique'       => ':attribute 已存在'
+            "required"              => trans('validation.attribute_not_empty'),
+            'username.unique'       => trans('validation.attribute_exists')
         ];
 
         $attributes = [
-            'name'                  => '名称',
-            'password'              => '密码',
-            'username'              => '用户名',
-            'roles'                 => '角色'
+            'name'                  => trans('admin.account.name'),
+            'password'              => trans('admin.account.password'),
+            'username'              => trans('admin.account.username'),
+            'roles'                 => trans('admin.account.role')
         ];
 
         return Validator::make(request()->all(), $rules, $message, $attributes);

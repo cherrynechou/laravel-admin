@@ -48,7 +48,7 @@ class MenuController extends Controller
         }
 
         $requestData = request()->only([
-            'name','path','parent_id','target','url','icon','order','status'
+            'name','locale','path','parent_id','target','url','icon','order','status'
         ]);
 
         $roles = request()->input('roles') ?: [];
@@ -100,7 +100,7 @@ class MenuController extends Controller
     public function update($id)
     {
         $requestData = request()->only([
-            'name','path','parent_id','target','url','icon','order','status'
+            'name','locale','path','parent_id','target','url','icon','order','status'
         ]);
 
         $roles = request()->input('roles') ?: [];
@@ -141,22 +141,27 @@ class MenuController extends Controller
                 'required',
                 Rule::unique(config('admin.database.menu_table'))->where('name',request()->input('name'))
             ],
+            'locale'      => [
+                'required',
+                Rule::unique(config('admin.database.menu_table'))->where('locale',request()->input('locale'))
+            ],
             'parent_id' => 'required',
             'path'      => 'required',
             'icon'      => 'required_if:parent_id,0'
         ];
 
         $message = [
-            'required'      => ':attribute 不能为空',
-            'name.unique'   => ':attribute 已存在',
-            'required_if'   => '根节点:attribute 不能为空',
+            'required'      => trans('validation.attribute_not_empty'),
+            'name.unique'   => trans('validation.attribute_exists'),
+            'required_if'   => trans('validation.attribute_root_not_empty'),
         ];
 
         $attributes = [
-            'name'                      => '菜单名称',
-            'parent_id'                 => '菜单父对象',
-            'path'                      => '菜单路径',
-            'icon'                      => '菜单图标'
+            'name'                      => trans('admin.menu.name'),
+            'locale'                    => trans('admin.menu.locale'),
+            'parent_id'                 => trans('admin.menu.parent_id'),
+            'path'                      => trans('admin.menu.path'),
+            'icon'                      => trans('admin.menu.icon')
         ];
 
         return Validator::make(request()->all(), $rules, $message, $attributes);

@@ -11,5 +11,26 @@ return [
     'save_failed'                   => '保存失败 !',
     'user_not_exists'               => '用户不存在',
     'user_forbidden_login'          => '禁止登录',
-    'username_or_password_is_wrong' =>'用户名或者密码不正确'
+    'username_or_password_is_wrong' =>'用户名或者密码不正确',
+    'account'   =>  [
+        'name'                       => '名称',
+        'username'                   => '用户名',
+        'password'                   => '密码',
+        'role'                       => '角色',
+    ],
+    'role'  => [
+        'name'                      => '角色名称',
+        'slug'                      => '角色标识'
+    ],
+    'permission'=>[
+        'name'                      => '权限名称',
+        'slug'                      => '权限标识'
+    ],
+    'menu'      =>[
+        'name'                      => '菜单名称',
+        'locale'                    => '国际化标识',
+        'parent_id'                 => '菜单父对象',
+        'path'                      => '菜单路径',
+        'icon'                      => '菜单图标'
+    ]
 ];

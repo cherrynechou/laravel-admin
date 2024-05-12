@@ -143,14 +143,14 @@ class RoleController extends Controller
         ];
 
         $message = [
-            'required'              => ':attribute 不能为空',
-            'name.unique'           => ':attribute 已存在',
-            'slug.unique'           => ':attribute 已存在'
+            'required'              => trans('validation.attribute_not_empty'),
+            'name.unique'           => trans('validation.attribute_exists'),
+            'slug.unique'           => trans('validation.attribute_exists')
         ];
 
         $attributes = [
-            'name'       => '角色名称',
-            'slug'       => '标识名称',
+            'name'       => trans('admin.role.name'),
+            'slug'       => trans('admin.role.slug'),
         ];
 
         return Validator::make(request()->all(), $rules, $message, $attributes);

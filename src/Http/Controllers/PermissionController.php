@@ -164,9 +164,9 @@ class PermissionController extends Controller
         ];
 
         $message = [
-            'required'      => ':attribute 不能为空',
-            'name.unique'   => ':attribute 已存在',
-            'slug.unique'   => ':attribute 已存在'
+            'required'      => trans('validation.attribute_not_empty'),
+            'name.unique'   => trans('validation.attribute_exists'),
+            'slug.unique'   => trans('validation.attribute_exists')
         ];
 
         $attributes = [
