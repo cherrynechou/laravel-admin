@@ -109,7 +109,7 @@ class AuthController extends Controller
                     ->serializeWith(new DataArraySerializer())
                     ->toArray();
 
-        $menus = Helper::listToTree($menuResources,'routes');
+        $menus = Helper::listToTree($menuResources);
 
         return $this->success($menus);
     }
