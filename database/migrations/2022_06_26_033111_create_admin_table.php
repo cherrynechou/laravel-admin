@@ -69,6 +69,7 @@ return new class extends Migration
         Schema::create($this->config('database.menu_table'), function (Blueprint $table) {
             $table->id();
             $table->string('name')->comment('菜单名称');
+            $table->string('locale')->comment('菜单国际化标识');
             $table->string('path')->nullable()->default('');
             $table->bigInteger('parent_id')->default(0);
             $table->string('target')->nullable()->default('')->comment('浏览器跳转类型');
