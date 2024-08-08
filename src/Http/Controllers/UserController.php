@@ -157,7 +157,7 @@ class UserController extends Controller
             'name'      => 'required',
             'username'  => [
                 'required',
-                Rule::unique(config('admin.database.roles_model'))->where('username',request()->input('username'))
+                Rule::unique(config('admin.database.users_model'))->where('username',request()->input('username'))
             ],
             'password'  => 'required', 
             'roles'     => 'required',
