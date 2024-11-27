@@ -11,7 +11,8 @@ return [
     'save_failed'                   => '保存失败 !',
     'user_not_exists'               => '用户不存在',
     'user_forbidden_login'          => '禁止登录',
-    'username_or_password_is_wrong' =>'用户名或者密码不正确',
+    'username_or_password_is_wrong' => '用户名或者密码不正确',
+    'origin_password_is_wrong'      => '原始密码不正确',
     'account'   =>  [
         'name'                       => '名称',
         'username'                   => '用户名',

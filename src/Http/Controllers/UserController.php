@@ -61,7 +61,6 @@ class UserController extends Controller
 
         $permissions = request()->input('permissions') ?: '';
 
-
         try {
             DB::beginTransaction();
 
@@ -70,7 +69,6 @@ class UserController extends Controller
             if(count($roles)>0){
                 $user->roles()->sync($roles);
             }
-
 
             if($permissions){
                 $permissionIds = json_decode($permissions,true);
@@ -82,6 +80,7 @@ class UserController extends Controller
             return $this->success();
 
         }catch (\Exception $exception){
+
             DB::rollBack();
 
             return $this->failed($exception->getMessage());
@@ -217,11 +216,43 @@ class UserController extends Controller
     }
 
     /**
+     * 修改密码
+     * @param $id
+     */
+    public function changePassword($id)
+    {
+        $admin = Administrator::find($id);
+
+        //判断用户密码是否正确
+        if (!$admin || !Hash::check(request()->oldPassword, $admin->password)) {
+            return $this->failed(trans('admin.origin_password_is_wrong'));
+        }
+
+        $newPassword = request()->input('newPassword');
+
+        try {
+            DB::beginTransaction();
+
+            $admin->password = Hash::make($newPassword);
+            $admin->save();
+
+            DB::commit();
+
+            return $this->success();
+
+        }catch (\Exception $exception){
+            DB::rollBack();
+
+            return $this->failed($exception->getMessage());
+        }
+    }
+
+    /**
      * 重置用户密码
      * @param $id
      * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\Resources\Json\JsonResource
      */
-    public function resetPassword($id)
+    public function resetPassword($id): \Illuminate\Http\JsonResponse|\Illuminate\Http\Resources\Json\JsonResource
     {
         $admin = Administrator::find($id);
         $admin->password = Hash::make(config('admin.default_password'));

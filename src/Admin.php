@@ -62,6 +62,8 @@ class Admin
                     $router->patch('/menu/{menu}/switch','MenuController@switchStatus')->name('menu.switch');
                     //重置用户密码
                     $router->patch('/user/{user}/resetPassword','UserController@resetPassword')->name('user.reset.password');
+                    //更改用户密码
+                    $router->patch('/user/{user}/changePassword','UserController@changePassword')->name('user.change.password');
                     //阻止用户登录
                     $router->patch('/user/{user}/block','UserController@block')->name('user.block');
                 });

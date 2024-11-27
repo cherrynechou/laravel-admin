@@ -31,7 +31,6 @@ class AuthController extends Controller
         $this->authorizationService = $authorizationService;
     }
 
-
     /**
      * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\Resources\Json\JsonResource
      */
@@ -60,20 +59,14 @@ class AuthController extends Controller
             $access_token = $admin->createToken(request()->username)->plainTextToken;
 
             return $this->success([
-                'token_type' => 'Bearer',
                 'access_token' => $access_token,
             ]);
 
         }catch (ModelNotFoundException $exception){
-
             return $this->failed(trans('admin.user_not_exists'));
-
         }catch (\Exception $exception){
-
             return $this->failed($exception->getMessage());
-
         }
-
     }
 
     /**
@@ -100,19 +93,17 @@ class AuthController extends Controller
      */
     public function getMenuList()
     {
-
         $filter_resources = $this->authorizationService->filterAuthMenus();
 
         $menuResources = fractal()
-                    ->collection($filter_resources)
-                    ->transformWith(new MenuTransformer())
-                    ->serializeWith(new DataArraySerializer())
-                    ->toArray();
+                         ->collection($filter_resources)
+                         ->transformWith(new MenuTransformer())
+                         ->serializeWith(new DataArraySerializer())
+                         ->toArray();
 
         $menus = Helper::listToTree($menuResources);
 
         return $this->success($menus);
     }
-
 
 }
