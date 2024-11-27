@@ -228,7 +228,7 @@ class UserController extends Controller
             return $this->failed(trans('admin.origin_password_is_wrong'));
         }
 
-        $newPassword = request()->input('newPassword');
+        $newPassword = request()->input('newPassword') ?? '';
 
         try {
             DB::beginTransaction();
