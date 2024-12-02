@@ -140,9 +140,9 @@ Trait RestfulResponse
      * @param array $header
      * @param int $options
      */
-    public function failed(string $message = '', $data = [],int $status = Response::HTTP_BAD_REQUEST, array $header = [], int $options = 0)
+    public function failed(string $message = '', int $status = Response::HTTP_BAD_REQUEST, array $header = [], int $options = 0)
     {
-        return  $this->response($this->formatData($data, $message, $status), $status, $header, $options);
+        return  $this->response($this->formatData(null, $message, $status), $status, $header, $options);
     }
 
 }
