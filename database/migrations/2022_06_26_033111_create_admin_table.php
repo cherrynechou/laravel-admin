@@ -99,7 +99,7 @@ return new class extends Migration
         });
 
 
-        Schema::create($this->config('admin.database.user_permissions_table'), function (Blueprint $table) {
+        Schema::create($this->config('database.user_permissions_table'), function (Blueprint $table) {
             $table->integer('user_id');
             $table->integer('permission_id');
             $table->index(['user_id', 'permission_id']);
