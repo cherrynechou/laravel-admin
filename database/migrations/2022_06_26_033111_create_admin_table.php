@@ -42,7 +42,7 @@ return new class extends Migration
             $table->timestamps();
             $table->softDeletes();
 
-            $table->comment('管员员表');
+            $table->comment('管理员表');
 
         });
 
@@ -68,7 +68,7 @@ return new class extends Migration
 
         Schema::create($this->config('database.menu_table'), function (Blueprint $table) {
             $table->id();
-            $table->string('name')->comment('菜单名称');
+            $table->string('key')->comment('菜单关键字');
             $table->string('locale')->comment('菜单国际化标识');
             $table->string('path')->nullable()->default('');
             $table->bigInteger('parent_id')->default(0);

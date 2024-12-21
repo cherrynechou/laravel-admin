@@ -22,8 +22,9 @@ class AdminServiceProvider extends ServiceProvider
      * @var array
      */
     protected $routeMiddleware = [
-        'admin.permission' => Http\Middleware\Permission::class,
-        'admin.app'        => Http\Middleware\Application::class,
+        'admin.permission'  => Http\Middleware\Permission::class,
+        'admin.app'         => Http\Middleware\Application::class,
+        'admin.locale'      => Http\Middleware\Locale::class,
     ];
 
     /**
