@@ -33,6 +33,7 @@ class AdminServiceProvider extends ServiceProvider
     protected $middlewareGroups = [
         'admin' => [
             'admin.permission',
+            'admin.locale'
         ],
     ];
 

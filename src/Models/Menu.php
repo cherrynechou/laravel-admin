@@ -25,10 +25,15 @@ class Menu extends Model
         $this->setTable(config('admin.database.menu_table'));
     }
 
+    /**
+     * A locale menu name
+     *
+     * @return Attribute
+     */
     protected function name(): Attribute
     {
         return Attribute::make(
-            get: fn (string $locale) => trans($locale),
+            get: fn (mixed $value, array $attributes) => trans($attributes['locale'])
         );
     }
 

@@ -43,7 +43,7 @@ class Permission
         if (! $user->allPermissions()->first(function ($permission) use ($request) {
             return $permission->shouldPassThrough($request);
         })) {
-            return response('无权限！', 403);
+            return response(trans('admin.user_no_permission'), 403);
         }
 
         return $next($request);

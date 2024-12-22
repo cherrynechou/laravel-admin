@@ -11,6 +11,7 @@ return [
     'save_failed'                   => 'Save Failed !',
     'user_not_exists'               => 'User is Not exists',
     'user_forbidden_login'          => 'Forbidden Login',
+    'user_no_permission'            => 'No permission！',
     'username_or_password_is_wrong' => 'User or Password is Wrong',
     'origin_password_is_wrong'      => 'Origin Password is Wrong',
     'account'   =>  [

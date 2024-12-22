@@ -104,7 +104,7 @@ class AdminTablesSeeder extends Seeder
             ],[
                 'parent_id'     => 1,
                 'order'         => 2,
-                'key'           => 'Anylysis',
+                'key'           => 'Analysis',
                 'locale'        => 'menu.dashboard.analysis',
                 'icon'          => '',
                 'uri'           => '/',

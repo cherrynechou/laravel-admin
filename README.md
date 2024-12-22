@@ -18,7 +18,17 @@ TODO
 php artisan vendor:publish --provider="CherryneChou\Admin\AdminServiceProvider"
 
 
-php artisan migrate
+## public resources
+
+```
+php artisan admin:publish
+```
+
+## install  
+
+```
+php artisan admin:install
+```
 
 
 You can contribute in one of three ways:

@@ -170,8 +170,8 @@ class PermissionController extends Controller
         ];
 
         $attributes = [
-            'name'                      => '权限名称',
-            'slug'                      => '权限标识'
+            'name'                      => trans('admin.permission.name'),
+            'slug'                      => trans('admin.permission.slug'),
         ];
 
         return Validator::make(request()->all(), $rules, $message, $attributes);
