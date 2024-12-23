@@ -93,34 +93,25 @@ class PermissionController extends Controller
         $routes = collect(app('router')->getRoutes())->map(function ($route) use ($prefix, $container) {
 
             if (! Str::startsWith($uri = $route->uri(), $prefix) && $prefix && $prefix !== '/') {
-
                 return false;
             }
 
             if (! Str::contains($uri, '{')) {
-
                 if ($prefix !== '/') {
-
                     $route = Str::replaceFirst($prefix, '', $uri.'*');
-
                 } else {
-
                     $route = $uri.'*';
                 }
 
                 if ($route !== '*') {
-
                     $container->push($route);
-
                 }
             }
 
             $path = preg_replace('/{.*}+/', '*', $uri);
 
             if ($prefix !== '/') {
-
                 return Str::replaceFirst($prefix, '', $path);
-
             }
 
             return $path;

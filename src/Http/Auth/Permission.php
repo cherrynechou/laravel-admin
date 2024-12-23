@@ -53,7 +53,7 @@ class Permission
 
     public static function error()
     {
-        abort(403, '没有权限');
+        abort(403, trans('admin.user_forbidden_login'));
     }
 
 

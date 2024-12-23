@@ -37,9 +37,9 @@ class Locale
         }else if($lang == 'pt_BR'){
             $locale = 'pt_BR';
         }else if($lang == 'zh-CN'){
-            $locale = 'zh-CN';
+            $locale = 'zh_CN';
         }else if($lang == 'zh-TW'){
-            $locale = 'zh-TW';
+            $locale = 'zh_TW';
         }else{
             $locale =  config('app.locale');
         }
