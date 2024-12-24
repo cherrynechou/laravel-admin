@@ -9,7 +9,7 @@ class Locale
 {
     /**
      *  孟加拉语 bn-BD          bn
-     *  美式英语 en_US          en
+     *  美式英语 en-US          en
      *  波斯语  fa-IR           fa
      *  印尼语  id-ID           id
      *  日语    ja-JP           ja
@@ -26,7 +26,7 @@ class Locale
 
         if($lang == 'bn-BD'){
             $locale = 'bn';
-        }else if($lang == 'en_US'){
+        }else if($lang == 'en-US'){
             $locale = 'en';
         }else if($lang == 'fa-IR'){
             $locale = 'fa';
@@ -34,7 +34,7 @@ class Locale
             $locale = 'id';
         }else if($lang == 'ja-JP'){
             $locale = 'ja';
-        }else if($lang == 'pt_BR'){
+        }else if($lang == 'pt-BR'){
             $locale = 'pt_BR';
         }else if($lang == 'zh-CN'){
             $locale = 'zh_CN';
