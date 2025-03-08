@@ -65,7 +65,7 @@ class Permission extends Model
      */
     public function getHttpPathAttribute($path)
     {
-        return explode(',', $path);
+        return explode(',', $path ?? '');
     }
 
     /**
