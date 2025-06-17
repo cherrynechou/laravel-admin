@@ -48,6 +48,7 @@ class MenuTransformer extends TransformerAbstract
             'uri'           =>          $model->uri,
             'icon'          =>          $model->icon,
             'status'        =>          $model->status,
+            'visible'       =>          $model->visible,
             'created_at'    =>          Carbon::parse($model->created_at)->toDateTimeString(),
             'updated_at'    =>          Carbon::parse($model->updated_at)->toDateTimeString(),
         ];
