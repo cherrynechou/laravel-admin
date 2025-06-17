@@ -54,6 +54,7 @@ class PermissionTransformer extends TransformerAbstract
             //
             'id'            =>          $model->id,
             'name'          =>          $model->name,
+            'locale'        =>          $model->locale,
             'slug'          =>          $model->slug,
             'methods'       =>          $model->parent_id > 0 ? $method : [],
             'paths'         =>          $path,

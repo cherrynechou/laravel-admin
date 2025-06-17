@@ -70,6 +70,8 @@ return new class extends Migration
             $table->integer('order')->default(0);
             $table->bigInteger('parent_id')->default(0);
             $table->timestamps();
+
+             $table->comment('权限表');
         });
 
         Schema::create($this->config('database.menu_table'), function (Blueprint $table) {
