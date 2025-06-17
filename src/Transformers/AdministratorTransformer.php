@@ -48,6 +48,7 @@ class AdministratorTransformer extends TransformerAbstract
             'last_login_time'   =>          Carbon::parse($model->last_login_time)->toDateTimeString(),
             'is_administrator'  =>          $model->isAdministrator(),    //是否是管理员
             'status'            =>          $model->status,
+            'order'             =>          $model->order,
             'created_at'        =>          Carbon::parse($model->created_at)->toDateTimeString(),
             'updated_at'        =>          Carbon::parse($model->updated_at)->toDateTimeString(),
         ];

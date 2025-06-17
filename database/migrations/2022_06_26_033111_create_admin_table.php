@@ -38,9 +38,9 @@ return new class extends Migration
             $table->string('last_login_ip')->nullable()->default('');
             $table->timestamp('last_login_time')->nullable();
 
-            $table->integer('order')->default(0);
             $table->boolean('status')->nullable()->default(0)->comment('是否禁用');
-
+            $table->integer('order')->default(0);
+        
             $table->timestamps();
             $table->softDeletes();
 
@@ -52,6 +52,7 @@ return new class extends Migration
             $table->id();
             $table->string('name', 50);
             $table->string('slug', 50)->unique();
+            $table->boolean('status')->nullable()->default(0)->comment('是否禁用');
             $table->integer('order')->default(0);
             $table->timestamps();
 
