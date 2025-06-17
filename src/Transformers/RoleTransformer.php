@@ -40,6 +40,7 @@ class RoleTransformer extends TransformerAbstract
             'name'          =>      $model->name,
             'slug'          =>      $model->slug,
             'order'         =>      $model->order,
+            'status'        =>      $model->status,
             'created_at'    =>      Carbon::parse($model->created_at)->toDateTimeString(),
             'updated_at'    =>      Carbon::parse($model->updated_at)->toDateTimeString(),
         ];
