@@ -100,6 +100,7 @@ class AdminTablesSeeder extends Seeder
                 'uri'           => '/',
                 'path'          => '/',
                 'status'        => 1,
+                'visible'       => 1,
                 'created_at'    => $createdAt,
             ],[
                 'parent_id'     => 1,
@@ -110,6 +111,7 @@ class AdminTablesSeeder extends Seeder
                 'uri'           => '/',
                 'path'          => '/dashboard',
                 'status'        => 1,
+                'visible'       => 1,
                 'created_at'    => $createdAt,
             ],[
                 'parent_id'     => 0,
@@ -120,6 +122,7 @@ class AdminTablesSeeder extends Seeder
                 'uri'           => '',
                 'path'          => '/auth',
                 'status'        => 1,
+                'visible'       => 1,
                 'created_at'    => $createdAt,
             ],[
                 'parent_id'     => 3,
@@ -130,6 +133,7 @@ class AdminTablesSeeder extends Seeder
                 'uri'           => '',
                 'path'          => '/auth/users',
                 'status'        => 1,
+                'visible'       => 1,
                 'created_at'    => $createdAt,
             ],[
                 'parent_id'     => 3,
@@ -140,6 +144,7 @@ class AdminTablesSeeder extends Seeder
                 'uri'           => '',
                 'path'          => '/auth/roles',
                 'status'        => 1,
+                'visible'       => 1,
                 'created_at'    => $createdAt,
             ],[
                 'parent_id'     => 3,
@@ -150,6 +155,7 @@ class AdminTablesSeeder extends Seeder
                 'uri'           => 'permissions',
                 'path'          => '/auth/permissions',
                 'status'        => 1,
+                'visible'       => 1,
                 'created_at'    => $createdAt,
             ],[
                 'parent_id'     => 3,
@@ -160,6 +166,7 @@ class AdminTablesSeeder extends Seeder
                 'uri'           => '',
                 'path'          => '/auth/menu',
                 'status'        => 1,
+                'visible'       => 1,
                 'created_at'    => $createdAt,
             ],
         ]);

@@ -50,7 +50,7 @@ class UserController extends Controller
             return $this->failed($warning);
         }
 
-        $requestData = request()->only(['name','username','avatar']);
+        $requestData = request()->only(['name','username','avatar','telephone','email']);
         $password = request()->input('password');
 
         if(!empty($password)){

@@ -31,7 +31,7 @@ return new class extends Migration
             $table->string('email',50)->nullable()->default('');
             $table->timestamp('email_verified_at')->nullable();
 
-            $table->string('phone',11)->nullable()->unique();
+            $table->string('telephone',11)->nullable()->unique();
             $table->string('avatar')->nullable();
 
             $table->unsignedInteger('login_count')->nullable()->default(0)->comment('登录次数');
@@ -68,7 +68,8 @@ return new class extends Migration
 
         Schema::create($this->config('database.menu_table'), function (Blueprint $table) {
             $table->id();
-            $table->string('key')->comment('菜单关键字');
+            $table->string('name')->comment('菜单关键字');
+            $table->tinyInteger('type')->nullable()->default(1)->comment('类型1菜单、2功能');
             $table->string('locale')->comment('菜单国际化标识');
             $table->string('path')->nullable()->default('');
             $table->bigInteger('parent_id')->default(0);
@@ -76,9 +77,8 @@ return new class extends Migration
             $table->string('uri')->nullable()->default('')->comment('浏览器跳转地址');
             $table->string('icon', 50)->default('')->nullable();
             $table->integer('order')->default(0)->nullable();
-            $table->boolean('status')->default(1)->comment('隐藏菜单: 0:不隐藏, 1:隐藏');
-
-            $table->tinyInteger('type')->nullable()->default(1)->comment('类型1菜单、2功能');
+            $table->boolean('status')->default(1)->comment('菜单状态（0正常 1停用）');
+            $table->boolean('visible')->default(1)->comment('菜单状态（0显示 1隐藏）');
 
             $table->timestamps();
             $table->comment('菜单表');

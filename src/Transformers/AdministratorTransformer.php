@@ -38,7 +38,7 @@ class AdministratorTransformer extends TransformerAbstract
             //
             'id'                =>          $model->id,
             'username'          =>          $model->username,
-            'phone'             =>          $model->phone,
+            'telephone'         =>          $model->telephone,
             'name'              =>          $model->name,
             'email'             =>          $model->email,
             'avatar'            =>          $model->avatar,
