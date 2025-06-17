@@ -38,8 +38,8 @@ class MenuTransformer extends TransformerAbstract
         return [
             //
             'id'            =>          $model->id,
-            'key'           =>          $model->key,
             'name'          =>          $model->name,
+            'type'          =>          $model->type,
             'locale'        =>          $model->locale,
             'parent_id'     =>          $model->parent_id,
             'path'          =>          $model->path,
