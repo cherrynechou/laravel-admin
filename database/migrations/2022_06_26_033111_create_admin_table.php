@@ -62,7 +62,7 @@ return new class extends Migration
         Schema::create($this->config('database.permissions_table'), function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name', 50);
-            $talbe->string('locale',50)->nullable()->default('')->comment('国际化标识');
+            $table->string('locale',50)->nullable()->default('')->comment('国际化标识');
             $table->tinyInteger('type')->nullable()->default(1)->comment('类型1目录、2子目录、3权限');
             $table->string('slug', 50)->unique();
             $table->string('http_method')->nullable();
