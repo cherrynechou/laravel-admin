@@ -59,6 +59,7 @@ class PermissionTransformer extends TransformerAbstract
             'methods'       =>          $model->parent_id > 0 ? $method : [],
             'paths'         =>          $path,
             'order'         =>          $model->order,
+            'type'          =>          $model->type,
             'parent_id'     =>          $model->parent_id,
             'created_at'    =>          Carbon::parse($model->created_at)->toDateTimeString(),
             'updated_at'    =>          Carbon::parse($model->updated_at)->toDateTimeString(),
