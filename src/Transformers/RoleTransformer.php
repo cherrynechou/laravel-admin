@@ -38,7 +38,7 @@ class RoleTransformer extends TransformerAbstract
             //
             'id'                =>      $model->id,
             'name'              =>      $model->name,
-            'is_administrator'  =>      $model->isAdministrator(),    //是否是管理员
+            'is_administrator'  =>      Role::isAdministrator($model->slug),    //是否是管理员
             'slug'              =>      $model->slug,
             'order'             =>      $model->order,
             'status'            =>      $model->status,
