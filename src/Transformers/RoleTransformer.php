@@ -36,13 +36,14 @@ class RoleTransformer extends TransformerAbstract
     {
         return [
             //
-            'id'            =>      $model->id,
-            'name'          =>      $model->name,
-            'slug'          =>      $model->slug,
-            'order'         =>      $model->order,
-            'status'        =>      $model->status,
-            'created_at'    =>      Carbon::parse($model->created_at)->toDateTimeString(),
-            'updated_at'    =>      Carbon::parse($model->updated_at)->toDateTimeString(),
+            'id'                =>      $model->id,
+            'name'              =>      $model->name,
+            'is_administrator'  =>      $model->isAdministrator(),    //是否是管理员
+            'slug'              =>      $model->slug,
+            'order'             =>      $model->order,
+            'status'            =>      $model->status,
+            'created_at'        =>      Carbon::parse($model->created_at)->toDateTimeString(),
+            'updated_at'        =>      Carbon::parse($model->updated_at)->toDateTimeString(),
         ];
     }
 

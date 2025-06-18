@@ -202,9 +202,9 @@ class RoleController extends Controller
     public function permissions($id)
     {
 
-        $role = Role::query()->find($id);
+        $currentRole = Role::query()->find($id);
 
-        $permissions = Admin::user()->permissions;
+        $permissions = $currentRole->permissions;
 
         return $this->success($permissions);
     }
