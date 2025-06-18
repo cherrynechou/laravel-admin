@@ -54,6 +54,8 @@ class Admin
                     $router->resource('auth/menu', 'MenuController', ['except' => ['create','edit']])->names('auth.menu');
                     //非分页列表
                     $router->get('/role/all','RoleController@all')->name('roles.all');
+                    //角色权限
+                    $router->get('/role/{id}/permissions','RoleController@permissions')->name('role.permissions');
                     //非树型结构列表
                     $router->get('/permission/all','PermissionController@all')->name('permissions.all');
                     //获取权限路由

@@ -48,7 +48,7 @@ class MenuController extends Controller
         }
 
         $requestData = request()->only([
-            'name','locale','path','parent_id','target','url','icon','order','status'
+            'name','locale','path','type','parent_id','target','url','icon','order','status'
         ]);
 
         $roles = request()->input('roles') ?: [];
@@ -100,7 +100,7 @@ class MenuController extends Controller
     public function update($id)
     {
         $requestData = request()->only([
-            'name','locale','path','parent_id','target','url','icon','order','status'
+            'name','locale','path','type','parent_id','target','url','icon','order','status'
         ]);
 
         $roles = request()->input('roles') ?: [];

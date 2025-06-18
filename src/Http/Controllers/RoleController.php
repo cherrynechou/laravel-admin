@@ -87,7 +87,6 @@ class RoleController extends Controller
             ->item($resource)
             ->transformWith(new RoleTransformer())
             ->serializeWith(new DataArraySerializer())
-            ->parseIncludes(['permissions'])
             ->toArray();
 
         return $this->success($role);
@@ -194,5 +193,19 @@ class RoleController extends Controller
                 ->toArray();
 
         return $this->success($roles);
+    }
+
+    /**
+     * 角色所有权限列表
+     * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\Resources\Json\JsonResource
+     */
+    public function permissions($id)
+    {
+
+        $role = Role::query()->find($id);
+
+        $permissions = Admin::user()->permissions;
+
+        return $this->success($permissions);
     }
 }
