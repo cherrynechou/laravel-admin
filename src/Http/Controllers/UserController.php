@@ -57,7 +57,7 @@ class UserController extends Controller
             $requestData['password'] = Hash::make($password);
         }
 
-        $roles = request()->input('roles') ?: [];
+        $roleIds = request()->input('roleIds') ?: [];
 
         $permissions = request()->input('permissions') ?: '';
 
@@ -66,8 +66,8 @@ class UserController extends Controller
 
             $user = Administrator::create($requestData);
 
-            if(count($roles)>0){
-                $user->roles()->sync($roles);
+            if(count($roleIds)>0){
+                $user->roles()->sync($roleIds);
             }
 
             if($permissions){
@@ -117,7 +117,7 @@ class UserController extends Controller
             $requestData['password'] = Hash::make($password);
         }
 
-        $roles = request()->input('roles') ?: [];
+        $roleIds = request()->input('roleIds') ?: [];
 
         $permissions = request()->input('permissions') ?: '';
 
@@ -127,8 +127,8 @@ class UserController extends Controller
             $user = Administrator::query()->find($id);
             $user->update($requestData);
 
-            if(count($roles)>0){
-                $user->roles()->sync($roles);
+            if(count($roleIds)>0){
+                $user->roles()->sync($roleIds);
             }
 
             if($permissions){
@@ -159,7 +159,7 @@ class UserController extends Controller
                 Rule::unique(config('admin.database.users_model'))->where('username',request()->input('username'))
             ],
             'password'  => 'required', 
-            'roles'     => 'required',
+            'roleIds'   => 'required',
         ];
 
         $message = [
@@ -171,7 +171,7 @@ class UserController extends Controller
             'name'                  => trans('admin.account.name'),
             'password'              => trans('admin.account.password'),
             'username'              => trans('admin.account.username'),
-            'roles'                 => trans('admin.account.role')
+            'roleIds'               => trans('admin.account.roleIds')
         ];
 
         return Validator::make(request()->all(), $rules, $message, $attributes);

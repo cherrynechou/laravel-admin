@@ -18,7 +18,7 @@ return [
         'name'                       => '名称',
         'username'                   => '用户名',
         'password'                   => '密码',
-        'role'                       => '角色',
+        'roleIds'                    => '角色',
     ],
     'role'  => [
         'name'                      => '角色名称',
