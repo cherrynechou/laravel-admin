@@ -215,7 +215,7 @@ class RoleController extends Controller
      */
     public function updatePermissions($id)
     {
-        $permissions =  Role::query()->get();
+        $permissions = request()->input('permissionIds') ?: '';
 
         try {
             DB::beginTransaction();
