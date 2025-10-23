@@ -201,11 +201,38 @@ class RoleController extends Controller
      */
     public function permissions($id)
     {
-
         $currentRole = Role::query()->find($id);
 
         $permissions = $currentRole->permissions;
 
         return $this->success($permissions);
+    }
+
+    /**
+     * 更新角色权限
+     * @param $id
+     * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\Resources\Json\JsonResource
+     */
+    public function updatePermissions($id)
+    {
+        $permissions =  Role::query()->get();
+
+        try {
+            DB::beginTransaction();
+            $role = Role::query()->find($id);
+
+            if($permissions){
+                $permissionIds = json_decode($permissions,true);
+                $role->permissions()->sync($permissionIds);
+            }
+
+            DB::commit();
+
+            return $this->success();
+        }catch (\Exception $exception){
+            DB::rollBack();
+
+            return $this->failed($exception->getTraceAsString());
+        }
     }
 }
