@@ -94,7 +94,7 @@ class AdminTablesSeeder extends Seeder
             [
                 'parent_id'     => 0,
                 'order'         => 1,
-                'key'           => 'Dashboard',
+                'name'           => 'Dashboard',
                 'locale'        => 'menu.dashboard',
                 'icon'          => 'DashboardOutlined',
                 'uri'           => '/',
@@ -105,7 +105,7 @@ class AdminTablesSeeder extends Seeder
             ],[
                 'parent_id'     => 1,
                 'order'         => 2,
-                'key'           => 'Analysis',
+                'name'           => 'Analysis',
                 'locale'        => 'menu.dashboard.analysis',
                 'icon'          => '',
                 'uri'           => '/',
@@ -116,7 +116,7 @@ class AdminTablesSeeder extends Seeder
             ],[
                 'parent_id'     => 0,
                 'order'         => 3,
-                'key'          => 'Admin',
+                'name'          => 'Admin',
                 'locale'        => 'menu.admin',
                 'icon'          => 'WindowsOutlined',
                 'uri'           => '',
@@ -127,7 +127,7 @@ class AdminTablesSeeder extends Seeder
             ],[
                 'parent_id'     => 3,
                 'order'         => 4,
-                'key'           => 'Users',
+                'name'           => 'Users',
                 'locale'        => 'menu.admin.user',
                 'icon'          => '',
                 'uri'           => '',
@@ -138,7 +138,7 @@ class AdminTablesSeeder extends Seeder
             ],[
                 'parent_id'     => 3,
                 'order'         => 5,
-                'key'           => 'Roles',
+                'name'           => 'Roles',
                 'locale'        => 'menu.admin.role',
                 'icon'          => '',
                 'uri'           => '',
@@ -149,7 +149,7 @@ class AdminTablesSeeder extends Seeder
             ],[
                 'parent_id'     => 3,
                 'order'         => 6,
-                'key'           => 'Permission',
+                'name'           => 'Permission',
                 'locale'        => 'menu.admin.permission',
                 'icon'          => '',
                 'uri'           => 'permissions',
@@ -160,7 +160,7 @@ class AdminTablesSeeder extends Seeder
             ],[
                 'parent_id'     => 3,
                 'order'         => 7,
-                'key'           => 'Menu',
+                'name'           => 'Menu',
                 'locale'        => 'menu.admin.menu',
                 'icon'          => '',
                 'uri'           => '',
