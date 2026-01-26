@@ -30,20 +30,15 @@ return new class extends Migration
             $table->string('name')->nullable()->default('');
             $table->string('email',50)->nullable()->default('');
             $table->timestamp('email_verified_at')->nullable();
-
             $table->string('telephone',11)->nullable()->unique();
             $table->string('avatar')->nullable();
-
             $table->unsignedInteger('login_count')->nullable()->default(0)->comment('登录次数');
             $table->string('last_login_ip')->nullable()->default('');
             $table->timestamp('last_login_time')->nullable();
-
             $table->boolean('status')->nullable()->default(0)->comment('是否禁用');
             $table->integer('order')->default(0);
-        
             $table->timestamps();
             $table->softDeletes();
-
             $table->comment('管理员表');
 
         });
@@ -55,7 +50,6 @@ return new class extends Migration
             $table->boolean('status')->nullable()->default(0)->comment('是否禁用');
             $table->integer('order')->default(0);
             $table->timestamps();
-
             $table->comment('角色表');
         });
 
@@ -70,13 +64,13 @@ return new class extends Migration
             $table->integer('order')->default(0);
             $table->bigInteger('parent_id')->default(0);
             $table->timestamps();
-
-             $table->comment('权限表');
+            $table->comment('权限表');
         });
 
         Schema::create($this->config('database.menu_table'), function (Blueprint $table) {
             $table->id();
-            $table->string('name')->comment('菜单关键字');
+            $table->string('name')->comment('菜单名称');
+            $table->string('key')->unique()->comment('唯一标识');;
             $table->tinyInteger('type')->nullable()->default(1)->comment('类型1菜单、2功能');
             $table->string('locale')->comment('菜单国际化标识');
             $table->string('path')->nullable()->default('');
@@ -87,7 +81,6 @@ return new class extends Migration
             $table->integer('order')->default(0)->nullable();
             $table->boolean('status')->default(1)->comment('菜单状态（0正常 1停用）');
             $table->boolean('visible')->default(1)->comment('菜单状态（0显示 1隐藏）');
-
             $table->timestamps();
             $table->comment('菜单表');
         });
