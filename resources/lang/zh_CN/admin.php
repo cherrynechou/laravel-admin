@@ -30,6 +30,7 @@ return [
     ],
     'menu'      =>[
         'name'                      => '菜单名称',
+        'key'                       => '菜单键',
         'locale'                    => '国际化标识',
         'parent_id'                 => '菜单父对象',
         'path'                      => '菜单路径',

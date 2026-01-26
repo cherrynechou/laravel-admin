@@ -48,7 +48,7 @@ class MenuController extends Controller
         }
 
         $requestData = request()->only([
-            'name','locale','path','type','parent_id','target','url','icon','order','status'
+            'name','key','locale','path','type','parent_id','target','url','icon','order','status'
         ]);
 
         $roles = request()->input('roles') ?: [];
@@ -100,7 +100,7 @@ class MenuController extends Controller
     public function update($id)
     {
         $requestData = request()->only([
-            'name','locale','path','type','parent_id','target','url','icon','order','status'
+            'name','key','locale','path','type','parent_id','target','url','icon','order','status'
         ]);
 
         $roles = request()->input('roles') ?: [];
@@ -153,11 +153,13 @@ class MenuController extends Controller
         $message = [
             'required'      => trans('validation.attribute_not_empty'),
             'name.unique'   => trans('validation.attribute_exists'),
+            'key.unique'    => trans('validation.attribute_exists'),
             'required_if'   => trans('validation.attribute_root_not_empty'),
         ];
 
         $attributes = [
             'name'                      => trans('admin.menu.name'),
+            'key'                       => trans('admin.menu.key'), 
             'locale'                    => trans('admin.menu.locale'),
             'parent_id'                 => trans('admin.menu.parent_id'),
             'path'                      => trans('admin.menu.path'),
@@ -210,6 +212,7 @@ class MenuController extends Controller
             return $this->success();
 
         }catch (\Exception $exception){
+
             DB::rollBack();
 
             return $this->failed($exception->getTraceAsString());
