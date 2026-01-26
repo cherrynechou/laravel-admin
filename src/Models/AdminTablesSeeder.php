@@ -119,7 +119,7 @@ class AdminTablesSeeder extends Seeder
                 'parent_id'     => 0,
                 'order'         => 3,
                 'name'          => 'Admin',
-                'key'           => 'admin'
+                'key'           => 'admin',
                 'locale'        => 'menu.admin',
                 'icon'          => 'WindowsOutlined',
                 'uri'           => '',
@@ -167,7 +167,7 @@ class AdminTablesSeeder extends Seeder
                 'parent_id'     => 3,
                 'order'         => 7,
                 'name'          => 'Menu',
-                'key'           => 'admin.menu'
+                'key'           => 'admin.menu',
                 'locale'        => 'menu.admin.menu',
                 'icon'          => '',
                 'uri'           => '',
