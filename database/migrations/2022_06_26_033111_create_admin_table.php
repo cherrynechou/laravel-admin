@@ -71,10 +71,11 @@ return new class extends Migration
             $table->id();
             $table->string('name')->comment('菜单名称');
             $table->string('key')->unique()->comment('唯一标识');;
-            $table->tinyInteger('type')->nullable()->default(1)->comment('类型1菜单、2功能');
+            $table->tinyInteger('type')->nullable()->default(1)->comment('类型1菜单menu、2功能 router');
             $table->string('locale')->comment('菜单国际化标识');
             $table->string('path')->nullable()->default('');
             $table->bigInteger('parent_id')->default(0);
+            $table->tinyInteger('is_back_link')->default(0)->comment('是否外链：1、是，0、否');
             $table->string('target')->nullable()->default('')->comment('浏览器跳转类型');
             $table->string('uri')->nullable()->default('')->comment('浏览器跳转地址');
             $table->string('icon', 50)->default('')->nullable();

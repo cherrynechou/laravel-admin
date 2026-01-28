@@ -45,6 +45,7 @@ class MenuTransformer extends TransformerAbstract
             'parent_id'     =>          $model->parent_id,
             'path'          =>          $model->path,
             'order'         =>          $model->order,
+            'is_back_link'  =>          $model->is_back_link,
             'target'        =>          $model->target,
             'uri'           =>          $model->uri,
             'icon'          =>          $model->icon,
