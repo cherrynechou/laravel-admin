@@ -18,18 +18,20 @@ class UploadController extends Controller
     {
         try {
 
-            $disk = $this->disk(config('easycms.disk'));
+            $disk = $this->disk(config('upload.disk'));
 
+            //扩展名
             $extension = request()->input('extension');
 
-            $fileData = request()->input('fileData');
+            //base64编码
+            $base64_code = request()->input('base64');
 
             $filePath = date('Y_m_d') . '/' . Str::random (10) . '.' . $extension;
 
-            $disk->put($filePath, base64_decode($fileData));
+            $disk->put($filePath, base64_decode($base64_code));
 
             $data = [
-                'remotePath'        =>  $disk->url($filePath),
+                'fullPath'        =>  $disk->url($filePath),
                 'path'              =>  $filePath,
             ];
 
