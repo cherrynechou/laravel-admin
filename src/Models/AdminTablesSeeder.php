@@ -45,7 +45,7 @@ class AdminTablesSeeder extends Seeder
                 'http_method' => '',
                 'http_path'   => '',
                 'parent_id'   => 0,
-                'order'       => 1,
+                'sort'       => 1,
                 'created_at'  => $createdAt,
             ],[
                 'id'          => 2,
@@ -54,7 +54,7 @@ class AdminTablesSeeder extends Seeder
                 'http_method' => '',
                 'http_path'   => '/auth/users*',
                 'parent_id'   => 1,
-                'order'       => 2,
+                'sort'       => 2,
                 'created_at'  => $createdAt,
             ],[
                 'id'          => 3,
@@ -63,7 +63,7 @@ class AdminTablesSeeder extends Seeder
                 'http_method' => '',
                 'http_path'   => '/auth/roles*',
                 'parent_id'   => 1,
-                'order'       => 3,
+                'sort'       => 3,
                 'created_at'  => $createdAt,
             ],[
                 'id'          => 4,
@@ -72,7 +72,7 @@ class AdminTablesSeeder extends Seeder
                 'http_method' => '',
                 'http_path'   => '/auth/permissions*',
                 'parent_id'   => 1,
-                'order'       => 4,
+                'sort'       => 4,
                 'created_at'  => $createdAt,
             ],[
                 'id'          => 5,
@@ -81,7 +81,7 @@ class AdminTablesSeeder extends Seeder
                 'http_method' => '',
                 'http_path'   => '/auth/menu*',
                 'parent_id'   => 1,
-                'order'       => 5,
+                'sort'       => 5,
                 'created_at'  => $createdAt,
             ],
         ]);
@@ -93,7 +93,7 @@ class AdminTablesSeeder extends Seeder
         Menu::insert([
             [
                 'parent_id'     => 0,
-                'order'         => 1,
+                'sort'         => 1,
                 'name'          => 'Dashboard',
                 'key'           => 'dashboard',
                 'locale'        => 'menu.dashboard',
@@ -105,7 +105,7 @@ class AdminTablesSeeder extends Seeder
                 'created_at'    => $createdAt,
             ],[
                 'parent_id'     => 1,
-                'order'         => 2,
+                'sort'         => 2,
                 'name'          => 'Analysis',
                 'key'           => 'dashboard.analysis',
                 'locale'        => 'menu.dashboard.analysis',
@@ -117,7 +117,7 @@ class AdminTablesSeeder extends Seeder
                 'created_at'    => $createdAt,
             ],[
                 'parent_id'     => 0,
-                'order'         => 3,
+                'sort'         => 3,
                 'name'          => 'Admin',
                 'key'           => 'admin',
                 'locale'        => 'menu.admin',
@@ -129,7 +129,7 @@ class AdminTablesSeeder extends Seeder
                 'created_at'    => $createdAt,
             ],[
                 'parent_id'     => 3,
-                'order'         => 4,
+                'sort'         => 4,
                 'name'          => 'Users',
                 'key'           => 'admin.user',
                 'locale'        => 'menu.admin.user',
@@ -141,7 +141,7 @@ class AdminTablesSeeder extends Seeder
                 'created_at'    => $createdAt,
             ],[
                 'parent_id'     => 3,
-                'order'         => 5,
+                'sort'         => 5,
                 'name'          => 'Roles',
                 'key'           => 'admin.role',
                 'locale'        => 'menu.admin.role',
@@ -153,7 +153,7 @@ class AdminTablesSeeder extends Seeder
                 'created_at'    => $createdAt,
             ],[
                 'parent_id'     => 3,
-                'order'         => 6,
+                'sort'         => 6,
                 'name'          => 'Permission',
                 'key'           => 'admin.permission',
                 'locale'        => 'menu.admin.permission',
@@ -165,7 +165,7 @@ class AdminTablesSeeder extends Seeder
                 'created_at'    => $createdAt,
             ],[
                 'parent_id'     => 3,
-                'order'         => 7,
+                'sort'         => 7,
                 'name'          => 'Menu',
                 'key'           => 'admin.menu',
                 'locale'        => 'menu.admin.menu',

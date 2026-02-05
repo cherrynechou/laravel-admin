@@ -36,7 +36,7 @@ return new class extends Migration
             $table->string('last_login_ip')->nullable()->default('');
             $table->timestamp('last_login_time')->nullable();
             $table->boolean('status')->nullable()->default(0)->comment('是否禁用');
-            $table->integer('order')->default(0);
+            $table->integer('sort')->default(0);
             $table->timestamps();
             $table->softDeletes();
             $table->comment('管理员表');
@@ -48,7 +48,7 @@ return new class extends Migration
             $table->string('name', 50);
             $table->string('slug', 50)->unique();
             $table->boolean('status')->nullable()->default(0)->comment('是否禁用');
-            $table->integer('order')->default(0);
+            $table->integer('sort')->default(0);
             $table->timestamps();
             $table->comment('角色表');
         });
@@ -61,7 +61,7 @@ return new class extends Migration
             $table->string('slug', 50)->unique();
             $table->string('http_method')->nullable();
             $table->text('http_path')->nullable();
-            $table->integer('order')->default(0);
+            $table->integer('sort')->default(0);
             $table->bigInteger('parent_id')->default(0);
             $table->timestamps();
             $table->comment('权限表');
@@ -79,7 +79,7 @@ return new class extends Migration
             $table->string('target')->nullable()->default('')->comment('浏览器跳转类型');
             $table->string('uri')->nullable()->default('')->comment('浏览器跳转地址');
             $table->string('icon', 50)->default('')->nullable();
-            $table->integer('order')->default(0)->nullable();
+            $table->integer('sort')->default(0)->nullable();
             $table->boolean('status')->default(1)->comment('菜单状态（0正常 1停用）');
             $table->boolean('visible')->default(1)->comment('菜单状态（0显示 1隐藏）');
             $table->timestamps();
