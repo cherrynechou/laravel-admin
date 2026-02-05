@@ -48,7 +48,7 @@ class RoleController extends Controller
         }
 
         // 获取通过验证的数据...
-        $validated = $validator->safe()->only(['name', 'slug', 'order', 'status']);
+        $validated = $validator->safe()->only(['name', 'slug', 'sort', 'status']);
 
         $permissions = request()->input('permissions') ?: '';
 
@@ -99,7 +99,7 @@ class RoleController extends Controller
     public function update($id)
     {
 
-        $requestData = request()->only(['name', 'slug', 'order', 'status']);
+        $requestData = request()->only(['name', 'slug', 'sort', 'status']);
 
         $permissions = request()->input('permissions') ?: '';
 

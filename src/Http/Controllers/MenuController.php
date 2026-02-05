@@ -21,7 +21,7 @@ class MenuController extends Controller
      */
     public function index()
     {
-        $resources = Menu::query()->orderBy('order')->get();
+        $resources = Menu::query()->orderBy('sort')->get();
 
         $menuResources = fractal()
                         ->collection($resources)
@@ -48,7 +48,7 @@ class MenuController extends Controller
         }
 
         $requestData = request()->only([
-            'name','key','locale','path','type','parent_id','target','url','icon','order','status'
+            'name','key','locale','path','type','parent_id','target','url','icon','sort','status'
         ]);
 
         $roles = request()->input('roles') ?: [];
@@ -100,7 +100,7 @@ class MenuController extends Controller
     public function update($id)
     {
         $requestData = request()->only([
-            'name','key','locale','path','type','parent_id','target','url','icon','order','status'
+            'name','key','locale','path','type','parent_id','target','url','icon','sort','status'
         ]);
 
         $roles = request()->input('roles') ?: [];
