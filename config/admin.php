@@ -122,6 +122,8 @@ return [
         'role_permissions_table' => 'admin_role_permissions',
         'role_menu_table'        => 'admin_role_menu',
         'permission_menu_table'  => 'admin_permission_menu',
+        'dict_table'             => 'admin_dict',
+        'dict_data_table'        => 'admin_dict_data',
     ],
     'default_password'      =>      env('DEFAULT_PASSWORD', '123456'),
 ];

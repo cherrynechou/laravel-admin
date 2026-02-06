@@ -70,6 +70,12 @@ class Admin
                     $router->patch('/user/{user}/changePassword','UserController@changePassword')->name('user.change.password');
                     //阻止用户登录
                     $router->patch('/user/{user}/block','UserController@block')->name('user.block');
+
+
+                    //数据字典
+
+
+
                 });
             }
 

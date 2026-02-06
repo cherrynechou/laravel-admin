@@ -123,6 +123,33 @@ return new class extends Migration
             $table->timestamps();
         });
 
+        Schema::create($this->config('database.dict_table'), function (Blueprint $table) {
+            $table->id();
+            $table->string('name')->default('');
+            $table->string('code')->default('');
+            $table->smallInteger('type')->nullable()->default(0);
+            $table->tinyInteger('status')->nullable()->default(0);
+            $table->tinyInteger("sort")->nullable()->default(0);
+            $table->string('remark')->nullable()->default('');
+            $table->timestamps();
+        });
+
+        Schema::create($this->config('database.dict_data_table'), function (Blueprint $table) {
+            $table->id();
+            $table->bigInteger("dict_id");
+            $table->string("code")->default("");
+            $table->string("label")->default("");
+            $table->string("value")->default("");
+            $table->tinyInteger("is_default")->nullable()->default(0);
+            $table->tinyInteger("status")->nullable()->default(0);
+            $table->tinyInteger("sort")->nullable()->default(0);
+            $table->string("remark")->nullable()->default(0);
+            $table->timestamps();
+        });
+
+
+
+
     }
 
     /**
@@ -141,5 +168,7 @@ return new class extends Migration
         Schema::dropIfExists($this->config('database.user_permissions_table'));
         Schema::dropIfExists($this->config('database.role_menu_table'));
         Schema::dropIfExists($this->config('database.permission_menu_table'));
+        Schema::dropIfExists($this->config('database.dict_table'));
+        Schema::dropIfExists($this->config('database.dict_data_table'));
     }
 };
