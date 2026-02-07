@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Transformers;
+namespace CherryneChou\Admin\Transformers;
 
 use App\Models\DictData;
 use Illuminate\Support\Carbon;

@@ -1,10 +1,11 @@
 <?php
-namespace App\Admin\Controllers;
+namespace CherryneChou\Admin\Http\Controllers;
 
 use CherryneChou\Admin\Models\DictData;
-use App\Transformers\DictDataTransformer;
+use CherryneChou\Admin\Transformers\DictDataTransformer;
 use CherryneChou\Admin\Serializer\DataArraySerializer;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use League\Fractal\Pagination\IlluminatePaginatorAdapter;
@@ -16,7 +17,7 @@ class DictDataController extends Controller
     {
         $dictDataPaginator = DictData::filter($filter)->paginate();
 
-        $resources = $adminPaginator->getCollection();
+        $resources = $dictDataPaginator->getCollection();
 
         $dictDatas = fractal()
             ->collection($resources)
