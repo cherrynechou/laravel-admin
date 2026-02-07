@@ -6,12 +6,14 @@ use CherryneChou\Admin\Transformers\DictDataTransformer;
 use CherryneChou\Admin\Serializer\DataArraySerializer;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use CherryneChou\Admin\Traits\RestfulResponse;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use League\Fractal\Pagination\IlluminatePaginatorAdapter;
 
 class DictDataController extends Controller
 {
+    use RestfulResponse;
 
     public function index(DictDataFilter $filter)
     {
