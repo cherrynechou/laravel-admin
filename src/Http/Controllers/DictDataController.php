@@ -2,6 +2,7 @@
 namespace CherryneChou\Admin\Http\Controllers;
 
 use CherryneChou\Admin\Models\DictData;
+use CherryneChou\Admin\Filters\DictDataFilter;
 use CherryneChou\Admin\Transformers\DictDataTransformer;
 use CherryneChou\Admin\Serializer\DataArraySerializer;
 use Illuminate\Http\Request;

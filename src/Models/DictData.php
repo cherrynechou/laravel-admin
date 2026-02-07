@@ -2,7 +2,9 @@
 
 namespace CherryneChou\Admin\Models;
 
+use CherryneChou\Admin\Abstracts\QueryFilter;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
 
 /**
  * Class DictData.
