@@ -26,10 +26,11 @@ class Dict extends Model
      */
     public function __construct(array $attributes = [])
     {
+        parent::__construct($attributes);
         $connection = config('admin.database.connection') ?: config('database.default');
         $this->setConnection($connection);
-        $this->setTable(config('admin.database.prefix') . 'dict');
-        parent::__construct($attributes);
+        $this->setTable(config('admin.database.dict_table'));
+     
     }
 
 }
