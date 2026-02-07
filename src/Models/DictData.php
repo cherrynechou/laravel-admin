@@ -32,4 +32,17 @@ class DictData extends Model
     }
 
 
+    public function scopeFilter($query, QueryFilter $filters)
+    {
+        return $filters->apply($query);
+    }
+
+    /**
+     *  作用域限制为仅包含给定类型的用户
+     */
+    public function scopeOfCode(Builder $query, string $code): void
+    {
+        $query->where('code', $code);
+    }
+
 }

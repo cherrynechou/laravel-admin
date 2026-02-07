@@ -73,7 +73,8 @@ class Admin
 
 
                     //数据字典
-
+                    $router->resource('auth/dicts', 'DictController', ['except' => ['create','edit']])->names('auth.dict');    
+                    $router->resource('auth/dict/datas', 'DictController', ['except' => ['create','edit']])->names('auth.dict.data');      
 
 
                 });

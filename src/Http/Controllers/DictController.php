@@ -1,7 +1,7 @@
 <?php
 namespace App\Admin\Controllers;
 
-use App\Contracts\Repositories\DictRepository;
+use CherryneChou\Admin\Models\Dict;
 use App\Transformers\DictTransformer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -13,8 +13,7 @@ class DictController extends Controller
 {
     public function index(): \Illuminate\Http\JsonResponse|\Illuminate\Http\Resources\Json\JsonResource
     {
-        //添加过滤
-        $dictPaginator = $this->dictRepository->paginate();
+        $dictPaginator = Dict::query()->orderBy('sort')->paginate();
 
         $resources = $dictPaginator->getCollection();
 
@@ -30,16 +29,14 @@ class DictController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request): \Illuminate\Http\JsonResponse|\Illuminate\Http\Resources\Json\JsonResource
+    public function store(): \Illuminate\Http\JsonResponse|\Illuminate\Http\Resources\Json\JsonResource
     {
         //
         $validator = $this->validateForm();
 
         if($validator->fails()){
-
             $warnings = $validator->messages();
             $show_warning = $warnings->first();
-
             return $this->failed($show_warning);
         }
 
@@ -49,17 +46,11 @@ class DictController extends Controller
 
         try {
             DB::beginTransaction();
-
-            $this->dictRepository->create($requestData);
-
+            Dict::create($requestData);
             DB::commit();
-
             return $this->success([], trans('admin.save_succeeded'));
-
         }catch (\Exception $exception){
-
             DB::commit();
-
             return $this->failed($exception->getMessage());
         }
     }
@@ -70,14 +61,12 @@ class DictController extends Controller
     public function show(string $id)
     {
         //
-        $resource =  $this->dictRepository->find($id);
-
+        $resource =  Dict::query()->find($id);
         $dict = fractal()
             ->item($resource)
             ->transformWith(new DictTransformer())
             ->serializeWith(new DataArraySerializer())
             ->toArray();
-
         return $this->success($dict);
 
     }
@@ -85,7 +74,7 @@ class DictController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id): \Illuminate\Http\JsonResponse|\Illuminate\Http\Resources\Json\JsonResource
+    public function update(string $id): \Illuminate\Http\JsonResponse|\Illuminate\Http\Resources\Json\JsonResource
     {
         $validator = $this->validateForm();
 
@@ -102,19 +91,12 @@ class DictController extends Controller
         //
         try {
             DB::beginTransaction();
-
-            $dict = $this->dictRepository->find($id);
-
+            $dict = Dict::query()->find($id);
             $dict->update($requestData);
-
             DB::commit();
-
             return $this->success([], trans('admin.update_succeeded'));
-
         }catch (\Exception $exception){
-
             DB::commit();
-
             return $this->failed($exception->getMessage());
         }
     }
@@ -129,11 +111,11 @@ class DictController extends Controller
         ];
 
         $message = [
-            'required'      => ':attribute 不能为空',
+            'required'  => trans('validation.attribute_not_empty'),
         ];
 
         $attributes = [
-            'name'                 => '单位名称',
+            'name'      => trans('admin.dict.name'),
         ];
 
         return Validator::make(request()->all(), $rules, $message, $attributes);
@@ -147,16 +129,11 @@ class DictController extends Controller
         //
         try {
             DB::beginTransaction();
-
-            $this->dictRepository->delete($id);
-
+            Dict::destroy($id);
             DB::commit();
-
             return $this->success();
-
         }catch (\Exception $exception){
             DB::rollBack();
-
             return $this->failed($exception->getTraceAsString());
         }
     }
