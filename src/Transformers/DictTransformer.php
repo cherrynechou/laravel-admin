@@ -2,7 +2,7 @@
 
 namespace CherryneChou\Admin\Transformers;
 
-use App\Models\Dict;
+use CherryneChou\Admin\Models\Dict;
 use Illuminate\Support\Carbon;
 use League\Fractal\TransformerAbstract;
 
