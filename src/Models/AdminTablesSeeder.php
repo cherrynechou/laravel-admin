@@ -175,7 +175,19 @@ class AdminTablesSeeder extends Seeder
                 'status'        => 1,
                 'visible'       => 1,
                 'created_at'    => $createdAt,
-            ],
+            ],[
+                'parent_id'     => 3,
+                'sort'          => 8,
+                'name'          => 'Dict',
+                'key'           => 'admin.dict',
+                'locale'        => 'menu.admin.dict',
+                'icon'          => '',
+                'uri'           => '',
+                'path'          => '/auth/dict',
+                'status'        => 1,
+                'visible'       => 1,
+                'created_at'    => $createdAt,
+            ]
         ]);
     }
 }
