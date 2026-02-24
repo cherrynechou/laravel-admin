@@ -53,7 +53,7 @@ class Application
         return array_filter($this->getApps());
     }
 
-    public function switch(string $app = null)
+    public function switch(?string $app = null)
     {
         $this->withName($app);
 

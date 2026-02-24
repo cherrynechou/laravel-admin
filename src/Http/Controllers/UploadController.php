@@ -32,7 +32,7 @@ class UploadController extends Controller
 
             $data = [
                 'fullPath'        =>  $disk->url($filePath),
-                'path'              =>  $filePath,
+                'path'            =>  $filePath,
             ];
 
             return $this->success($data, trans('admin.upload_succeeded'));
