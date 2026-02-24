@@ -29,6 +29,8 @@ class AdminTablesSeeder extends Seeder
         Role::create([
             'name'       => 'Administrator',
             'slug'       => Role::ADMINISTRATOR,
+            'status'     => 1,
+            'sort'       => 0,   
             'created_at' => $createdAt,
         ]);
 
