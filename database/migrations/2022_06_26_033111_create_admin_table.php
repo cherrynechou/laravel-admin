@@ -48,6 +48,7 @@ return new class extends Migration
             $table->string('name', 50);
             $table->string('slug', 50)->unique();
             $table->boolean('status')->nullable()->default(0)->comment('是否禁用');
+            $table->string('data_scope')->nullable()->default("")->comment('数据访问权限');
             $table->integer('sort')->default(0);
             $table->timestamps();
             $table->comment('角色表');
