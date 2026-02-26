@@ -52,6 +52,8 @@ class Admin
                     $router->resource('auth/roles', 'RoleController',['except'=>['create','edit']])->names('auth.roles');
                     $router->resource('auth/permissions', 'PermissionController',['except'=>['create','edit']])->names('auth.permissions');
                     $router->resource('auth/menu', 'MenuController', ['except' => ['create','edit']])->names('auth.menu');
+                    $router->resource('auth/departments', 'DepartmentController', ['except' => ['create','edit']])->names('auth.departments');
+
                     //非分页列表
                     $router->get('/role/all','RoleController@all')->name('roles.all');
                     //角色权限

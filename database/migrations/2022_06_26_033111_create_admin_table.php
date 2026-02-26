@@ -27,6 +27,7 @@ return new class extends Migration
             $table->id();
             $table->string('username', 120)->unique();
             $table->string('password', 80);
+            $table->integer('department_id')->nullable()->default(0)->comment('部门ID');
             $table->string('name')->nullable()->default('');
             $table->string('email',50)->nullable()->default('');
             $table->timestamp('email_verified_at')->nullable();
@@ -48,11 +49,25 @@ return new class extends Migration
             $table->string('name', 50);
             $table->string('slug', 50)->unique();
             $table->boolean('status')->nullable()->default(0)->comment('是否禁用');
-            $table->string('data_scope')->nullable()->default("")->comment('数据访问权限');
+            $table->boolean('data_scope')->nullable()->default(1)->comment('数据访问权限 1 全部数据 2 自定义数据 3 部门数据 4 部门及以下数据 5 仅本人数据');
             $table->integer('sort')->default(0);
             $table->timestamps();
             $table->comment('角色表');
         });
+
+        Schema::create($this->config('database.departments_table'), function (Blueprint $table) {
+            $table->id();
+            $table->string('name', 50);
+            $table->integer('parent_id')->default(0)->comment('父级ID');    
+            $table->string('principal')->nullable()->comment('负责人');    
+            $table->string('email',50)->nullable()->default('');
+            $table->string('telephone',11)->nullable()->unique();
+            $table->boolean('status')->default(1)->comment('1 正常 2 停用');
+            $table->integer('sort')->default(0);    
+            $table->timestamps();
+            $table->comment('部门表');
+        });
+
 
         Schema::create($this->config('database.permissions_table'), function (Blueprint $table) {
             $table->bigIncrements('id');
@@ -101,6 +116,12 @@ return new class extends Migration
             $table->timestamps();
         });
 
+        Schema::create($this->config('database.role_department_table'), function (Blueprint $table) {
+            $table->bigInteger('role_id');
+            $table->bigInteger('department_id');
+            $table->unique(['role_id', 'department_id']);
+            $table->timestamps();
+        });
 
         Schema::create($this->config('database.user_permissions_table'), function (Blueprint $table) {
             $table->integer('user_id');
@@ -147,10 +168,6 @@ return new class extends Migration
             $table->string("remark")->nullable()->default(0);
             $table->timestamps();
         });
-
-
-
-
     }
 
     /**
@@ -162,10 +179,12 @@ return new class extends Migration
     {
         Schema::dropIfExists($this->config('database.users_table'));
         Schema::dropIfExists($this->config('database.roles_table'));
+        Schema::dropIfExists($this->config('database.departments_table'));
         Schema::dropIfExists($this->config('database.permissions_table'));
         Schema::dropIfExists($this->config('database.menu_table'));
         Schema::dropIfExists($this->config('database.role_users_table'));
         Schema::dropIfExists($this->config('database.role_permissions_table'));
+        Schema::dropIfExists($this->config('database.role_department_table'));
         Schema::dropIfExists($this->config('database.user_permissions_table'));
         Schema::dropIfExists($this->config('database.role_menu_table'));
         Schema::dropIfExists($this->config('database.permission_menu_table'));

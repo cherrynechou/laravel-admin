@@ -40,6 +40,9 @@ return [
         'name'                      => '字典名称',
         'label'                     => '字典标签',
         'value'                     => '字典标签值' 
+    ],
+    'department' => [
+        'name'                      => '部门名称'
     ]
 
 ];
