@@ -3,14 +3,14 @@ namespace CherryneChou\Admin\Http\Controllers;
 
 use CherryneChou\Admin\Models\Department;
 use CherryneChou\Admin\Filters\DepartmentFilter;
+use CherryneChou\Admin\Support\Helper;
 use CherryneChou\Admin\Transformers\DepartmentTransformer;
-use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use CherryneChou\Admin\Traits\RestfulResponse;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use CherryneChou\Admin\Serializer\DataArraySerializer;
-use League\Fractal\Pagination\IlluminatePaginatorAdapter;
+
 
 class DepartmentController extends Controller
 {

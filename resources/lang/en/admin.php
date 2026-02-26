@@ -34,11 +34,13 @@ return [
         'parent_id'                 => 'menu parent id',
         'path'                      => 'menu path',
         'icon'                      => 'menu icon'
-    ]，
+    ],
     'dict'    =>[
         'name'                      => 'dict name',
         'label'                     => 'dict label',
         'value'                     => 'dict label' 
+    ],
+    'department' => [
+        'name'                      => 'department name'
     ]
-
 ];

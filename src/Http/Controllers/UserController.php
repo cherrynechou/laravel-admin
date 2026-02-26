@@ -110,7 +110,7 @@ class UserController extends Controller
      */
     public function update($id)
     {
-        $requestData = request()->only(['name','username','avatar']);
+        $requestData = request()->only(['name','username','avatar','telephone','email']);
         $password = request()->input('password');
 
         if(!empty($password)){
