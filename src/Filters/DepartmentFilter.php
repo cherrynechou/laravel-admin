@@ -1,6 +1,8 @@
 <?php
 namespace CherryneChou\Admin\Filters;
 
+use CherryneChou\Admin\Abstracts\QueryFilter;
+
 class DepartmentFilter extends QueryFilter
 {
 	/**

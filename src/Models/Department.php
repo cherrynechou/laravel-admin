@@ -2,7 +2,9 @@
 
 namespace CherryneChou\Admin\Models;
 
+use CherryneChou\Admin\Abstracts\QueryFilter;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
 
 class Department extends Model
 {
@@ -23,7 +25,13 @@ class Department extends Model
         parent::__construct($attributes);
         $connection = config('admin.database.connection') ?: config('database.default');
         $this->setConnection($connection);
-        $this->setTable(config('admin.database.department_table'));
+        $this->setTable(config('admin.database.departments_table'));
      
+    }
+
+
+    public function scopeFilter($query, QueryFilter $filters)
+    {
+        return $filters->apply($query);
     }
 }

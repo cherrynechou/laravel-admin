@@ -1,23 +1,33 @@
 <?php
 namespace CherryneChou\Admin\Http\Controllers;
 
+use CherryneChou\Admin\Models\Department;
+use CherryneChou\Admin\Filters\DepartmentFilter;
+use CherryneChou\Admin\Transformers\DepartmentTransformer;
+use Illuminate\Http\Request;
+use Illuminate\Routing\Controller;
+use CherryneChou\Admin\Traits\RestfulResponse;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
+use CherryneChou\Admin\Serializer\DataArraySerializer;
+use League\Fractal\Pagination\IlluminatePaginatorAdapter;
+
 class DepartmentController extends Controller
 {
 	 use RestfulResponse;
 
     public function index(DepartmentFilter $filter): \Illuminate\Http\JsonResponse|\Illuminate\Http\Resources\Json\JsonResource
     {
-        $departmentPaginator = Department::filter($filter)->paginate();
+        $resources = Department::filter($filter)->get();
 
-        $resources = $departmentPaginator->getCollection();
-
-        $departmentDatas = fractal()
+        $departmentResources = fractal()
             ->collection($resources)
             ->transformWith(new DepartmentTransformer())
-            ->paginateWith(new IlluminatePaginatorAdapter($departmentPaginator))
+            ->serializeWith(new DataArraySerializer())
             ->toArray();
 
-
+        $departments = Helper::listToTree($departmentResources);
+                
         return $this->success($departmentDatas);
     }
 

@@ -116,7 +116,7 @@ return new class extends Migration
             $table->timestamps();
         });
 
-        Schema::create($this->config('database.role_department_table'), function (Blueprint $table) {
+        Schema::create($this->config('database.role_departments_table'), function (Blueprint $table) {
             $table->bigInteger('role_id');
             $table->bigInteger('department_id');
             $table->unique(['role_id', 'department_id']);

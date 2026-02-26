@@ -109,8 +109,8 @@ return [
         'roles_model' => CherryneChou\Admin\Models\Role::class,
 
         // Role Department table and model
-        'department_table' => 'admin_departments',
-        'department_model' => CherryneChou\Admin\Models\Department::class,
+        'departments_table' => 'admin_departments',
+        'departments_model' => CherryneChou\Admin\Models\Department::class,
 
         // Permission table and model.
         'permissions_table' => 'admin_permissions',
