@@ -124,7 +124,7 @@ return [
         'user_permissions_table' => 'admin_user_permissions',
         'role_users_table'       => 'admin_role_users',
         'role_permissions_table' => 'admin_role_permissions',
-        'role_departments_table' => 'admin_role_department'
+        'role_departments_table' => 'admin_role_department',
         'role_menu_table'        => 'admin_role_menu',
         'permission_menu_table'  => 'admin_permission_menu',
         'dict_table'             => 'admin_dict',

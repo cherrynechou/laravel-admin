@@ -4,6 +4,7 @@ namespace CherryneChou\Admin\Models;
 
 use CherryneChou\Admin\Abstracts\QueryFilter;
 use DateTimeInterface;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -88,6 +89,37 @@ class Role extends Model
     }
 
     /**
+     * A role belongs to many departments.
+     *
+     * @return BelongsToMany
+     */
+    public function departments(): BelongsToMany
+    {
+        $pivotTable = config('admin.database.role_departments_table');
+
+        $relatedModel = config('admin.database.department_model');
+
+        return $this->belongsToMany( $relatedModel,$pivotTable, 'role_id', 'department_id');
+    }
+
+
+    /**
+     * get role's permissions
+     */
+    public function getPermissions(): Collection
+    {
+        return $this->permissions()->get();
+    }
+
+    /**
+     * get role's departments
+     */
+    public function getDepartments(): Collection
+    {
+        return $this->departments()->get();
+    }
+
+    /**
      * Check user has permission.
      *
      * @param $permission
@@ -126,6 +158,8 @@ class Role extends Model
             $model->administrators()->detach();
 
             $model->permissions()->detach();
+
+            $model->departments()->detach();
         });
     }
 

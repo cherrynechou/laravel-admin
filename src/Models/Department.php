@@ -26,7 +26,6 @@ class Department extends Model
         $connection = config('admin.database.connection') ?: config('database.default');
         $this->setConnection($connection);
         $this->setTable(config('admin.database.departments_table'));
-     
     }
 
 
