@@ -25,7 +25,7 @@ class PostController extends Controller
 
         $lines = fractal()
             ->collection($resources)
-            ->transformWith(new DictTransformer())
+            ->transformWith(new PostTransformer())
             ->paginateWith(new IlluminatePaginatorAdapter($dictPaginator))
             ->toArray();
 
@@ -70,7 +70,7 @@ class PostController extends Controller
         $resource =  Department::query()->find($id);
         $department = fractal()
             ->item($resource)
-            ->transformWith(new DepartmentTransformer())
+            ->transformWith(new PostTransformer())
             ->serializeWith(new DataArraySerializer())
             ->toArray();
         return $this->success($department);
