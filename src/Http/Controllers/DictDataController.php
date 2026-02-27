@@ -57,7 +57,7 @@ class DictDataController extends Controller
         try {
             DB::beginTransaction();
 
-            DictData::create($validated);
+            DictData::create($requestData);
 
             DB::commit();
 
