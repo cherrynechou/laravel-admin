@@ -43,6 +43,9 @@ return [
     ],
     'department' => [
         'name'                      => '部门名称'
+    ],
+    'post'      =>[
+        'name'                      => '岗位名称'
     ]
 
 ];

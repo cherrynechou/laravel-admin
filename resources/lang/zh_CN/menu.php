@@ -8,6 +8,7 @@ return [
   'admin.role'			        => '角色',
   'admin.permission' 	      => '权限',
   'admin.menu' 			        => '菜单',
+  'admin.dict'              => '字典'
   'admin.department'        => '部门',
-  'admin.dict'              => '字典' 
+  'admin.post'              => '岗位'
 ];

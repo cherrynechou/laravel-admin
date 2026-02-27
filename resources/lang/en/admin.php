@@ -42,5 +42,8 @@ return [
     ],
     'department' => [
         'name'                      => 'department name'
+    ],
+    'post'      =>[
+        'name'                      => 'post name'
     ]
 ];
