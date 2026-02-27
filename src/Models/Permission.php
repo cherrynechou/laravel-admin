@@ -1,7 +1,7 @@
 <?php
 namespace CherryneChou\Admin\Models;
 
-use DateTimeInterface;
+use CherryneChou\Admin\Traits\HasDateTimeFormatter;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -10,6 +10,9 @@ use Illuminate\Support\Str;
 
 class Permission extends Model
 {
+
+    use HasDateTimeFormatter;
+
     protected $guarded = ['id'];
 
     /**
@@ -154,16 +157,6 @@ class Permission extends Model
         return $method;
     }
 
-    /**
-     * Prepare a date for array / JSON serialization.
-     *
-     * @param  \DateTimeInterface  $date
-     * @return string
-     */
-    protected function serializeDate(DateTimeInterface $date)
-    {
-        return $date->format('Y-m-d H:i:s');
-    }
 
     /**
      * Detach models from the relationship.

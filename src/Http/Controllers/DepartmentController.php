@@ -28,7 +28,7 @@ class DepartmentController extends Controller
 
         $departments = Helper::listToTree($departmentResources);
                 
-        return $this->success($departmentDatas);
+        return $this->success($departments);
     }
 
 
@@ -73,7 +73,7 @@ class DepartmentController extends Controller
             ->transformWith(new DepartmentTransformer())
             ->serializeWith(new DataArraySerializer())
             ->toArray();
-        return $this->success($dict);
+        return $this->success($department);
 
     }
 

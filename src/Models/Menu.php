@@ -2,7 +2,7 @@
 
 namespace CherryneChou\Admin\Models;
 
-use DateTimeInterface;
+use CherryneChou\Admin\Traits\HasDateTimeFormatter;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Menu extends Model
 {
-    use MenuCache;
+    use HasDateTimeFormatter,MenuCache;
 
     protected $guarded = ['id'];
 
@@ -80,18 +80,7 @@ class Menu extends Model
     {
         return $this->children()->with('allChildren');
     }
-
-
-    /* Prepare a date for array / JSON serialization.
-     *
-     * @param  \DateTimeInterface  $date
-     * @return string
-     */
-    protected function serializeDate(DateTimeInterface $date)
-    {
-        return $date->format('Y-m-d H:i:s');
-    }
-
+ 
     /**
      * Detach models from the relationship.
      *

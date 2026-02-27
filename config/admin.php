@@ -145,6 +145,18 @@ return [
         'menu_table' => 'admin_menu',
         'menu_model' => CherryneChou\Admin\Models\Menu::class,
 
+        //Config talbe and model
+        'config_table'=> 'admin_system_config',
+        'config_model'=> CherryneChou\Admin\Models\SystemConfig::class,
+
+        //Attachment Category table and model
+        'attachment_category_table'=> 'admin_attachment_category',
+        'attachment_category_model'=> CherryneChou\Admin\Models\AttachmentCategory::class,
+
+        //Attachment table and model
+        'attachment_table'=> 'admin_attachment',
+        'attachment_model'=> CherryneChou\Admin\Models\Attachment::class,
+
         // Pivot table for table above.
         'user_permissions_table' => 'admin_user_permissions',
         'role_users_table'       => 'admin_role_users',

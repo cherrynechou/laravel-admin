@@ -3,7 +3,7 @@
 namespace CherryneChou\Admin\Models;
 
 use CherryneChou\Admin\Abstracts\QueryFilter;
-use DateTimeInterface;
+use CherryneChou\Admin\Traits\HasDateTimeFormatter;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -18,6 +18,7 @@ class Administrator extends Model
     use HasFactory,
         HasApiTokens,
         HasPermissions,
+        HasDateTimeFormatter,
         SoftDeletes;
 
     const DEFAULT_ID = 1;
@@ -124,16 +125,6 @@ class Administrator extends Model
     public function getAllPermissions()
     {
         return $this->allPermissions()->pluck('slug');
-    }
-
-    /* Prepare a date for array / JSON serialization.
-     *
-     * @param  \DateTimeInterface  $date
-     * @return string
-     */
-    protected function serializeDate(DateTimeInterface $date)
-    {
-        return $date->format('Y-m-d H:i:s');
     }
 
 }

@@ -4,15 +4,9 @@ namespace CherryneChou\Admin\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-
-/**
- * Class Dict.
- *
- * @package namespace App\Models;
- */
-class Dict extends Model 
+class AttachmentCategory extends Model
 {
-    /**
+ 	/**
      * The attributes that are mass assignable.
      *
      * @var array
@@ -29,7 +23,6 @@ class Dict extends Model
         parent::__construct($attributes);
         $connection = config('admin.database.connection') ?: config('database.default');
         $this->setConnection($connection);
-        $this->setTable(config('admin.database.dict_table'));
+        $this->setTable(config('admin.database.attachment_category_table'));
     }
-
 }

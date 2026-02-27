@@ -3,7 +3,7 @@
 namespace CherryneChou\Admin\Models;
 
 use CherryneChou\Admin\Abstracts\QueryFilter;
-use DateTimeInterface;
+use CherryneChou\Admin\Traits\HasDateTimeFormatter;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -12,6 +12,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Role extends Model
 {
+    use HasDateTimeFormatter;
+
     const ADMINISTRATOR = 'administrator';
 
     const ADMINISTRATOR_ID = 1;
@@ -161,17 +163,5 @@ class Role extends Model
 
             $model->departments()->detach();
         });
-    }
-
-
-    /**
-     * Prepare a date for array / JSON serialization.
-     *
-     * @param  \DateTimeInterface  $date
-     * @return string
-     */
-    protected function serializeDate(DateTimeInterface $date)
-    {
-        return $date->format('Y-m-d H:i:s');
     }
 }
