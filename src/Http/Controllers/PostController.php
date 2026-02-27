@@ -2,6 +2,17 @@
 
 namespace CherryneChou\Admin\Http\Controllers;
 
+use CherryneChou\Admin\Filters\PostFilter;
+use CherryneChou\Admin\Models\Post;
+use CherryneChou\Admin\Serializer\DataArraySerializer;
+use CherryneChou\Admin\Transformers\PostTransformer;
+use CherryneChou\Admin\Traits\RestfulResponse;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
+use League\Fractal\Pagination\IlluminatePaginatorAdapter;
+use Illuminate\Routing\Controller;
+use Illuminate\Validation\Rule;
+
 class PostController extends Controller
 {
 	use RestfulResponse;
@@ -157,8 +168,5 @@ class PostController extends Controller
             return $this->failed($exception->getTraceAsString());
         }
     }
-
-
-
 
 }
