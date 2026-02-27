@@ -53,6 +53,7 @@ class Admin
                     $router->resource('auth/permissions', 'PermissionController',['except'=>['create','edit']])->names('auth.permissions');
                     $router->resource('auth/menu', 'MenuController', ['except' => ['create','edit']])->names('auth.menu');
                     $router->resource('auth/departments', 'DepartmentController', ['except' => ['create','edit']])->names('auth.departments');
+                    $router->resource('auth/posts', 'PostController', ['except' => ['create','edit']])->names('auth.posts');
                     $router->resource('auth/attchment/category', 'AttachmentCategoryController', ['except' => ['create','edit']])->names('auth.department.category');
                     $router->resource('auth/attchments', 'AttachmentController', ['except' => ['create','edit']])->names('auth.attchments');
    

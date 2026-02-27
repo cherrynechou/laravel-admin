@@ -9,7 +9,6 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
-
 class Role extends Model
 {
     use HasDateTimeFormatter;
@@ -156,11 +155,8 @@ class Role extends Model
         parent::boot();
 
         static::deleting(function ($model) {
-
             $model->administrators()->detach();
-
             $model->permissions()->detach();
-
             $model->departments()->detach();
         });
     }

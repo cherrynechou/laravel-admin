@@ -50,7 +50,7 @@ class UserController extends Controller
             return $this->failed($warning);
         }
 
-        $requestData = request()->only(['name','username','avatar','telephone','email']);
+        $requestData = request()->all();
         $password = request()->input('password');
 
         if(!empty($password)){
@@ -110,7 +110,7 @@ class UserController extends Controller
      */
     public function update($id)
     {
-        $requestData = request()->only(['name','username','avatar','telephone','email']);
+        $requestData = request()->all();
         $password = request()->input('password');
 
         if(!empty($password)){

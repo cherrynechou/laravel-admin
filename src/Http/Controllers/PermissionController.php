@@ -47,18 +47,16 @@ class PermissionController extends Controller
             return $this->failed($warning);
         }
 
+        // 获取通过验证的数据...
+        $validated = $validator->safe()->all();
+
         try {
             DB::beginTransaction();
-
-            Permission::create(request()->all());
-
+            Permission::create($validated);
             DB::commit();
-
             return $this->success();
-
         }catch (\Exception $exception){
             DB::rollBack();
-
             return $this->failed($exception->getTraceAsString());
         }
     }
@@ -174,18 +172,24 @@ class PermissionController extends Controller
      */
     public function update($id)
     {
+        $validator = $this->validateForm();
+
+        if($validator->fails()){
+            $warning = $validator->messages()->first();
+            return $this->failed($warning);
+        }
+
+         // 获取通过验证的数据...
+        $validated = $validator->safe()->all();
+
         try {
             DB::beginTransaction();
-
-            Permission::query()->find($id)->update(request()->all());
-
+            $permission = Permission::query()->find($id);
+            $permission->update($validated);
             DB::commit();
-
             return $this->success();
-
         }catch (\Exception $exception){
             DB::rollBack();
-
             return $this->failed($exception->getTraceAsString());
         }
     }
@@ -199,17 +203,11 @@ class PermissionController extends Controller
         try {
 
             DB::beginTransaction();
-
             Permission::destroy($id);
-
             DB::commit();
-
             return $this->success();
-
         }catch (\Exception $exception){
-
             DB::rollBack();
-
             return $this->failed($exception->getMessage());
         }
     }

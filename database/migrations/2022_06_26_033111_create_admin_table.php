@@ -39,6 +39,10 @@ return new class extends Migration
             $table->boolean('status')->nullable()->default(0)->comment('是否禁用');
             $table->integer('sort')->default(0);
             $table->timestamps();
+
+            $table->bigInteger("created_id")->default(0)->comment('创建id');
+            $table->bigInteger("updated_id")->default(0)->comment('创建id');
+
             $table->softDeletes();
             $table->comment('管理员表');
 
@@ -51,6 +55,8 @@ return new class extends Migration
             $table->boolean('status')->nullable()->default(0)->comment('是否禁用');
             $table->boolean('data_scope')->nullable()->default(1)->comment('数据访问权限 1 全部数据 2 自定义数据 3 部门数据 4 部门及以下数据 5 仅本人数据');
             $table->integer('sort')->default(0);
+            $table->bigInteger("created_id")->default(0)->comment('创建id');
+            $table->bigInteger("updated_id")->default(0)->comment('更新id');
             $table->timestamps();
             $table->comment('角色表');
         });
@@ -64,6 +70,21 @@ return new class extends Migration
             $table->string('telephone',11)->nullable()->unique();
             $table->boolean('status')->default(1)->comment('1 正常 2 停用');
             $table->integer('sort')->default(0);    
+            $table->bigInteger("created_id")->default(0)->comment('创建id');
+            $table->bigInteger("updated_id")->default(0)->comment('更新id');
+            $table->timestamps();
+            $table->comment('部门表');
+        });
+
+        Schema::create($this->config('database.posts_table'), function (Blueprint $table) {
+            $table->id();
+            $table->string('name', 50);
+            $table->string('code')->nullable()->comment('编码');
+            $table->boolean('status')->default(1)->comment('1 正常 2 停用');
+            $table->integer('sort')->default(0);    
+            $table->string('remark')->nullable()->default('');
+            $table->bigInteger("created_id")->default(0)->comment('创建id');
+            $table->bigInteger("updated_id")->default(0)->comment('更新id');
             $table->timestamps();
             $table->comment('部门表');
         });
@@ -72,13 +93,16 @@ return new class extends Migration
         Schema::create($this->config('database.permissions_table'), function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name', 50);
+            $table->bigInteger('parent_id')->default(0);
             $table->string('locale',50)->nullable()->default('')->comment('国际化标识');
             $table->tinyInteger('type')->nullable()->default(1)->comment('类型1目录、2子目录、3权限');
             $table->string('slug', 50)->unique();
             $table->string('http_method')->nullable();
             $table->text('http_path')->nullable();
             $table->integer('sort')->default(0);
-            $table->bigInteger('parent_id')->default(0);
+
+            $table->bigInteger("created_id")->default(0)->comment('创建id');
+            $table->bigInteger("updated_id")->default(0)->comment('更新id');
             $table->timestamps();
             $table->comment('权限表');
         });
@@ -98,6 +122,8 @@ return new class extends Migration
             $table->integer('sort')->default(0)->nullable();
             $table->boolean('status')->default(1)->comment('菜单状态（0正常 1停用）');
             $table->boolean('visible')->default(1)->comment('菜单状态（0显示 1隐藏）');
+            $table->bigInteger("created_id")->default(0)->comment('创建id');
+            $table->bigInteger("updated_id")->default(0)->comment('更新id');
             $table->timestamps();
             $table->comment('菜单表');
         });
@@ -153,6 +179,8 @@ return new class extends Migration
             $table->tinyInteger('status')->nullable()->default(0);
             $table->tinyInteger("sort")->nullable()->default(0);
             $table->string('remark')->nullable()->default('');
+            $table->bigInteger("created_id")->default(0)->comment('创建id');
+            $table->bigInteger("updated_id")->default(0)->comment('更新id');
             $table->timestamps();
         });
 
@@ -166,6 +194,8 @@ return new class extends Migration
             $table->tinyInteger("status")->nullable()->default(0);
             $table->tinyInteger("sort")->nullable()->default(0);
             $table->string("remark")->nullable()->default('');
+            $table->bigInteger("created_id")->default(0)->comment('创建id');
+            $table->bigInteger("updated_id")->default(0)->comment('更新id');
             $table->timestamps();
         });
 

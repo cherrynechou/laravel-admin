@@ -48,20 +48,13 @@ class RoleController extends Controller
         }
 
         // 获取通过验证的数据...
-        $validated = $validator->safe()->only(['name', 'slug', 'sort', 'status']);
-
-        $permissions = request()->input('permissions') ?: '';
+        $validated = $validator->safe()->all();
 
         try {
 
             DB::beginTransaction();
 
             $role = Role::create($validated);
-
-            if($permissions){
-                $permissionIds = json_decode($permissions,true);
-                $role->permissions()->sync($permissionIds);
-            }
 
             DB::commit();
 
@@ -98,21 +91,21 @@ class RoleController extends Controller
      */
     public function update($id)
     {
+        $validator = $this->validateForm();
 
-        $requestData = request()->only(['name', 'slug', 'sort', 'status']);
+        if($validator->fails()){
+            $warning =$validator->messages()->first();
+            return $this->failed($warning);
+        }
 
-        $permissions = request()->input('permissions') ?: '';
+        // 获取通过验证的数据...
+        $validated = $validator->safe()->all();
 
         try {
             DB::beginTransaction();
 
             $role = Role::query()->find($id);
-            $role->update($requestData);
-
-            if($permissions){
-                $permissionIds = json_decode($permissions,true);
-                $role->permissions()->sync($permissionIds);
-            }
+            $role->update($validated);
 
             DB::commit();
 
@@ -203,9 +196,7 @@ class RoleController extends Controller
     {
         $currentRole = Role::query()->find($id);
 
-        $permissions = $currentRole->permissions;
-
-        return $this->success($permissions);
+        return $this->success($currentRole->permissions ?? []);
     }
 
     /**

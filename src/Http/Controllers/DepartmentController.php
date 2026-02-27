@@ -32,9 +32,9 @@ class DepartmentController extends Controller
     }
 
 
-     /**
-     * Store a newly created resource in storage.
-     */
+    /**
+    * Store a newly created resource in storage.
+    */
     public function store(): \Illuminate\Http\JsonResponse|\Illuminate\Http\Resources\Json\JsonResource
     {
         //
@@ -46,13 +46,12 @@ class DepartmentController extends Controller
             return $this->failed($show_warning);
         }
 
-        $requestData = request()->only([
-            'name','parent_id','principal','email','telephone','sort','status'
-        ]);
+        // 获取通过验证的数据...
+        $validated = $validator->safe()->all();
 
         try {
             DB::beginTransaction();
-            Department::create($requestData);
+            Department::create($validated);
             DB::commit();
             return $this->success([], trans('admin.save_succeeded'));
         }catch (\Exception $exception){
@@ -90,15 +89,13 @@ class DepartmentController extends Controller
             return $this->failed($show_warning);
         }
 
-        $requestData = request()->only([
-            'name','parent_id','principal','email','telephone','sort','status'
-        ]);
-
-        //
+        // 获取通过验证的数据...
+        $validated = $validator->safe()->all();
+        
         try {
             DB::beginTransaction();
             $department = Department::query()->find($id);
-            $department->update($requestData);
+            $department->update($validated);
             DB::commit();
             return $this->success([], trans('admin.update_succeeded'));
         }catch (\Exception $exception){

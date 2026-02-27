@@ -45,12 +45,11 @@ class DictDataController extends Controller
             return $this->failed($show_warning);
         }
 
-        $requestData = $request->only([
-            'dict_id','code','label','value','is_default','status','sort','remark'
-        ]);
+         // 获取通过验证的数据...
+        $validated = $validator->safe()->all();
 
         //查询当前
-        $codeData= DictData::ofCode($requestData['code'])->get();
+        $codeData= DictData::ofCode($validated['code'])->get();
 
         if(count($codeData) == 0){
             $requestData['is_default'] = 1;
@@ -59,7 +58,7 @@ class DictDataController extends Controller
         try {
             DB::beginTransaction();
 
-            DictData::create($requestData);
+            DictData::create($validated);
 
             DB::commit();
 
@@ -104,18 +103,15 @@ class DictDataController extends Controller
             return $this->failed($show_warning);
         }
         
-        //
-        $requestData = request()->only([
-            'dict_id','code','label','value','is_default','status','sort','remark'
-        ]);
-
-        //
+        // 获取通过验证的数据...
+        $validated = $validator->safe()->all();
+        
         try {
             DB::beginTransaction();
 
             $dict = DictData::query()->find($id);
 
-            $dict->update($requestData);
+            $dict->update($validated);
 
             DB::commit();
 

@@ -47,16 +47,16 @@ class MenuController extends Controller
             return $this->failed($warning);
         }
 
-        $requestData = request()->only([
-            'name','key','locale','path','type','parent_id','target','url','icon','sort','status'
-        ]);
+        // 获取通过验证的数据...
+        $validated = $validator->safe()->all();
+
 
         $roles = request()->input('roles') ?: [];
 
         try {
             DB::beginTransaction();
 
-            $menu = Menu::create($requestData);
+            $menu = Menu::create($validated);
 
             if(count($roles)>0){
                 $menu->roles()->sync($roles);
@@ -99,9 +99,7 @@ class MenuController extends Controller
      */
     public function update($id)
     {
-        $requestData = request()->only([
-            'name','key','locale','path','type','parent_id','target','url','icon','sort','status'
-        ]);
+        $requestData = request()->all();
 
         $roles = request()->input('roles') ?: [];
 

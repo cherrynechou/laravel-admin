@@ -1,25 +1,16 @@
 <?php
+
 namespace CherryneChou\Admin\Http\Controllers;
 
-use CherryneChou\Admin\Models\Dict;
-use CherryneChou\Admin\Transformers\DictTransformer;
-use Illuminate\Http\Request;
-use Illuminate\Routing\Controller;
-use CherryneChou\Admin\Traits\RestfulResponse;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Validator;
-use CherryneChou\Admin\Serializer\DataArraySerializer;
-use League\Fractal\Pagination\IlluminatePaginatorAdapter;
-
-class DictController extends Controller
+class PostController extends Controller
 {
-    use RestfulResponse;
+	use RestfulResponse;
 
-    public function index(): \Illuminate\Http\JsonResponse|\Illuminate\Http\Resources\Json\JsonResource
+	public function index(PostFilter $filter): \Illuminate\Http\JsonResponse|\Illuminate\Http\Resources\Json\JsonResource
     {
-        $dictPaginator = Dict::query()->orderBy('sort')->paginate();
+        $postPaginator = Post::filter($filter)->orderBy('sort')->paginate();
 
-        $resources = $dictPaginator->getCollection();
+        $resources = $postPaginator->getCollection();
 
         $lines = fractal()
             ->collection($resources)
@@ -30,9 +21,10 @@ class DictController extends Controller
         return $this->success($lines);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+
+     /**
+    * Store a newly created resource in storage.
+    */
     public function store(): \Illuminate\Http\JsonResponse|\Illuminate\Http\Resources\Json\JsonResource
     {
         //
@@ -49,7 +41,7 @@ class DictController extends Controller
 
         try {
             DB::beginTransaction();
-            Dict::create($validated);
+            Department::create($validated);
             DB::commit();
             return $this->success([], trans('admin.save_succeeded'));
         }catch (\Exception $exception){
@@ -64,13 +56,13 @@ class DictController extends Controller
     public function show(string $id)
     {
         //
-        $resource =  Dict::query()->find($id);
-        $dict = fractal()
+        $resource =  Department::query()->find($id);
+        $department = fractal()
             ->item($resource)
-            ->transformWith(new DictTransformer())
+            ->transformWith(new DepartmentTransformer())
             ->serializeWith(new DataArraySerializer())
             ->toArray();
-        return $this->success($dict);
+        return $this->success($department);
 
     }
 
@@ -90,11 +82,10 @@ class DictController extends Controller
         // 获取通过验证的数据...
         $validated = $validator->safe()->all();
 
-        //
         try {
             DB::beginTransaction();
-            $dict = Dict::query()->find($id);
-            $dict->update($validated);
+            $department = Department::query()->find($id);
+            $department->update($validated);
             DB::commit();
             return $this->success([], trans('admin.update_succeeded'));
         }catch (\Exception $exception){
@@ -102,6 +93,24 @@ class DictController extends Controller
             return $this->failed($exception->getMessage());
         }
     }
+
+
+    /**
+     * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\Resources\Json\JsonResource
+     */
+    public function all()
+    {
+        $resources = Department::query()->get();
+
+        $departments = fractal()
+                        ->collection($resources)
+                        ->transformWith(new PostTransformer())
+                        ->serializeWith(new DataArraySerializer())
+                        ->toArray();
+
+        return $this->success($departments);
+    }
+
 
     /**
      * @return \Illuminate\Validation\Validator
@@ -117,28 +126,39 @@ class DictController extends Controller
         ];
 
         $attributes = [
-            'name'      => trans('admin.dict.name'),
+            'name'      => trans('admin.post.name'),
         ];
 
         return Validator::make(request()->all(), $rules, $message, $attributes);
     }
 
-    /**
-     * Remove the specified resource from storage.
+
+
+     /**
+     * @param $id
+     * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\Resources\Json\JsonResource
      */
-    public function destroy(string $id): \Illuminate\Http\JsonResponse|\Illuminate\Http\Resources\Json\JsonResource
+    public function destroy($id)
     {
-        //
+
         try {
             DB::beginTransaction();
-            Dict::destroy($id);
+
+            Post::destroy($id);
+
             DB::commit();
+
             return $this->success();
+
         }catch (\Exception $exception){
+
             DB::rollBack();
+
             return $this->failed($exception->getTraceAsString());
         }
     }
 
-}
 
+
+
+}
