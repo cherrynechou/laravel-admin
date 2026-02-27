@@ -99,7 +99,7 @@ class Menu extends Model
      */
     protected static function boot()
     {
-
+        parent::boot();
         static::deleting(function ($model) {
             $model->roles()->detach();
             $model->permissions()->detach();

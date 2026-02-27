@@ -72,6 +72,31 @@ return [
             'getMenuList',
         ],
     ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | menu setting
+    |--------------------------------------------------------------------------
+    |
+    */
+    'menu' => [
+        'cache' => [
+            // enable cache or not
+            'enable' => false,
+            'store'  => 'file',
+        ],
+
+        // Whether enable menu bind to a permission.
+        'bind_permission' => true,
+
+        // Whether enable role bind to menu.
+        'role_bind_menu' => true,
+
+        // Whether enable permission bind to menu.
+        'permission_bind_menu' => true,
+    ],
+
+
     /*
     | File system configuration for form upload files and images, including
     | disk and upload path.
