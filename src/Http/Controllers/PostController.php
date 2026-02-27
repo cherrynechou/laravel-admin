@@ -26,7 +26,7 @@ class PostController extends Controller
         $lines = fractal()
             ->collection($resources)
             ->transformWith(new PostTransformer())
-            ->paginateWith(new IlluminatePaginatorAdapter($dictPaginator))
+            ->paginateWith(new IlluminatePaginatorAdapter($postPaginator))
             ->toArray();
 
         return $this->success($lines);
@@ -52,7 +52,7 @@ class PostController extends Controller
 
         try {
             DB::beginTransaction();
-            Department::create($validated);
+            Post::create($validated);
             DB::commit();
             return $this->success([], trans('admin.save_succeeded'));
         }catch (\Exception $exception){
@@ -67,13 +67,13 @@ class PostController extends Controller
     public function show(string $id)
     {
         //
-        $resource =  Department::query()->find($id);
-        $department = fractal()
+        $resource =  Post::query()->find($id);
+        $post = fractal()
             ->item($resource)
             ->transformWith(new PostTransformer())
             ->serializeWith(new DataArraySerializer())
             ->toArray();
-        return $this->success($department);
+        return $this->success($post);
 
     }
 
@@ -95,8 +95,8 @@ class PostController extends Controller
 
         try {
             DB::beginTransaction();
-            $department = Department::query()->find($id);
-            $department->update($validated);
+            $post = Post::query()->find($id);
+            $post->update($validated);
             DB::commit();
             return $this->success([], trans('admin.update_succeeded'));
         }catch (\Exception $exception){
@@ -111,7 +111,7 @@ class PostController extends Controller
      */
     public function all()
     {
-        $resources = Department::query()->get();
+        $resources = Post::query()->get();
 
         $departments = fractal()
                         ->collection($resources)

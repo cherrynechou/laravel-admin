@@ -70,6 +70,8 @@ class Admin
                     $router->get('/permission/routes','PermissionController@routes')->name('permissions.routes');
                     //部门列表
                     $router->get('/department/all','DepartmentController@all')->name('departments.all');
+                    //所有岗位
+                    $router->get('/post/all','PostController@all')->name('post.all');
                     //更改菜单的状态
                     $router->patch('/menu/{menu}/switch','MenuController@switchStatus')->name('menu.switch');
                     //重置用户密码
