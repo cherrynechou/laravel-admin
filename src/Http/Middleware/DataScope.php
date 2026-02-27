@@ -8,12 +8,18 @@ class DataScope
 {
    	public function handle(Request $request, Closure $next)
     {
-        // 将用户权限信息注入请求，方便调试
-        $request->merge([
-            'admin_user_id' => $request->user()->id,
-            'admin_department_id' => $request->user()->department_id,
-        ]);
+        if($request->isMethod('POST')){   //添加
+            $request->merge([
+                'created_id' => $request->user()->id,
+            ]);
 
+        }else if($request->isMethod(['PUT','PATCH'])){  //修改
+            $request->merge([
+                'updated_id' => $request->user()->id,
+            ]);
+        }
+
+        // 将用户权限信息注入请求，方便调试
 		return $next($request);
     }
 }

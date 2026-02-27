@@ -25,6 +25,7 @@ class AdminServiceProvider extends ServiceProvider
         'admin.permission'  => Http\Middleware\Permission::class,
         'admin.app'         => Http\Middleware\Application::class,
         'admin.locale'      => Http\Middleware\Locale::class,
+        'admin.data.scope'  => Http\Middleware\DataScope::class,
     ];
 
     /**
@@ -33,7 +34,8 @@ class AdminServiceProvider extends ServiceProvider
     protected $middlewareGroups = [
         'admin' => [
             'admin.permission',
-            'admin.locale'
+            'admin.locale',
+            'admin.data.scope'
         ],
     ];
 

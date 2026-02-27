@@ -25,10 +25,10 @@ class PermissionController extends Controller
         $resources = Permission::query()->orderBy('sort')->get();
 
         $permissionResources = fractal()
-            ->collection($resources)
-            ->transformWith(new PermissionTransformer())
-            ->serializeWith(new DataArraySerializer())
-            ->toArray();
+                            ->collection($resources)
+                            ->transformWith(new PermissionTransformer())
+                            ->serializeWith(new DataArraySerializer())
+                            ->toArray();
 
         $permissions = Helper::listToTree($permissionResources);
 

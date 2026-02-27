@@ -33,4 +33,37 @@ class Department extends Model
     {
         return $filters->apply($query);
     }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function children()
+    {
+        return $this->hasMany(Department::class, 'parent_id')->orderBy('sort')->with('children');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function allChildren()
+    {
+        return $this->children()->with('allChildren');
+    }
+
+
+    public function findFollowDepartments(int|array $id): array
+    {
+        if(!is_array($id)){
+            $id = [$id];
+        }
+
+        $followDepartmentIds = $this->whereIn('parent_id', $id)->pluck('id')->toArray();
+
+        if (! empty($followDepartmentIds)) {
+            $followDepartmentIds = array_merge($followDepartmentIds, $this->findFollowDepartments($followDepartmentIds));
+        }
+
+        return $followDepartmentIds;
+    }
+
 }

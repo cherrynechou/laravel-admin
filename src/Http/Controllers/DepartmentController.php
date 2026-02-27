@@ -107,6 +107,24 @@ class DepartmentController extends Controller
         }
     }
 
+
+    /**
+     * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\Resources\Json\JsonResource
+     */
+    public function all()
+    {
+        $resources = Department::query()->get();
+
+        $departments = fractal()
+                        ->collection($resources)
+                        ->transformWith(new DepartmentTransformer())
+                        ->serializeWith(new DataArraySerializer())
+                        ->toArray();
+
+        return $this->success($departments);
+    }
+
+
     /**
      * @return \Illuminate\Validation\Validator
      */

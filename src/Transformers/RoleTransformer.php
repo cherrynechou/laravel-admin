@@ -40,6 +40,7 @@ class RoleTransformer extends TransformerAbstract
             'name'              =>      $model->name,
             'is_administrator'  =>      Role::isAdministrator($model->slug),    //是否是管理员
             'slug'              =>      $model->slug,
+            'data_scope'        =>      $model->data_scope,
             'sort'              =>      $model->sort,
             'status'            =>      $model->status,
             'created_at'        =>      Carbon::parse($model->created_at)->toDateTimeString(),

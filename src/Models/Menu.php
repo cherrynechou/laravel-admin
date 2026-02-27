@@ -10,6 +10,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Menu extends Model
 {
+    use MenuCache;
+
     protected $guarded = ['id'];
 
     /**
@@ -90,4 +92,25 @@ class Menu extends Model
         return $date->format('Y-m-d H:i:s');
     }
 
+    /**
+     * Detach models from the relationship.
+     *
+     * @return void
+     */
+    protected static function boot()
+    {
+
+        static::deleting(function ($model) {
+            $model->roles()->detach();
+            $model->permissions()->detach();
+
+            $model->flushCache();
+        });
+
+        static::saved(function ($model) {
+            $model->flushCache();
+        });
+
+    }
+      
 }

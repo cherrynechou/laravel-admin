@@ -64,6 +64,8 @@ class Admin
                     $router->get('/permission/all','PermissionController@all')->name('permissions.all');
                     //获取权限路由
                     $router->get('/permission/routes','PermissionController@routes')->name('permissions.routes');
+                    //部门列表
+                    $router->get('/department/all','DepartmentController@all')->name('departments.all');
                     //更改菜单的状态
                     $router->patch('/menu/{menu}/switch','MenuController@switchStatus')->name('menu.switch');
                     //重置用户密码
@@ -77,7 +79,6 @@ class Admin
                     //数据字典
                     $router->resource('auth/dicts', 'DictController', ['except' => ['create','edit']])->names('auth.dict');    
                     $router->resource('auth/dict/datas', 'DictDataController', ['except' => ['create','edit']])->names('auth.dict.data');      
-
 
                 });
             }
