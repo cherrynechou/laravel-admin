@@ -209,7 +209,7 @@ class AdminTablesSeeder extends Seeder
                 'locale'        => 'menu.admin.dict',
                 'icon'          => '',
                 'uri'           => '',
-                'path'          => '/auth/dict',
+                'path'          => '/auth/dicts',
                 'status'        => 1,
                 'visible'       => 1,
                 'created_at'    => $createdAt,

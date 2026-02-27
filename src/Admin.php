@@ -73,7 +73,7 @@ class Admin
                     //所有岗位
                     $router->get('/post/all','PostController@all')->name('post.all');
                     //更改菜单的状态
-                    $router->patch('/menu/{menu}/switch','MenuController@switchStatus')->name('menu.switch');
+                    $router->patch('/menu/{menu}/switch','MenuController@switch')->name('menu.switch');
                     //重置用户密码
                     $router->patch('/user/{user}/resetPassword','UserController@resetPassword')->name('user.reset.password');
                     //更改用户密码

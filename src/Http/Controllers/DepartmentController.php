@@ -46,12 +46,11 @@ class DepartmentController extends Controller
             return $this->failed($show_warning);
         }
 
-        // 获取通过验证的数据...
-        $validated = $validator->safe()->all();
+        $requestData = request()->all();
 
         try {
             DB::beginTransaction();
-            Department::create($validated);
+            Department::create($requestData);
             DB::commit();
             return $this->success([], trans('admin.save_succeeded'));
         }catch (\Exception $exception){
@@ -89,13 +88,12 @@ class DepartmentController extends Controller
             return $this->failed($show_warning);
         }
 
-        // 获取通过验证的数据...
-        $validated = $validator->safe()->all();
+        $requestData = request()->all();
         
         try {
             DB::beginTransaction();
             $department = Department::query()->find($id);
-            $department->update($validated);
+            $department->update($requestData);
             DB::commit();
             return $this->success([], trans('admin.update_succeeded'));
         }catch (\Exception $exception){

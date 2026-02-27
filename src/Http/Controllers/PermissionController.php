@@ -47,12 +47,11 @@ class PermissionController extends Controller
             return $this->failed($warning);
         }
 
-        // 获取通过验证的数据...
-        $validated = $validator->safe()->all();
+        $requestData = request()->all();
 
         try {
             DB::beginTransaction();
-            Permission::create($validated);
+            Permission::create($requestData);
             DB::commit();
             return $this->success();
         }catch (\Exception $exception){
@@ -179,13 +178,12 @@ class PermissionController extends Controller
             return $this->failed($warning);
         }
 
-         // 获取通过验证的数据...
-        $validated = $validator->safe()->all();
+        $requestData = request()->all();
 
         try {
             DB::beginTransaction();
             $permission = Permission::query()->find($id);
-            $permission->update($validated);
+            $permission->update($requestData);
             DB::commit();
             return $this->success();
         }catch (\Exception $exception){

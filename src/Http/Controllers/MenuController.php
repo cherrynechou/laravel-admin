@@ -47,16 +47,14 @@ class MenuController extends Controller
             return $this->failed($warning);
         }
 
-        // 获取通过验证的数据...
-        $validated = $validator->safe()->all();
 
-
+        $requestData = request()->all();
         $roles = request()->input('roles') ?: [];
 
         try {
             DB::beginTransaction();
 
-            $menu = Menu::create($validated);
+            $menu = Menu::create($requestData);
 
             if(count($roles)>0){
                 $menu->roles()->sync($roles);
@@ -171,7 +169,7 @@ class MenuController extends Controller
      * 更改菜单状态
      * @param $id
      */
-    public function switchStatus($id)
+    public function switch($id)
     {
         try {
             DB::beginTransaction();

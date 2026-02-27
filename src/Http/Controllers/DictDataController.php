@@ -45,11 +45,10 @@ class DictDataController extends Controller
             return $this->failed($show_warning);
         }
 
-         // 获取通过验证的数据...
-        $validated = $validator->safe()->all();
+        $requestData = request()->all();
 
         //查询当前
-        $codeData= DictData::ofCode($validated['code'])->get();
+        $codeData= DictData::ofCode($requestData['code'])->get();
 
         if(count($codeData) == 0){
             $requestData['is_default'] = 1;
@@ -103,15 +102,15 @@ class DictDataController extends Controller
             return $this->failed($show_warning);
         }
         
-        // 获取通过验证的数据...
-        $validated = $validator->safe()->all();
+ 
+        $requestData = request()->all();
         
         try {
             DB::beginTransaction();
 
             $dict = DictData::query()->find($id);
 
-            $dict->update($validated);
+            $dict->update($requestData);
 
             DB::commit();
 

@@ -44,12 +44,11 @@ class DictController extends Controller
             return $this->failed($show_warning);
         }
 
-        // 获取通过验证的数据...
-        $validated = $validator->safe()->all();
+        $requestData = request()->all();
 
         try {
             DB::beginTransaction();
-            Dict::create($validated);
+            Dict::create($requestData);
             DB::commit();
             return $this->success([], trans('admin.save_succeeded'));
         }catch (\Exception $exception){
@@ -87,14 +86,13 @@ class DictController extends Controller
             return $this->failed($show_warning);
         }
 
-        // 获取通过验证的数据...
-        $validated = $validator->safe()->all();
+        $requestData = request()->all();
 
         //
         try {
             DB::beginTransaction();
             $dict = Dict::query()->find($id);
-            $dict->update($validated);
+            $dict->update($requestData);
             DB::commit();
             return $this->success([], trans('admin.update_succeeded'));
         }catch (\Exception $exception){

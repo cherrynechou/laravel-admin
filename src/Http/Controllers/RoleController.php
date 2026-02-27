@@ -47,14 +47,14 @@ class RoleController extends Controller
             return $this->failed($warning);
         }
 
-        // 获取通过验证的数据...
-        $validated = $validator->safe()->all();
+
+        $requestData = request()->all();
 
         try {
 
             DB::beginTransaction();
 
-            $role = Role::create($validated);
+            $role = Role::create($requestData);
 
             DB::commit();
 
@@ -98,14 +98,13 @@ class RoleController extends Controller
             return $this->failed($warning);
         }
 
-        // 获取通过验证的数据...
-        $validated = $validator->safe()->all();
+        $requestData = request()->all();
 
         try {
             DB::beginTransaction();
 
             $role = Role::query()->find($id);
-            $role->update($validated);
+            $role->update($requestData);
 
             DB::commit();
 

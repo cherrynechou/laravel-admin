@@ -47,12 +47,11 @@ class PostController extends Controller
             return $this->failed($show_warning);
         }
 
-        // 获取通过验证的数据...
-        $validated = $validator->safe()->all();
+        $requestData = request()->all();
 
         try {
             DB::beginTransaction();
-            Post::create($validated);
+            Post::create($requestData);
             DB::commit();
             return $this->success([], trans('admin.save_succeeded'));
         }catch (\Exception $exception){
@@ -90,13 +89,12 @@ class PostController extends Controller
             return $this->failed($show_warning);
         }
 
-        // 获取通过验证的数据...
-        $validated = $validator->safe()->all();
+        $requestData = request()->all();
 
         try {
             DB::beginTransaction();
             $post = Post::query()->find($id);
-            $post->update($validated);
+            $post->update($requestData);
             DB::commit();
             return $this->success([], trans('admin.update_succeeded'));
         }catch (\Exception $exception){
