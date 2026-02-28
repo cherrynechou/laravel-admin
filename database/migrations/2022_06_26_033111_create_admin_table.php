@@ -38,7 +38,7 @@ return new class extends Migration
             $table->string('last_login_ip')->nullable()->default('');
             $table->timestamp('last_login_time')->nullable();
             $table->boolean('status')->nullable()->default(0)->comment('是否禁用');
-            $table->integer('sort')->default(0);
+            $table->integer('sort')->nullable()->default(0);
             $table->timestamps();
 
             $table->bigInteger("created_id")->nullable()->default(0)->comment('创建id');
@@ -55,7 +55,7 @@ return new class extends Migration
             $table->string('slug', 50)->unique();
             $table->boolean('status')->nullable()->default(0)->comment('是否禁用');
             $table->boolean('data_scope')->nullable()->default(1)->comment('数据访问权限 1 全部数据 2 自定义数据 3 部门数据 4 部门及以下数据 5 仅本人数据');
-            $table->integer('sort')->default(0);
+            $table->integer('sort')->nullable()->default(0);
             $table->bigInteger("created_id")->nullable()->default(0)->comment('创建id');
             $table->bigInteger("updated_id")->nullable()->default(0)->comment('更新id');
             $table->timestamps();
@@ -70,7 +70,7 @@ return new class extends Migration
             $table->string('email',50)->nullable()->default('');
             $table->string('telephone',11)->nullable()->unique();
             $table->boolean('status')->default(1)->comment('1 正常 2 停用');
-            $table->integer('sort')->default(0);    
+            $table->integer('sort')->nullable()->default(0);    
             $table->bigInteger("created_id")->nullable()->default(0)->comment('创建id');
             $table->bigInteger("updated_id")->nullable()->default(0)->comment('更新id');
             $table->timestamps();
@@ -81,8 +81,8 @@ return new class extends Migration
             $table->id();
             $table->string('name', 50);
             $table->string('code')->nullable()->comment('编码');
-            $table->boolean('status')->default(1)->comment('1 正常 2 停用');
-            $table->integer('sort')->default(0);    
+            $table->boolean('status')->nullable()->default(1)->comment('1 正常 2 停用');
+            $table->integer('sort')->nullable()->default(0);    
             $table->string('remark')->nullable()->default('');
             $table->bigInteger("created_id")->nullable()->default(0)->comment('创建id');
             $table->bigInteger("updated_id")->nullable()->default(0)->comment('更新id');
@@ -94,13 +94,13 @@ return new class extends Migration
         Schema::create($this->config('database.permissions_table'), function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name', 50);
-            $table->bigInteger('parent_id')->default(0);
+            $table->bigInteger('parent_id')->nullable()->default(0);
             $table->string('locale',50)->nullable()->default('')->comment('国际化标识');
             $table->tinyInteger('type')->nullable()->default(1)->comment('类型1目录、2子目录、3权限');
             $table->string('slug', 50)->unique();
             $table->string('http_method')->nullable();
             $table->text('http_path')->nullable();
-            $table->integer('sort')->default(0);
+            $table->integer('sort')->nullable()->default(0);
 
             $table->bigInteger("created_id")->nullable()->default(0)->comment('创建id');
             $table->bigInteger("updated_id")->nullable()->default(0)->comment('更新id');
@@ -113,16 +113,16 @@ return new class extends Migration
             $table->string('name')->comment('菜单名称');
             $table->string('key')->unique()->comment('唯一标识');;
             $table->tinyInteger('type')->nullable()->default(1)->comment('类型1菜单menu、2功能 router');
-            $table->string('locale')->comment('菜单国际化标识');
-            $table->string('path')->nullable()->default('');
-            $table->bigInteger('parent_id')->default(0);
-            $table->tinyInteger('is_back_link')->default(0)->comment('是否外链：1、是，0、否');
+            $table->string('locale')->nullable()->comment('菜单国际化标识');
+            $table->string('path')->nullable()->nullable()->default('');
+            $table->bigInteger('parent_id')->nullable()->default(0);
+            $table->tinyInteger('is_back_link')->nullable()->default(0)->comment('是否外链：1、是，0、否');
             $table->string('target')->nullable()->default('')->comment('浏览器跳转类型');
             $table->string('uri')->nullable()->default('')->comment('浏览器跳转地址');
-            $table->string('icon', 50)->default('')->nullable();
-            $table->integer('sort')->default(0)->nullable();
-            $table->boolean('status')->default(1)->comment('菜单状态（0正常 1停用）');
-            $table->boolean('visible')->default(1)->comment('菜单状态（0显示 1隐藏）');
+            $table->string('icon', 50)->nullable()->default('')->nullable();
+            $table->integer('sort')->nullable()->default(0)->nullable();
+            $table->boolean('status')->nullable()->default(1)->comment('菜单状态（0正常 1停用）');
+            $table->boolean('visible')->nullable()->default(1)->comment('菜单状态（0显示 1隐藏）');
             $table->bigInteger("created_id")->nullable()->default(0)->comment('创建id');
             $table->bigInteger("updated_id")->nullable()->default(0)->comment('更新id');
             $table->timestamps();
@@ -218,12 +218,12 @@ return new class extends Migration
         Schema::create($this->config('database.attachment_table'), function (Blueprint $table) {
             $table->id();
             $table->integer('cat_id')->default(0)->comment('分类ID');
-            $table->string('filename')->comment('文件名');
-            $table->string('path')->comment('文件路径');
-            $table->string('extension')->comment('文件后缀');
-            $table->string('filesize')->comment('文件大小');
-            $table->string('mimetype')->comment('文件mimetype');
-            $table->string('driver')->comment('上传方式');
+            $table->string('filename')->nullable()->comment('文件名');
+            $table->string('path')->nullable()->comment('文件路径');
+            $table->string('extension')->nullable()->comment('文件后缀');
+            $table->string('filesize')->nullable()->comment('文件大小');
+            $table->string('mimetype')->nullable()->comment('文件mimetype');
+            $table->string('driver')->nullable()->comment('上传方式');
 
             $table->bigInteger("created_id")->nullable()->default(0)->comment('创建id');
             $table->bigInteger("updated_id")->nullable()->default(0)->comment('更新id');
