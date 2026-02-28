@@ -41,8 +41,8 @@ return new class extends Migration
             $table->integer('sort')->default(0);
             $table->timestamps();
 
-            $table->bigInteger("created_id")->default(0)->comment('创建id');
-            $table->bigInteger("updated_id")->default(0)->comment('创建id');
+            $table->bigInteger("created_id")->nullable()->default(0)->comment('创建id');
+            $table->bigInteger("updated_id")->nullable()->default(0)->comment('更新id');
 
             $table->softDeletes();
             $table->comment('管理员表');
@@ -56,8 +56,8 @@ return new class extends Migration
             $table->boolean('status')->nullable()->default(0)->comment('是否禁用');
             $table->boolean('data_scope')->nullable()->default(1)->comment('数据访问权限 1 全部数据 2 自定义数据 3 部门数据 4 部门及以下数据 5 仅本人数据');
             $table->integer('sort')->default(0);
-            $table->bigInteger("created_id")->default(0)->comment('创建id');
-            $table->bigInteger("updated_id")->default(0)->comment('更新id');
+            $table->bigInteger("created_id")->nullable()->default(0)->comment('创建id');
+            $table->bigInteger("updated_id")->nullable()->default(0)->comment('更新id');
             $table->timestamps();
             $table->comment('角色表');
         });
@@ -71,8 +71,8 @@ return new class extends Migration
             $table->string('telephone',11)->nullable()->unique();
             $table->boolean('status')->default(1)->comment('1 正常 2 停用');
             $table->integer('sort')->default(0);    
-            $table->bigInteger("created_id")->default(0)->comment('创建id');
-            $table->bigInteger("updated_id")->default(0)->comment('更新id');
+            $table->bigInteger("created_id")->nullable()->default(0)->comment('创建id');
+            $table->bigInteger("updated_id")->nullable()->default(0)->comment('更新id');
             $table->timestamps();
             $table->comment('部门表');
         });
@@ -84,8 +84,8 @@ return new class extends Migration
             $table->boolean('status')->default(1)->comment('1 正常 2 停用');
             $table->integer('sort')->default(0);    
             $table->string('remark')->nullable()->default('');
-            $table->bigInteger("created_id")->default(0)->comment('创建id');
-            $table->bigInteger("updated_id")->default(0)->comment('更新id');
+            $table->bigInteger("created_id")->nullable()->default(0)->comment('创建id');
+            $table->bigInteger("updated_id")->nullable()->default(0)->comment('更新id');
             $table->timestamps();
             $table->comment('部门表');
         });
@@ -102,8 +102,8 @@ return new class extends Migration
             $table->text('http_path')->nullable();
             $table->integer('sort')->default(0);
 
-            $table->bigInteger("created_id")->default(0)->comment('创建id');
-            $table->bigInteger("updated_id")->default(0)->comment('更新id');
+            $table->bigInteger("created_id")->nullable()->default(0)->comment('创建id');
+            $table->bigInteger("updated_id")->nullable()->default(0)->comment('更新id');
             $table->timestamps();
             $table->comment('权限表');
         });
@@ -123,8 +123,8 @@ return new class extends Migration
             $table->integer('sort')->default(0)->nullable();
             $table->boolean('status')->default(1)->comment('菜单状态（0正常 1停用）');
             $table->boolean('visible')->default(1)->comment('菜单状态（0显示 1隐藏）');
-            $table->bigInteger("created_id")->default(0)->comment('创建id');
-            $table->bigInteger("updated_id")->default(0)->comment('更新id');
+            $table->bigInteger("created_id")->nullable()->default(0)->comment('创建id');
+            $table->bigInteger("updated_id")->nullable()->default(0)->comment('更新id');
             $table->timestamps();
             $table->comment('菜单表');
         });
@@ -210,8 +210,8 @@ return new class extends Migration
             $table->integer('parent_id')->default(0)->comment('父级ID');
             $table->string('remark')->nullable()->default('');
 
-            $table->bigInteger("created_id")->default(0)->comment('创建id');
-            $table->bigInteger("updated_id")->default(0)->comment('创建id');
+            $table->bigInteger("created_id")->nullable()->default(0)->comment('创建id');
+            $table->bigInteger("updated_id")->nullable()->default(0)->comment('更新id');
             $table->timestamps();
         });
 
@@ -225,8 +225,8 @@ return new class extends Migration
             $table->string('mimetype')->comment('文件mimetype');
             $table->string('driver')->comment('上传方式');
 
-            $table->bigInteger("created_id")->default(0)->comment('创建id');
-            $table->bigInteger("updated_id")->default(0)->comment('创建id');
+            $table->bigInteger("created_id")->nullable()->default(0)->comment('创建id');
+            $table->bigInteger("updated_id")->nullable()->default(0)->comment('更新id');
             $table->timestamps();
         });
     }
