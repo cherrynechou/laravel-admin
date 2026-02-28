@@ -28,6 +28,7 @@ return new class extends Migration
             $table->string('username', 120)->unique();
             $table->string('password', 80);
             $table->integer('department_id')->nullable()->default(0)->comment('部门ID');
+            $table->integer('post_id')->nullable()->default(0)->comment('岗位ID');
             $table->string('name')->nullable()->default('');
             $table->string('email',50)->nullable()->default('');
             $table->timestamp('email_verified_at')->nullable();
@@ -179,8 +180,6 @@ return new class extends Migration
             $table->tinyInteger('status')->nullable()->default(0);
             $table->tinyInteger("sort")->nullable()->default(0);
             $table->string('remark')->nullable()->default('');
-            $table->bigInteger("created_id")->default(0)->comment('创建id');
-            $table->bigInteger("updated_id")->default(0)->comment('更新id');
             $table->timestamps();
         });
 
@@ -194,8 +193,6 @@ return new class extends Migration
             $table->tinyInteger("status")->nullable()->default(0);
             $table->tinyInteger("sort")->nullable()->default(0);
             $table->string("remark")->nullable()->default('');
-            $table->bigInteger("created_id")->default(0)->comment('创建id');
-            $table->bigInteger("updated_id")->default(0)->comment('更新id');
             $table->timestamps();
         });
 
@@ -212,6 +209,9 @@ return new class extends Migration
             $table->string('name')->unique()->comment('分类名称');
             $table->integer('parent_id')->default(0)->comment('父级ID');
             $table->string('remark')->nullable()->default('');
+
+            $table->bigInteger("created_id")->default(0)->comment('创建id');
+            $table->bigInteger("updated_id")->default(0)->comment('创建id');
             $table->timestamps();
         });
 
@@ -224,6 +224,9 @@ return new class extends Migration
             $table->string('filesize')->comment('文件大小');
             $table->string('mimetype')->comment('文件mimetype');
             $table->string('driver')->comment('上传方式');
+
+            $table->bigInteger("created_id")->default(0)->comment('创建id');
+            $table->bigInteger("updated_id")->default(0)->comment('创建id');
             $table->timestamps();
         });
     }
