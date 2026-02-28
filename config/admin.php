@@ -146,8 +146,8 @@ return [
         'menu_model' => CherryneChou\Admin\Models\Menu::class,
 
         //Post table and model.
-        'post_table' => 'admin_post',
-        'post_model' => CherryneChou\Admin\Models\Post::class,
+        'posts_table' => 'admin_post',
+        'posts_model' => CherryneChou\Admin\Models\Post::class,
 
         //Config table and model
         'config_table'=> 'admin_system_config',
