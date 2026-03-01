@@ -8,6 +8,10 @@ class DataScope
 {
    	public function handle(Request $request, Closure $next)
     {
+        if (! Admin::guard()->guest()) {
+            return $next($request);
+        }
+
         if($request->isMethod('POST')){   //添加
             $request->merge([
                 'created_id' => $request->user()->id,

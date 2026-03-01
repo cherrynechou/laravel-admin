@@ -3,6 +3,7 @@ namespace CherryneChou\Admin;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Arr;
+use CherryneChou\Admin\Support\Context;
 use CherryneChou\Admin\Support\Helper;
 
 class AdminServiceProvider extends ServiceProvider
@@ -22,10 +23,12 @@ class AdminServiceProvider extends ServiceProvider
      * @var array
      */
     protected $routeMiddleware = [
+        'admin.auth'        => Http\Middleware\Authenticate::class,
         'admin.permission'  => Http\Middleware\Permission::class,
-        'admin.app'         => Http\Middleware\Application::class,
+        'admin.bootstrap'  => Http\Middleware\Bootstrap::class,
         'admin.locale'      => Http\Middleware\Locale::class,
         'admin.data.scope'  => Http\Middleware\DataScope::class,
+        'admin.app'         => Http\Middleware\Application::class,
     ];
 
     /**
@@ -33,6 +36,8 @@ class AdminServiceProvider extends ServiceProvider
      */
     protected $middlewareGroups = [
         'admin' => [
+            'admin.auth',
+            'admin.bootstrap',
             'admin.permission',
             'admin.locale',
             'admin.data.scope'
@@ -106,6 +111,7 @@ class AdminServiceProvider extends ServiceProvider
     public function registerServices()
     {
         $this->app->singleton('admin.app', Application::class);
+        $this->app->singleton('admin.context', Context::class);
     }
 
 

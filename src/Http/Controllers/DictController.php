@@ -8,12 +8,22 @@ use Illuminate\Routing\Controller;
 use CherryneChou\Admin\Traits\RestfulResponse;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
+use CherryneChou\Contracts\ValidatorInterface;
 use CherryneChou\Admin\Serializer\DataArraySerializer;
 use League\Fractal\Pagination\IlluminatePaginatorAdapter;
 
 class DictController extends Controller
 {
     use RestfulResponse;
+
+    protected $rules = [
+        ValidatorInterface::RULE_CREATE => [
+            'name'      => 'required',
+        ],
+        ValidatorInterface::RULE_UPDATE => [
+            'name'      => 'required',
+        ]
+    ];
 
     public function index(): \Illuminate\Http\JsonResponse|\Illuminate\Http\Resources\Json\JsonResource
     {
@@ -36,12 +46,11 @@ class DictController extends Controller
     public function store(): \Illuminate\Http\JsonResponse|\Illuminate\Http\Resources\Json\JsonResource
     {
         //
-        $validator = $this->validateForm();
+        $validator = $this->validateForm(ValidatorInterface::RULE_CREATE);
 
         if($validator->fails()){
-            $warnings = $validator->messages();
-            $show_warning = $warnings->first();
-            return $this->failed($show_warning);
+            $warning = $validator->messages()->first();
+            return $this->failed($warning);
         }
 
         $requestData = request()->all();
@@ -78,12 +87,11 @@ class DictController extends Controller
      */
     public function update(string $id): \Illuminate\Http\JsonResponse|\Illuminate\Http\Resources\Json\JsonResource
     {
-        $validator = $this->validateForm();
+        $validator = $this->validateForm( ValidatorInterface::RULE_UPDATE );
 
         if($validator->fails()){
-            $warnings = $validator->messages();
-            $show_warning = $warnings->first();
-            return $this->failed($show_warning);
+            $warning = $validator->messages()->first();
+            return $this->failed($warning);
         }
 
         $requestData = request()->all();
@@ -104,12 +112,8 @@ class DictController extends Controller
     /**
      * @return \Illuminate\Validation\Validator
      */
-    protected function validateForm()
+    protected function validateForm($rule)
     {
-        $rules = [
-            'name'      => 'required',
-        ];
-
         $message = [
             'required'  => trans('validation.attribute_not_empty'),
         ];
@@ -118,7 +122,7 @@ class DictController extends Controller
             'name'      => trans('admin.dict.name'),
         ];
 
-        return Validator::make(request()->all(), $rules, $message, $attributes);
+        return Validator::make(request()->all(), $this->rules[$rule], $message, $attributes);
     }
 
     /**

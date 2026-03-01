@@ -41,9 +41,8 @@ class DepartmentController extends Controller
         $validator = $this->validateForm();
 
         if($validator->fails()){
-            $warnings = $validator->messages();
-            $show_warning = $warnings->first();
-            return $this->failed($show_warning);
+        $warning = $validator->messages()->first();
+            return $this->failed($warning);
         }
 
         $requestData = request()->all();
@@ -83,9 +82,8 @@ class DepartmentController extends Controller
         $validator = $this->validateForm();
 
         if($validator->fails()){
-            $warnings = $validator->messages();
-            $show_warning = $warnings->first();
-            return $this->failed($show_warning);
+            $warning = $validator->messages()->first();
+            return $this->failed($warning);
         }
 
         $requestData = request()->all();

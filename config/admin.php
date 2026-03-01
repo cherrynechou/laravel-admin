@@ -42,6 +42,29 @@ return [
         'enable' => true,
 
         'controller' => App\Admin\Controllers\AuthController::class,
+
+        'guard' => 'admin',
+
+        'guards' => [
+            'admin' => [
+                'driver'   => 'sanctum',
+                'provider' => 'admin',
+            ],
+        ],
+
+        'providers' => [
+            'admin' => [
+                'driver' => 'eloquent',
+                'model'  => CherryneChou\Admin\Models\Administrator::class,
+            ],
+        ],
+
+        // All method to path like: auth/users/*/edit
+        // or specific method to path like: get:auth/users.
+        'except' => [
+            'auth/login',
+            'auth/logout',
+        ],
     ],
 
     /*

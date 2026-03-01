@@ -36,9 +36,22 @@ class AuthController extends Controller
      */
     public function postLogin()
     {
+
+        $credentials = request()->only([$this->username(), 'password']);
+
+        /** @var \Illuminate\Validation\Validator $validator */
+        $validator = Validator::make($credentials, [
+            $this->username()   => 'required',
+            'password'          => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return $this->failed($validator);
+        }
+
         try {
 
-            $admin = Administrator::query()->where('username', request()->username)->first();
+            $admin = Administrator::query()->where($this->username(), request()->username)->first();
 
             //判断用户名密码
             if (!$admin || !Hash::check(request()->password, $admin->password)) {
@@ -106,6 +119,17 @@ class AuthController extends Controller
         $menus = Helper::listToTree($menuResources);
 
         return $this->success($menus);
+    }
+
+
+    /**
+     * Get the login username to be used by the controller.
+     *
+     * @return string
+     */
+    protected function username()
+    {
+        return 'username';
     }
 
 }

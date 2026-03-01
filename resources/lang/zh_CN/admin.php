@@ -14,6 +14,12 @@ return [
     'user_no_permission'            => '无权限！',
     'username_or_password_is_wrong' => '用户名或者密码不正确',
     'origin_password_is_wrong'      => '原始密码不正确',
+    'client' => [
+        '500' => '系统繁忙，请稍后再试！',
+        '403' => '对不起，您没有权限访问，请与管理员联系。',
+        '401' => '请登录！',
+        '419' => '对不起，当前页面已失效，请刷新浏览器。',
+    ],
     'account'   =>  [
         'name'                       => '名称',
         'username'                   => '用户名',

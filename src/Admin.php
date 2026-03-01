@@ -1,6 +1,8 @@
 <?php
 namespace CherryneChou\Admin;
 
+use Illuminate\Support\Facades\Event;
+
 class Admin
 {
     const VERSION = '2.3.0';
@@ -13,6 +15,67 @@ class Admin
     public static function app()
     {
         return app('admin.app');
+    }
+
+
+    /**
+     * 获取登录用户模型.
+     *
+     * @return Model|Authenticatable|HasPermissions
+     */
+    public static function user()
+    {
+        return static::guard()->user();
+    }
+
+    /**
+     * @return \Illuminate\Contracts\Auth\Guard|\Illuminate\Contracts\Auth\StatefulGuard|GuardHelpers
+     */
+    public static function guard()
+    {
+        return Auth::guard(config('admin.auth.guard') ?: 'admin');
+    }
+
+     /**
+     * @param  callable  $callback
+     */
+    public static function booting($callback)
+    {
+        Event::listen('admin:booting', $callback);
+    }
+
+    /**
+     * @param  callable  $callback
+     */
+    public static function booted($callback)
+    {
+        Event::listen('admin:booted', $callback);
+    }
+
+    /**
+     * @return void
+     */
+    public static function callBooting()
+    {
+        Event::dispatch('admin:booting');
+    }
+
+    /**
+     * @return void
+     */
+    public static function callBooted()
+    {
+        Event::dispatch('admin:booted');
+    }
+
+    /**
+     * 上下文管理.
+     *
+     * @return \Dcat\Admin\Support\Context
+     */
+    public static function context()
+    {
+        return app('admin.context');
     }
 
 

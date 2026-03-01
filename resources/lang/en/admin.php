@@ -14,6 +14,12 @@ return [
     'user_no_permission'            => 'No permission！',
     'username_or_password_is_wrong' => 'User or Password is Wrong',
     'origin_password_is_wrong'      => 'Origin Password is Wrong',
+    'client' => [
+        '500' => 'Internal server error !',
+        '403' => 'Permission deny !',
+        '401' => 'Unauthorized !',
+        '419' => 'Page expired !',
+    ],
     'account'   =>  [
         'name'                          => 'name',
         'username'                      => 'username',

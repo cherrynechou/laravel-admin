@@ -186,16 +186,11 @@ class UserController extends Controller
     {
         try {
             DB::beginTransaction();
-
             Administrator::destroy($id);
-
             DB::commit();
-
             return $this->success();
-
         }catch (\Exception $exception){
             DB::rollBack();
-
             return $this->failed($exception->getTraceAsString());
         }
 
