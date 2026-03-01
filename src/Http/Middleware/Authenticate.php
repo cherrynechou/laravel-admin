@@ -2,7 +2,9 @@
 
 namespace CherryneChou\Admin\Http\Middleware;
 
+use Closure;
 use CherryneChou\Admin\Admin;
+use CherryneChou\Admin\Support\Helper;
 
 class Authenticate
 {
