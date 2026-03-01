@@ -8,7 +8,7 @@ use CherryneChou\Admin\Serializer\DataArraySerializer;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use CherryneChou\Admin\Traits\RestfulResponse;
-use CherryneChou\Contracts\ValidatorInterface;
+use CherryneChou\Admin\Contracts\ValidatorInterface;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use League\Fractal\Pagination\IlluminatePaginatorAdapter;

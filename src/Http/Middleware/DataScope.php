@@ -3,6 +3,7 @@ namespace CherryneChou\Admin\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
+use CherryneChou\Admin\Admin;
 
 class DataScope
 {

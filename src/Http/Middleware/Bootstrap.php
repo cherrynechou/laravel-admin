@@ -3,6 +3,7 @@
 namespace CherryneChou\Admin\Http\Middleware;
 
 use CherryneChou\Admin\Admin;
+use Illuminate\Http\Request;
 
 class Bootstrap
 {
