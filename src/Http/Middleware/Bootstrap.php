@@ -4,7 +4,7 @@ namespace CherryneChou\Admin\Http\Middleware;
 
 use CherryneChou\Admin\Admin;
 
-class Boostrap
+class Bootstrap
 {
 	public function handle(Request $request, \Closure $next)
     {

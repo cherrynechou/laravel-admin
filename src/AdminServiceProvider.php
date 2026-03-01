@@ -25,7 +25,7 @@ class AdminServiceProvider extends ServiceProvider
     protected $routeMiddleware = [
         'admin.auth'        => Http\Middleware\Authenticate::class,
         'admin.permission'  => Http\Middleware\Permission::class,
-        'admin.bootstrap'  => Http\Middleware\Bootstrap::class,
+        'admin.bootstrap'   => Http\Middleware\Bootstrap::class,
         'admin.locale'      => Http\Middleware\Locale::class,
         'admin.data.scope'  => Http\Middleware\DataScope::class,
         'admin.app'         => Http\Middleware\Application::class,
