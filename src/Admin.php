@@ -2,6 +2,7 @@
 namespace CherryneChou\Admin;
 
 use Illuminate\Support\Facades\Event;
+use Illuminate\Support\Facades\Auth;
 
 class Admin
 {
