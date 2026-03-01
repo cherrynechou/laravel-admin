@@ -129,6 +129,29 @@ return new class extends Migration
             $table->comment('菜单表');
         });
 
+
+        Schema::create($this->config('database.operation_log_table'), function (Blueprint $table) {
+            $table->id();
+            $table->integer('created_id');
+            $table->string('created_by')->nullable()->default("")->comment('用户');
+            $table->string('path');
+            $table->string('http_method', 10)->comment('http 请求方式');
+            $table->string('ip')->comment('ip 地址');
+            $table->text('params')->comment('参数');
+            $table->integer('sort')->nullable()->default(0)->nullable();
+            $table->index('created_id');
+            $table->timestamps();
+        });
+
+
+        Schema::create($this->config('database.login_log_table'), function (Blueprint $table) {
+            $table->id();
+
+            $table->integer('sort')->nullable()->default(0)->nullable();
+            $table->timestamps();
+        });
+    
+
         Schema::create($this->config('database.role_users_table'), function (Blueprint $table) {
             $table->bigInteger('role_id');
             $table->bigInteger('user_id');
@@ -243,6 +266,8 @@ return new class extends Migration
         Schema::dropIfExists($this->config('database.departments_table'));
         Schema::dropIfExists($this->config('database.permissions_table'));
         Schema::dropIfExists($this->config('database.menu_table'));
+        Schema::dropIfExists($this->config('database.operation_log_table'));
+        Schema::dropIfExists($this->config('database.login_log_table'));
         Schema::dropIfExists($this->config('database.role_users_table'));
         Schema::dropIfExists($this->config('database.role_permissions_table'));
         Schema::dropIfExists($this->config('database.role_department_table'));

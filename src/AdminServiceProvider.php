@@ -24,6 +24,7 @@ class AdminServiceProvider extends ServiceProvider
      */
     protected $routeMiddleware = [
         'admin.auth'        => Http\Middleware\Authenticate::class,
+        'admin.log'         => Http\Middleware\LogOperation::class,
         'admin.permission'  => Http\Middleware\Permission::class,
         'admin.bootstrap'   => Http\Middleware\Bootstrap::class,
         'admin.locale'      => Http\Middleware\Locale::class,
@@ -37,6 +38,7 @@ class AdminServiceProvider extends ServiceProvider
     protected $middlewareGroups = [
         'admin' => [
             'admin.auth',
+            'admin.log',
             'admin.bootstrap',
             'admin.permission',
             'admin.locale',

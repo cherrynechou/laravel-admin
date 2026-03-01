@@ -69,6 +69,36 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | User operation log setting
+    |--------------------------------------------------------------------------
+    |
+    | By setting this option to open or close operation log in laravel-admin.
+    |
+    */
+    'operation_log' => [
+
+        'enable' => true,
+
+        /*
+         * Only logging allowed methods in the list
+         */
+        'allowed_methods' => ['GET', 'HEAD', 'POST', 'PUT', 'DELETE', 'CONNECT', 'OPTIONS', 'TRACE', 'PATCH'],
+
+        'securt_fields' = ['password','password_confirmation'],
+
+        /*
+         * Routes that will not log to database.
+         *
+         * All method to path like: admin/auth/logs
+         * or specific method to path like: get:admin/auth/logs.
+         */
+        'except' => [
+            env('ADMIN_ROUTE_PREFIX', 'admin').'/auth/logs*',
+        ],
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
     | User default avatar
     |--------------------------------------------------------------------------
     |
@@ -175,6 +205,10 @@ return [
         //Config table and model
         'config_table'=> 'admin_system_config',
         'config_model'=> CherryneChou\Admin\Models\SystemConfig::class,
+
+        //Operation log table and model
+        'operation_log_table' => 'admin_operation_log',
+        'operation_log_model' => CherryneChou\Admin\Models\OperationLog::class,
 
         //Attachment Category table and model
         'attachment_category_table'=> 'admin_attachment_category',

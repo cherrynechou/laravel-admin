@@ -116,11 +116,6 @@ class Admin
                     $router->resource('auth/roles', 'RoleController',['except'=>['create','edit']])->names('auth.roles');
                     $router->resource('auth/permissions', 'PermissionController',['except'=>['create','edit']])->names('auth.permissions');
                     $router->resource('auth/menu', 'MenuController', ['except' => ['create','edit']])->names('auth.menu');
-                    $router->resource('auth/departments', 'DepartmentController', ['except' => ['create','edit']])->names('auth.departments');
-                    $router->resource('auth/posts', 'PostController', ['except' => ['create','edit']])->names('auth.posts');
-                    $router->resource('auth/attchment/category', 'AttachmentCategoryController', ['except' => ['create','edit']])->names('auth.department.category');
-                    $router->resource('auth/attchments', 'AttachmentController', ['except' => ['create','edit']])->names('auth.attchments');
-   
 
                     //非分页列表
                     $router->get('/role/all','RoleController@all')->name('roles.all');
@@ -132,10 +127,7 @@ class Admin
                     $router->get('/permission/all','PermissionController@all')->name('permissions.all');
                     //获取权限路由
                     $router->get('/permission/routes','PermissionController@routes')->name('permissions.routes');
-                    //部门列表
-                    $router->get('/department/all','DepartmentController@all')->name('departments.all');
-                    //所有岗位
-                    $router->get('/post/all','PostController@all')->name('post.all');
+
                     //更改菜单的状态
                     $router->patch('/menu/{menu}/switch','MenuController@switch')->name('menu.switch');
                     //重置用户密码
@@ -144,17 +136,33 @@ class Admin
                     $router->patch('/user/{user}/changePassword','UserController@changePassword')->name('user.change.password');
                     //阻止用户登录
                     $router->patch('/user/{user}/block','UserController@block')->name('user.block');
-
-
-                    //数据字典
-                    $router->resource('auth/dicts', 'DictController', ['except' => ['create','edit']])->names('auth.dict');    
-                    $router->resource('auth/dict/datas', 'DictDataController', ['except' => ['create','edit']])->names('auth.dict.data');      
-
                 });
             }
 
+            //部门列表
+            $router->get('/department/all','DepartmentController@all')->name('departments.all');
+            //所有岗位
+            $router->get('/post/all','PostController@all')->name('post.all');
+
             //登录
             $authController = config('admin.auth.controller', AuthController::class);
+
+            $router->resource('auth/departments', 'DepartmentController', ['except' => ['create','edit']])->names('auth.departments');
+            $router->resource('auth/posts', 'PostController', ['except' => ['create','edit']])->names('auth.posts');
+            $router->resource('auth/attchment/category', 'AttachmentCategoryController', ['except' => ['create','edit']])->names('auth.department.category');
+            $router->resource('auth/attchments', 'AttachmentController', ['except' => ['create','edit']])->names('auth.attchments');
+
+            //操作日志
+            $router->get('auth/operations','');
+
+            //数据字典
+            $router->resource('auth/dicts', 'DictController', ['except' => ['create','edit']])->names('auth.dict');    
+            $router->resource('auth/dict/datas', 'DictDataController', ['except' => ['create','edit']])->names('auth.dict.data');   
+
+            //获取验证码
+            $router->get('auth/getCaptcha',$authController . '@getCaptcha')->name('auth.getCaptcha');
+
+
             //当前用户
             $router->get('/currentUser', $authController . '@currentUser')->name('current.user');
             //菜单
