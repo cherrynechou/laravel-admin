@@ -4,8 +4,8 @@ namespace CherryneChou\Admin;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Arr;
 use CherryneChou\Admin\Support\Context;
-use Cherrynechou\Admin\Events\UserLogined;
-use Cherrynechou\Admin\Listeners\UserLoginRecord;
+use CherryneChou\Admin\Events\UserLogined;
+use CherryneChou\Admin\Listeners\UserLoginRecord;
 use CherryneChou\Admin\Support\Helper;
 use Illuminate\Support\Facades\Event;
 
