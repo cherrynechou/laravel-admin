@@ -14,6 +14,7 @@ use CherryneChou\Admin\Events\Login;
 use Mews\Captcha\Facades\Captcha;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Event;
 
 class AuthController extends BaseController
 {
