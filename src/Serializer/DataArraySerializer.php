@@ -5,7 +5,7 @@ use League\Fractal\Serializer\ArraySerializer;
 
 /**
  * Class DataArraySerializer
- * @package App\Serializer
+ * @package CherryneChou\Admin\Serializer
  */
 class DataArraySerializer extends ArraySerializer
 {

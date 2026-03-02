@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Str;
 use Illuminate\Support\Stringable;
+use CherryneChou\Admin\Admin;
 use CherryneChou\Admin\Models\LoginLog as LoginLogModel;
 use CherryneChou\Admin\Events\UserLogined;
 
