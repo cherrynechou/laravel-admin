@@ -13,6 +13,7 @@ use Illuminate\Support\Carbon;
 use CherryneChou\Admin\Events\Login;
 use Mews\Captcha\Facades\Captcha;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 
 class AuthController extends BaseController
 {
