@@ -8,10 +8,12 @@ use CherryneChou\Admin\Services\AuthorizationService;
 use CherryneChou\Admin\Transformers\AdministratorTransformer;
 use CherryneChou\Admin\Transformers\MenuTransformer;
 use CherryneChou\Admin\Support\Helper;
+use CherryneChou\Admin\Admin;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Carbon;
 use CherryneChou\Admin\Events\Login;
 use Mews\Captcha\Facades\Captcha;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Event;
@@ -85,6 +87,20 @@ class AuthController extends BaseController
     }
 
 
+    /**
+     * User logout.
+     *
+     * @return void
+     */
+    public function getLogout(Request $request)
+    {
+        $this->guard()->logout();
+
+        // 撤销用于认证当前请求的令牌...
+        $request->user()->currentAccessToken()->delete();
+    }
+
+
 
     /**
      * 当前用户
@@ -145,6 +161,16 @@ class AuthController extends BaseController
     protected function username()
     {
         return 'username';
+    }
+
+    /**
+     * Get the guard to be used during authentication.
+     *
+     * @return \Illuminate\Contracts\Auth\StatefulGuard|GuardHelpers
+     */
+    protected function guard()
+    {
+        return Admin::guard();
     }
 
 }

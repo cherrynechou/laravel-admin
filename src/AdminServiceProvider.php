@@ -10,7 +10,7 @@ class AdminServiceProvider extends ServiceProvider
 {
     protected array $listen = [
         Cherrynechou\Admin\Events\Login::class =>[
-            Cherrynechou\Admin\Listener\Login::class
+            Cherrynechou\Admin\Listeners\Login::class
         ]
     ];
 

@@ -119,6 +119,7 @@ class Admin
             $authController = config('admin.auth.controller', AuthController::class);
             /* @var \Illuminate\Routing\Router $router */
             $router->post('/oauth/login', $authController . '@postLogin')->name('oauth.login');
+            $router->get('/oauth/logout', $authController . '@getLogout')->name('oauth.logout');
         });
 
 

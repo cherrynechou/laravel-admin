@@ -1,5 +1,5 @@
 <?php
-namespace App\Traits;
+namespace CherryneChou\Admin\Traits;
 
 /**
  * 过滤掉空或者null的数据
