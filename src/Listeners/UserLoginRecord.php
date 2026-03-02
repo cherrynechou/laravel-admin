@@ -11,7 +11,7 @@ use Illuminate\Support\Stringable;
 use CherryneChou\Admin\Models\LoginLog as LoginLogModel;
 use CherryneChou\Admin\Events\Login as LoginEvent;
 
-class Login
+class UserLoginRecord
 {
 	public function handle(LoginEvent $event): void
 	{

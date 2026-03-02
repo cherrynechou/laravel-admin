@@ -4,17 +4,13 @@ namespace CherryneChou\Admin;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Arr;
 use CherryneChou\Admin\Support\Context;
+use Cherrynechou\Admin\Events\UserLogined;
+use Cherrynechou\Admin\Listeners\UserLoginRecord;
 use CherryneChou\Admin\Support\Helper;
+use Illuminate\Support\Facades\Event;
 
 class AdminServiceProvider extends ServiceProvider
 {
-    protected array $listen = [
-        Cherrynechou\Admin\Events\Login::class =>[
-            Cherrynechou\Admin\Listeners\Login::class
-        ]
-    ];
-
-
     /**
      * @var array
      */
@@ -54,7 +50,7 @@ class AdminServiceProvider extends ServiceProvider
     ];
 
 
-    public function register()
+    public function register(): void
     {
         $this->aliasAdmin();
         $this->loadAdminAuthConfig();
@@ -63,10 +59,11 @@ class AdminServiceProvider extends ServiceProvider
         $this->commands($this->commands);
     }
 
-    public function boot()
+    public function boot(): void
     {
         $this->ensureHttps();
         $this->bootApplication();
+        $this->registerEvents();
         $this->registerPublishing();
     }
 
@@ -84,6 +81,17 @@ class AdminServiceProvider extends ServiceProvider
     protected function bootApplication()
     {
         Admin::app()->boot();
+    }
+
+    /**
+     * 事件注册 
+     */
+    protected function registerEvents()
+    {
+        Event::listen(
+            UserLogined::class,
+            UserLoginRecord::class,
+        );
     }
 
     /**
