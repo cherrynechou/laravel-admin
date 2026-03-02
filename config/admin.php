@@ -222,7 +222,7 @@ return [
     ],
     /*
     |
-    | Here are database settings for dcat-admin builtin model & tables.
+    | Here are database settings for laravel-admin builtin model & tables.
     |
     */
     'database'  =>  [
