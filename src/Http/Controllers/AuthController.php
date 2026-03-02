@@ -11,6 +11,7 @@ use CherryneChou\Admin\Transformers\MenuTransformer;
 use CherryneChou\Admin\Support\Helper;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Carbon;
+use CherryneChou\Admin\Events\Login;
 use Mews\Captcha\Facades\Captcha;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Routing\Controller;
@@ -37,7 +38,6 @@ class AuthController extends Controller
      */
     public function postLogin()
     {
-
         $credentials = request()->only([$this->username(), 'password']);
 
         /** @var \Illuminate\Validation\Validator $validator */
@@ -71,6 +71,9 @@ class AuthController extends Controller
             $admin->save();
 
             $access_token = $admin->createToken(request()->username)->plainTextToken;
+
+            // 登录成功事件
+            Event::dispatch(new Login());
 
             return $this->success([
                 'access_token' => $access_token,

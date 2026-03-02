@@ -8,6 +8,13 @@ use CherryneChou\Admin\Support\Helper;
 
 class AdminServiceProvider extends ServiceProvider
 {
+    protected array $listen = [
+        'Cherrynechou\Admin\Events\Login' =>[
+            'Cherrynechou\Admin\Listener\Login'
+        ]
+    ];
+
+
     /**
      * @var array
      */

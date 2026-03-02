@@ -2,22 +2,14 @@
 
 namespace CherryneChou\Admin\Http\Middleware;
 
-use CherryneChou\Admin\Admin;
+use CherryneChou\Admin\Facades\Admin;
 use Illuminate\Http\Request;
 
 class Bootstrap
 {
 	public function handle(Request $request, \Closure $next)
     {
-    	$this->fireEvents();
+        Admin::bootstrap();
     	return $next($request);
-    }
-
-
-    protected function fireEvents()
-    {
-        Admin::callBooting();
-
-        Admin::callBooted();
     }
 }

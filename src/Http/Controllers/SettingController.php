@@ -9,6 +9,6 @@ class SettingController extends Controller
 {
     use RestfulResponse;
 
-
+    
 
 }

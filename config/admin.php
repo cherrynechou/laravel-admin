@@ -1,5 +1,49 @@
 <?php
 return [
+    
+    /*
+    |--------------------------------------------------------------------------
+    | Laravel-admin name
+    |--------------------------------------------------------------------------
+    |
+    | This value is the name of laravel-admin, This setting is displayed on the
+    | login page.
+    |
+    */
+    'name' => 'Laravel-admin',
+
+    /*
+    |--------------------------------------------------------------------------
+    | Laravel-admin logo
+    |--------------------------------------------------------------------------
+    |
+    | The logo of all admin pages. You can also set it as an image by using a
+    | `img` tag, eg '<img src="http://logo-url" alt="Admin logo">'.
+    |
+    */
+    'logo' => '<b>Laravel</b> admin',
+
+    /*
+    |--------------------------------------------------------------------------
+    | Laravel-admin mini logo
+    |--------------------------------------------------------------------------
+    |
+    | The logo of all admin pages when the sidebar menu is collapsed. You can
+    | also set it as an image by using a `img` tag, eg
+    | '<img src="http://logo-url" alt="Admin logo">'.
+    |
+    */
+    'logo-mini' => '<b>La</b>',
+    /*
+    |--------------------------------------------------------------------------
+    | Laravel-admin bootstrap setting
+    |--------------------------------------------------------------------------
+    |
+    | This value is the path of laravel-admin bootstrap file.
+    |
+    */
+    'bootstrap' => app_path('Admin/bootstrap.php'),
+
     //版本一用于后台
     'route'     =>  [
         'prefix' => env('ADMIN_ROUTE_PREFIX', 'admin'),
@@ -20,6 +64,16 @@ return [
     |
     */
     'directory' => app_path('Admin'),
+
+    /*
+    |--------------------------------------------------------------------------
+    | Laravel-admin html title
+    |--------------------------------------------------------------------------
+    |
+    | Html title for all pages.
+    |
+    */
+    'title' => 'Admin',
 
     /*
     |--------------------------------------------------------------------------
@@ -209,6 +263,10 @@ return [
         //Operation log table and model
         'operation_log_table' => 'admin_operation_log',
         'operation_log_model' => CherryneChou\Admin\Models\OperationLog::class,
+
+        //Login log table and model
+        'login_log_table' => 'admin_login_log',
+        'login_log_model' => CherryneChou\Admin\Models\LoginLog::class,
 
         //Attachment Category table and model
         'attachment_category_table'=> 'admin_attachment_category',

@@ -8,6 +8,7 @@ class Admin
 {
     const VERSION = '2.3.0';
 
+
     /**
      * 应用管理.
      *
@@ -37,7 +38,7 @@ class Admin
         return Auth::guard(config('admin.auth.guard') ?: 'admin');
     }
 
-     /**
+    /**
      * @param  callable  $callback
      */
     public static function booting($callback)
@@ -68,6 +69,25 @@ class Admin
     {
         Event::dispatch('admin:booted');
     }
+
+
+    /**
+     * Bootstrap the admin application.
+     */
+    public function bootstrap()
+    {
+        require config('admin.bootstrap', admin_path('bootstrap.php'));
+
+        $this->fireEvents();
+    }
+
+    protected function fireEvents()
+    {
+        Admin::callBooting();
+
+        Admin::callBooted();
+    }
+
 
     /**
      * 上下文管理.

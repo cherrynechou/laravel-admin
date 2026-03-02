@@ -146,7 +146,11 @@ return new class extends Migration
 
         Schema::create($this->config('database.login_log_table'), function (Blueprint $table) {
             $table->id();
-
+            $table->string('account')->comment('登录账户');
+            $table->string('login_ip')->comment('登录的IP');
+            $table->string('browser')->comment('浏览器');
+            $table->string('platform')->comment('平台');
+            $table->timestamp('login_at')->nullable()->comment('登录时间');
             $table->integer('sort')->nullable()->default(0)->nullable();
             $table->timestamps();
         });

@@ -2,6 +2,8 @@
 
 namespace CherryneChou\Admin\Models;
 
+use Illuminate\Database\Eloquent\Model;
+
 class OperationLog extends Model
 {
 	use HasDateTimeFormatter;

@@ -1,6 +1,8 @@
 <?php
 namespace CherryneChou\Admin\Http\Controllers;
 
+use CherryneChou\Admin\Models\OperationLog;
+
 class LogController extends Controller
 {
 	use RestfulResponse;
@@ -8,19 +10,36 @@ class LogController extends Controller
 	/**
      * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\Resources\Json\JsonResource
      */
-    public function index()
+    public function operationLogs()
     {
-        $resources = Menu::query()->orderBy('sort')->get();
+        $opeartionLogPaginator = OperationLog::query()->orderBy('sort')->paginate();
 
-        $menuResources = fractal()
+        $resources = $opeartionLogPaginator->getCollection();
+
+        $opeartionLogs = fractal()
                         ->collection($resources)
-                        ->transformWith(new MenuTransformer())
+                        ->transformWith(new OperationLogTransformer())
                         ->serializeWith(new DataArraySerializer())
-                        ->parseIncludes(['roles'])
-                        ->toArray();
+                        ->toArray();                 
 
-        $menus = Helper::listToTree($menuResources);
+        return $this->success($opeartionLogs);
+    }
 
-        return $this->success($menus);
+    /**
+     * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\Resources\Json\JsonResource
+     */
+    public function loginLogs()
+    {
+       $opeartionLogPaginator = LoginLog::query()->orderBy('sort')->paginate();
+
+        $resources = $opeartionLogPaginator->getCollection();
+
+        $opeartionLogs = fractal()
+                        ->collection($resources)
+                        ->transformWith(new LoginLogTransformer())
+                        ->serializeWith(new DataArraySerializer())
+                        ->toArray();                 
+
+        return $this->success($opeartionLogs);
     }
 }

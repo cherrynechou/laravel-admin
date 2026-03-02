@@ -8,4 +8,29 @@ use CherryneChou\Admin\Traits\RestfulResponse;
 class DummyClass extends Controller
 {
     use RestfulResponse;
+
+    public function index(): \Illuminate\Http\JsonResponse|\Illuminate\Http\Resources\Json\JsonResource
+    {
+        return $this->success();
+    }
+
+    public function store(Request $request): \Illuminate\Http\JsonResponse|\Illuminate\Http\Resources\Json\JsonResource
+    {
+        return $this->success();
+    }
+
+    public function show(string $id): \Illuminate\Http\JsonResponse|\Illuminate\Http\Resources\Json\JsonResource
+    {
+        return $this->success();
+    }
+
+    public function update(string $id): \Illuminate\Http\JsonResponse|\Illuminate\Http\Resources\Json\JsonResource
+    {
+        return $this->success();
+    }
+
+    public function destroy(string $id): \Illuminate\Http\JsonResponse|\Illuminate\Http\Resources\Json\JsonResource
+    {
+        return $this->success();
+    }
 }

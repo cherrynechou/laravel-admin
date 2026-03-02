@@ -1,0 +1,11 @@
+<?php
+/**
+ * laravel-admin - admin builder based on Laravel.
+ * @author cherrynechou <https://github.com/cherrynechou>
+ *
+ * Bootstraper for Admin.
+ *
+ * Here you can remove builtin form field:
+ *
+ *
+ */

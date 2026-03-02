@@ -20,7 +20,6 @@ class LogOperation
     public function handle(Request $request, \Closure $next)
     {
         if ($this->shouldLogOperation($request)) {
-
             $params = $request->input();
             // 如果参数过长则不记录
             if (! empty($params)) {
