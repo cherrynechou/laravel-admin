@@ -5,17 +5,12 @@ use CherryneChou\Admin\Models\Department;
 use CherryneChou\Admin\Filters\DepartmentFilter;
 use CherryneChou\Admin\Support\Helper;
 use CherryneChou\Admin\Transformers\DepartmentTransformer;
-use Illuminate\Routing\Controller;
-use CherryneChou\Admin\Traits\RestfulResponse;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use CherryneChou\Admin\Serializer\DataArraySerializer;
 
-
-class DepartmentController extends Controller
+class DepartmentController extends BaseController
 {
-	 use RestfulResponse;
-
     public function index(DepartmentFilter $filter): \Illuminate\Http\JsonResponse|\Illuminate\Http\Resources\Json\JsonResource
     {
         $resources = Department::filter($filter)->get();

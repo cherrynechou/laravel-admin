@@ -6,17 +6,13 @@ use CherryneChou\Admin\Filters\RoleFilter;
 use CherryneChou\Admin\Models\Role;
 use CherryneChou\Admin\Serializer\DataArraySerializer;
 use CherryneChou\Admin\Transformers\RoleTransformer;
-use CherryneChou\Admin\Traits\RestfulResponse;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use League\Fractal\Pagination\IlluminatePaginatorAdapter;
-use Illuminate\Routing\Controller;
 use Illuminate\Validation\Rule;
 
-class RoleController extends Controller
+class RoleController extends BaseController
 {
-    use RestfulResponse;
-
     /**
      * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\Resources\Json\JsonResource
      */

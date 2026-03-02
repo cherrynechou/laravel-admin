@@ -2,12 +2,13 @@
 namespace CherryneChou\Admin\Http\Controllers;
 
 use CherryneChou\Admin\Models\OperationLog;
+use CherryneChou\Admin\Models\LoginLog;
+use CherryneChou\Admin\Transformers\OperationLogTransformer;
+use CherryneChou\Admin\Transformers\LoginLogTransformer;
 
-class LogController extends Controller
+class LogController extends BaseController
 {
-	use RestfulResponse;
-
-	/**
+    /**
      * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\Resources\Json\JsonResource
      */
     public function operationLogs()

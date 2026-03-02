@@ -9,13 +9,10 @@ use CherryneChou\Admin\Models\Menu;
 use CherryneChou\Admin\Traits\RestfulResponse;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Routing\Controller;
 use Illuminate\Validation\Rule;
 
-class MenuController extends Controller
+class MenuController extends BaseController
 {
-    use RestfulResponse;
-
     /**
      * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\Resources\Json\JsonResource
      */

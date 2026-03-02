@@ -6,18 +6,15 @@ use CherryneChou\Admin\Filters\AdministratorFilter;
 use CherryneChou\Admin\Serializer\DataArraySerializer;
 use CherryneChou\Admin\Transformers\AdministratorTransformer;
 use CherryneChou\Admin\Models\Administrator;
-use CherryneChou\Admin\Traits\RestfulResponse;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
 use League\Fractal\Pagination\IlluminatePaginatorAdapter;
-use Illuminate\Routing\Controller;
 use Illuminate\Validation\Rule;
 
-class UserController extends Controller
+class UserController extends BaseController
 {
-    use RestfulResponse;
-
+ 
     /**
      * @param AdministratorFilter $filter
      * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\Resources\Json\JsonResource

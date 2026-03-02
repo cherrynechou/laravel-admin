@@ -5,7 +5,6 @@ namespace CherryneChou\Admin\Http\Controllers;
 use CherryneChou\Admin\Models\Administrator;
 use CherryneChou\Admin\Serializer\DataArraySerializer;
 use CherryneChou\Admin\Services\AuthorizationService;
-use CherryneChou\Admin\Traits\RestfulResponse;
 use CherryneChou\Admin\Transformers\AdministratorTransformer;
 use CherryneChou\Admin\Transformers\MenuTransformer;
 use CherryneChou\Admin\Support\Helper;
@@ -14,12 +13,9 @@ use Illuminate\Support\Carbon;
 use CherryneChou\Admin\Events\Login;
 use Mews\Captcha\Facades\Captcha;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Routing\Controller;
 
-class AuthController extends Controller
+class AuthController extends BaseController
 {
-    use RestfulResponse;
-
     /**
      * @var AuthorizationService
      */

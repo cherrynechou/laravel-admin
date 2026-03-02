@@ -6,17 +6,13 @@ use CherryneChou\Admin\Support\Helper;
 use CherryneChou\Admin\Serializer\DataArraySerializer;
 use CherryneChou\Admin\Transformers\PermissionTransformer;
 use CherryneChou\Admin\Models\Permission;
-use CherryneChou\Admin\Traits\RestfulResponse;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
-use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 
-class PermissionController extends Controller
+class PermissionController extends BaseController
 {
-    use RestfulResponse;
-
     /**
      * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\Resources\Json\JsonResource
      */

@@ -6,17 +6,14 @@ use CherryneChou\Admin\Filters\DictDataFilter;
 use CherryneChou\Admin\Transformers\DictDataTransformer;
 use CherryneChou\Admin\Serializer\DataArraySerializer;
 use Illuminate\Http\Request;
-use Illuminate\Routing\Controller;
-use CherryneChou\Admin\Traits\RestfulResponse;
 use CherryneChou\Admin\Contracts\ValidatorInterface;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use League\Fractal\Pagination\IlluminatePaginatorAdapter;
 
-class DictDataController extends Controller
+class DictDataController extends BaseController
 {
-    use RestfulResponse;
-
+  
     protected $rules = [
         ValidatorInterface::RULE_CREATE => [
             'label'      => 'required',

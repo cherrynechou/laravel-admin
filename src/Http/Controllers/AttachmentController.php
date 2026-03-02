@@ -2,10 +2,8 @@
 
 namespace CherryneChou\Admin\Http\Controllers;
 
-use CherryneChou\Admin\Traits\RestfulResponse;
-use Illuminate\Routing\Controller;
 
-class AttachmentController extends Controller
+class AttachmentController extends BaseController
 {
-	use RestfulResponse;
+
 }
