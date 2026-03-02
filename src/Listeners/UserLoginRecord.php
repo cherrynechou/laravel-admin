@@ -9,11 +9,11 @@ use Illuminate\Support\Carbon;
 use Illuminate\Support\Str;
 use Illuminate\Support\Stringable;
 use CherryneChou\Admin\Models\LoginLog as LoginLogModel;
-use CherryneChou\Admin\Events\Login as LoginEvent;
+use CherryneChou\Admin\Events\UserLogined;
 
 class UserLoginRecord
 {
-	public function handle(LoginEvent $event): void
+	public function handle(UserLogined $event): void
 	{
 		$request = $event->request;
 
