@@ -109,26 +109,21 @@ class Admin
     {
         $router = app('router');
 
-        $attributes = [
+        $router->group([
             'prefix'     => config('admin.route.prefix'),
             'middleware' => config('admin.route.middleware'),
-        ];
-
-        $router->group($attributes, function ($router) {
+        ], function ($router) {
             //登录
             $authController = config('admin.auth.controller', AuthController::class);
             /* @var \Illuminate\Routing\Router $router */
             $router->post('/oauth/login', $authController . '@postLogin')->name('oauth.login');
-            $router->get('/oauth/logout', $authController . '@getLogout')->name('oauth.logout');
         });
 
 
-        $auth_attributes = [
+        $router->group([
             'prefix'     => config('admin.route.prefix'),
             'middleware' => config('admin.route.auth_middleware'),
-        ];
-
-        $router->group($auth_attributes, function ($router) {
+        ], function ($router) {
             if (config('admin.auth.enable', true)) {
                 /* @var \Illuminate\Support\Facades\Route $router */
                 $router->namespace('\CherryneChou\Admin\Http\Controllers')->group(function ($router) {
@@ -161,11 +156,7 @@ class Admin
             }
 
             $router->namespace('\CherryneChou\Admin\Http\Controllers')->group(function ($router) {
-                //部门列表
-                $router->get('/department/all','DepartmentController@all')->name('departments.all');
-                //所有岗位
-                $router->get('/post/all','PostController@all')->name('post.all');
-
+                /* @var \Illuminate\Routing\Router $router */
                 $router->resource('auth/departments', 'DepartmentController', ['except' => ['create','edit']])->names('auth.departments');
                 $router->resource('auth/posts', 'PostController', ['except' => ['create','edit']])->names('auth.posts');
                 $router->resource('auth/attchment/category', 'AttachmentCategoryController', ['except' => ['create','edit']])->names('auth.department.category');
@@ -179,11 +170,13 @@ class Admin
                 $router->resource('auth/dicts', 'DictController', ['except' => ['create','edit']])->names('auth.dict');    
                 $router->resource('auth/dict/datas', 'DictDataController', ['except' => ['create','edit']])->names('auth.dict.data');   
 
+                //部门列表
+                $router->get('/department/all','DepartmentController@all')->name('departments.all');
+                //所有岗位
+                $router->get('/post/all','PostController@all')->name('post.all');
 
                 //更新配置
                 $router->post('/config/update/{name}','ConfigController@update');
-
-
              });
 
             //登录
@@ -194,6 +187,8 @@ class Admin
             $router->get('/currentUser', $authController . '@currentUser')->name('current.user');
             //菜单
             $router->get('/getMenuList', $authController . '@getMenuList')->name('menu.list');
+            //退出    
+            $router->get('/oauth/logout', $authController . '@getLogout')->name('oauth.logout');
 
             $router->namespace('\CherryneChou\Admin\Http\Controllers')->group(function ($router) {
                 //图片上传
