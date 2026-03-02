@@ -11,7 +11,7 @@ use CherryneChou\Admin\Support\Helper;
 use CherryneChou\Admin\Admin;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Carbon;
-use CherryneChou\Admin\Events\Login;
+use CherryneChou\Admin\Events\UserLogined;
 use Mews\Captcha\Facades\Captcha;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -72,7 +72,7 @@ class AuthController extends BaseController
             $access_token = $admin->createToken(request()->username)->plainTextToken;
 
             // 登录成功事件
-            Event::dispatch(new Login());
+            Event::dispatch(new UserLogined());
 
             return $this->success([
                 'access_token' => $access_token,
