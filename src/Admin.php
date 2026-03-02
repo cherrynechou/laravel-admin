@@ -159,30 +159,30 @@ class Admin
                 });
             }
 
-            //部门列表
-            $router->get('/department/all','DepartmentController@all')->name('departments.all');
-            //所有岗位
-            $router->get('/post/all','PostController@all')->name('post.all');
+            $router->namespace('\CherryneChou\Admin\Http\Controllers')->group(function ($router) {
+                //部门列表
+                $router->get('/department/all','DepartmentController@all')->name('departments.all');
+                //所有岗位
+                $router->get('/post/all','PostController@all')->name('post.all');
+
+                $router->resource('auth/departments', 'DepartmentController', ['except' => ['create','edit']])->names('auth.departments');
+                $router->resource('auth/posts', 'PostController', ['except' => ['create','edit']])->names('auth.posts');
+                $router->resource('auth/attchment/category', 'AttachmentCategoryController', ['except' => ['create','edit']])->names('auth.department.category');
+                $router->resource('auth/attchments', 'AttachmentController', ['except' => ['create','edit']])->names('auth.attchments');
+
+                //操作日志
+                $router->get('auth/log/operations','LogController@operations')->name('log.operations');
+                $router->get('auth/log/logins','LogController@logins')->name('log.logins');
+
+                //数据字典
+                $router->resource('auth/dicts', 'DictController', ['except' => ['create','edit']])->names('auth.dict');    
+                $router->resource('auth/dict/datas', 'DictDataController', ['except' => ['create','edit']])->names('auth.dict.data');   
+             });
 
             //登录
             $authController = config('admin.auth.controller', AuthController::class);
-
-            $router->resource('auth/departments', 'DepartmentController', ['except' => ['create','edit']])->names('auth.departments');
-            $router->resource('auth/posts', 'PostController', ['except' => ['create','edit']])->names('auth.posts');
-            $router->resource('auth/attchment/category', 'AttachmentCategoryController', ['except' => ['create','edit']])->names('auth.department.category');
-            $router->resource('auth/attchments', 'AttachmentController', ['except' => ['create','edit']])->names('auth.attchments');
-
-            //操作日志
-            $router->get('auth/operations','');
-
-            //数据字典
-            $router->resource('auth/dicts', 'DictController', ['except' => ['create','edit']])->names('auth.dict');    
-            $router->resource('auth/dict/datas', 'DictDataController', ['except' => ['create','edit']])->names('auth.dict.data');   
-
             //获取验证码
-            $router->get('auth/getCaptcha',$authController . '@getCaptcha')->name('auth.getCaptcha');
-
-
+            $router->get('/getCaptcha',$authController . '@getCaptcha')->name('getCaptcha');
             //当前用户
             $router->get('/currentUser', $authController . '@currentUser')->name('current.user');
             //菜单
