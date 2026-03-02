@@ -4,6 +4,7 @@ namespace CherryneChou\Admin\Http\Middleware;
 
 use CherryneChou\Admin\Facades\Admin;
 use CherryneChou\Admin\Support\Helper;
+use CherryneChou\Admin\Models\OperationLogModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
@@ -20,7 +21,7 @@ class LogOperation
     public function handle(Request $request, \Closure $next)
     {
         if ($this->shouldLogOperation($request)) {
-            $params = $request->input();
+            $params = $this->formatInput($request->input());
             // 如果参数过长则不记录
             if (! empty($params)) {
                 if (strlen(\json_encode($params, JSON_UNESCAPED_UNICODE)) > 5000) {
@@ -56,7 +57,7 @@ class LogOperation
     protected function formatInput(array $input)
     {
 
-        $secretFields = config('admin.operation_log.securt_fields');
+        $secretFields = config('admin.operation_log.secret_fields');
 
         foreach ($secretFields as $field) {
             if ($field && ! empty($input[$field])) {

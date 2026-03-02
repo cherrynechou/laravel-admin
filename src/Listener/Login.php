@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Str;
 use Illuminate\Support\Stringable;
+use CherryneChou\Admin\Models\LoginLog as LoginLogModel;
 use CherryneChou\Admin\Events\Login as LoginEvent;
 
 class Login
@@ -23,8 +24,13 @@ class Login
             'platform' => $this->getPlatformFrom(Str::of($request->userAgent())),
             'login_at' => Carbon::now()
         ];
-	}
 
+        try {
+            LoginLogModel::create($log);
+        } catch (\Exception $exception) {
+            // pass
+        }
+	}
 
 
     /**

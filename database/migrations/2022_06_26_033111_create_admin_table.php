@@ -205,29 +205,49 @@ return new class extends Migration
             $table->string('code')->default('');
             $table->smallInteger('type')->nullable()->default(0);
             $table->tinyInteger('status')->nullable()->default(0);
-            $table->tinyInteger("sort")->nullable()->default(0);
+            $table->integer("sort")->nullable()->default(0);
             $table->string('remark')->nullable()->default('');
             $table->timestamps();
         });
 
         Schema::create($this->config('database.dict_data_table'), function (Blueprint $table) {
             $table->id();
-            $table->bigInteger("dict_id");
-            $table->string("code")->default("");
-            $table->string("label")->default("");
+            $table->bigInteger("dict_id")->nullable()->default(0);
+            $table->string("code",100)->default("");
+            $table->string("label",100)->default("");
             $table->string("value")->default("");
             $table->tinyInteger("is_default")->nullable()->default(0);
             $table->tinyInteger("status")->nullable()->default(0);
-            $table->tinyInteger("sort")->nullable()->default(0);
+            $table->integer("sort")->nullable()->default(0);
             $table->string("remark")->nullable()->default('');
+            $table->timestamps();
+        });
+
+        Schema::create($this->config('database.config_group_table'), function (Blueprint $table) {
+            $table->id();
+            $table->string('name',100)->unique()->comment('配置的key');
+            $table->string('code',100)->nullable()->comment('配置设置的值');
+            $table->integer("sort")->nullable()->default(0);
+            $table->string('remark')->nullable()->default('');
             $table->timestamps();
         });
 
         Schema::create($this->config('database.config_table'), function (Blueprint $table) {
             $table->id();
+            $table->bigInteger("group_id")->nullable()->default(0);
+            $table->string("group_code",100)->default("");
             $table->string('key')->unique()->comment('配置的key');
+            $table->string('label')->comment('前端显示label');
             $table->text('value')->nullable()->comment('配置设置的值');
+            $table->tinyInteger('type')->nullable()->default(0)->comment('1 input 2 switch 3 select 4 radio ');
+            $table->string('placeholder')->nullable()->default('')->comment('输入提示');
+            $table->boolean('is_required')->nullable()->default(0);
+            $table->boolean('is_visible')->nullable()->default(0);
+            $table->json('options');
+            $table->json('rules');
+            $table->integer("sort")->nullable()->default(0);
             $table->string('remark')->nullable()->default('');
+            $table->index('group_id');
             $table->timestamps();
         });
 

@@ -3,6 +3,7 @@
 namespace CherryneChou\Admin\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use CherryneChou\Admin\traits\HasDateTimeFormatter;
 
 class OperationLog extends Model
 {

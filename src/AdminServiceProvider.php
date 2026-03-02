@@ -9,8 +9,8 @@ use CherryneChou\Admin\Support\Helper;
 class AdminServiceProvider extends ServiceProvider
 {
     protected array $listen = [
-        'Cherrynechou\Admin\Events\Login' =>[
-            'Cherrynechou\Admin\Listener\Login'
+        Cherrynechou\Admin\Events\Login::class =>[
+            Cherrynechou\Admin\Listener\Login::class
         ]
     ];
 

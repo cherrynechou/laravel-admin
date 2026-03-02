@@ -8,7 +8,7 @@ use Illuminate\Support\Collection;
 use CherryneChou\Admin\Models\Departments;
 
 
-trait DataScope
+trait HasDataScope
 {
     protected $dataScopeRelations = [
         'all' => 1,                 // 全部数据

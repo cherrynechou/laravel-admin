@@ -3,15 +3,17 @@
 namespace CherryneChou\Admin\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use CherryneChou\Admin\traits\HasDateTimeFormatter;
 
-class LoginLog extends Model
+class ConfigGroup extends Model 
 {
-	use HasDateTimeFormatter;
-
-	protected $guarded = ['id'];
-
 	/**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $guarded = ['id'];
+
+    /**
      * Create a new Eloquent model instance.
      *
      * @param array $attributes
@@ -21,7 +23,7 @@ class LoginLog extends Model
         parent::__construct($attributes);
         $connection = config('admin.database.connection') ?: config('database.default');
         $this->setConnection($connection);
-        $this->setTable(config('admin.database.login_log_table'));
+        $this->setTable(config('admin.database.config_group_table'));
+     
     }
-
 }

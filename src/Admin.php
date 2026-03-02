@@ -177,6 +177,12 @@ class Admin
                 //数据字典
                 $router->resource('auth/dicts', 'DictController', ['except' => ['create','edit']])->names('auth.dict');    
                 $router->resource('auth/dict/datas', 'DictDataController', ['except' => ['create','edit']])->names('auth.dict.data');   
+
+
+                //更新配置
+                $router->post('/config/update/{name}','ConfigController@update');
+
+
              });
 
             //登录

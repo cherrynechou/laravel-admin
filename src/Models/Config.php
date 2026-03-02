@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Model;
  *
  * @package namespace App\Models;
  */
-class SystemConfig extends Model 
+class Config extends Model 
 {
 	/**
      * The attributes that are mass assignable.

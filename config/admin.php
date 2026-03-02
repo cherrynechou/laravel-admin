@@ -138,7 +138,7 @@ return [
          */
         'allowed_methods' => ['GET', 'HEAD', 'POST', 'PUT', 'DELETE', 'CONNECT', 'OPTIONS', 'TRACE', 'PATCH'],
 
-        'securt_fields' = ['password','password_confirmation'],
+        'securt_fields' => ['password','password_confirmation'],
 
         /*
          * Routes that will not log to database.
@@ -147,7 +147,7 @@ return [
          * or specific method to path like: get:admin/auth/logs.
          */
         'except' => [
-            env('ADMIN_ROUTE_PREFIX', 'admin').'/auth/logs*',
+            env('ADMIN_ROUTE_PREFIX', 'admin').'/auth/log*',
         ],
     ],
 
@@ -256,9 +256,13 @@ return [
         'posts_table' => 'admin_post',
         'posts_model' => CherryneChou\Admin\Models\Post::class,
 
+        //Config group table and model
+        'config_group_table'=> 'admin_config_group',
+        'config_group_model'=> CherryneChou\Admin\Models\ConfigGroup::class,
+
         //Config table and model
-        'config_table'=> 'admin_system_config',
-        'config_model'=> CherryneChou\Admin\Models\SystemConfig::class,
+        'config_table'=> 'admin_config',
+        'config_model'=> CherryneChou\Admin\Models\Config::class,
 
         //Operation log table and model
         'operation_log_table' => 'admin_operation_log',
