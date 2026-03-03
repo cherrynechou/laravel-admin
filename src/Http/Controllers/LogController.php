@@ -5,6 +5,7 @@ use CherryneChou\Admin\Models\OperationLog;
 use CherryneChou\Admin\Models\LoginLog;
 use CherryneChou\Admin\Transformers\OperationLogTransformer;
 use CherryneChou\Admin\Transformers\LoginLogTransformer;
+use League\Fractal\Pagination\IlluminatePaginatorAdapter;
 
 class LogController extends BaseController
 {
@@ -20,7 +21,7 @@ class LogController extends BaseController
         $opeartionLogs = fractal()
                         ->collection($resources)
                         ->transformWith(new OperationLogTransformer())
-                        ->serializeWith(new DataArraySerializer())
+                        ->paginateWith(new IlluminatePaginatorAdapter($opeartionLogPaginator))
                         ->toArray();                 
 
         return $this->success($opeartionLogs);
@@ -38,7 +39,7 @@ class LogController extends BaseController
         $loginLogs = fractal()
                         ->collection($resources)
                         ->transformWith(new LoginLogTransformer())
-                        ->serializeWith(new DataArraySerializer())
+                        ->paginateWith(new IlluminatePaginatorAdapter($loginLogPaginator))
                         ->toArray();                 
 
         return $this->success($loginLogs);
