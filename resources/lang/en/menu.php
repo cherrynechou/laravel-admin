@@ -10,5 +10,8 @@ return [
   'admin.menu'			      => 'Menu',
   'admin.dict'            => 'Dictionary',
   'admin.department'      => 'Department',
-  'admin.post'            => 'Post'
+  'admin.post'            => 'Post',
+  'admin.log'             => 'Log',
+  'admin.log.login'       => 'Login',
+  'admin.log.operation'   => 'operation',
 ];

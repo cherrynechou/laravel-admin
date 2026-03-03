@@ -2,6 +2,7 @@
 
 namespace CherryneChou\Admin\Events;
 
+use CherryneChou\Admin\Models\Administrator;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Broadcasting\PresenceChannel;
@@ -17,12 +18,15 @@ class UserLogined
 
 	public Request $request;
 
+    public Administrator $administrator;
+
 	/**
      * Create a new event instance.
      */
-    public function __construct()
+    public function __construct(Administrator $administrator)
     {
         $this->request = request();
+        $this->administrator = $administrator;
     }
 
 }

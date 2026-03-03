@@ -7,6 +7,7 @@ return [
     'update_failed'                 => 'Upload Failed !',
     'upload_succeeded'              => 'Upload Successful !',
     'upload_failed'                 => 'Upload Failed !',
+    'logout_success'                => 'Logout Successful !',
     'save_succeeded'                => 'Save Successful !',
     'save_failed'                   => 'Save Failed !',
     'user_not_exists'               => 'User is Not exists',

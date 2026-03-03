@@ -163,8 +163,8 @@ class Admin
                 $router->resource('auth/attchments', 'AttachmentController', ['except' => ['create','edit']])->names('auth.attchments');
 
                 //操作日志
-                $router->get('auth/log/operations','LogController@operations')->name('log.operations');
-                $router->get('auth/log/logins','LogController@logins')->name('log.logins');
+                $router->get('auth/log/operations','LogController@operationLogs')->name('log.operations');
+                $router->get('auth/log/logins','LogController@loginLogs')->name('log.logins');
 
                 //数据字典
                 $router->resource('auth/dicts', 'DictController', ['except' => ['create','edit']])->names('auth.dict');    

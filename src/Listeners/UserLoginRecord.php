@@ -18,8 +18,10 @@ class UserLoginRecord
 	{
 		$request = $event->request;
 
+        $admin = $event->administrator;
+
 		$log = [
-            'account' => Admin::user()->name,
+            'account' => $admin->username,
             'login_ip' => $request->ip(),
             'browser' => $this->getBrowserFrom(Str::of($request->userAgent())),
             'platform' => $this->getPlatformFrom(Str::of($request->userAgent())),

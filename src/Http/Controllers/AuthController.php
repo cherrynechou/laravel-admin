@@ -72,10 +72,11 @@ class AuthController extends BaseController
             $access_token = $admin->createToken(request()->username)->plainTextToken;
 
             // 登录成功事件
-            Event::dispatch(new UserLogined());
+            Event::dispatch(new UserLogined($admin));
 
             return $this->success([
                 'access_token' => $access_token,
+                'token_type' => 'Bearer'
             ]);
 
         }catch (ModelNotFoundException $exception){
@@ -96,6 +97,8 @@ class AuthController extends BaseController
 
         // 撤销用于认证当前请求的令牌...
         request()->user()->currentAccessToken()->delete();
+
+        return $this->success();
     }
 
 

@@ -7,6 +7,7 @@ return [
     'update_failed'                 => '更新失败 !',
     'upload_succeeded'              => '上传成功 !',
     'upload_failed'                 => '上传失败 !',
+    'logout_success'                => '退出成功',
     'save_succeeded'                => '保存成功 !',
     'save_failed'                   => '保存失败 !',
     'user_not_exists'               => '用户不存在',

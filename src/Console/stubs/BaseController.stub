@@ -3,9 +3,9 @@
 namespace DummyNamespace;
 
 use App\Http\Controllers\Controller;
-use CherryneChou\Admin\Traits\RestfulResponse;
+use CherryneChou\Admin\Traits\HasRestfulResponse;
 
 class BaseController extends Controller
 {
-    use RestfulResponse;
+    use HasRestfulResponse;
 }

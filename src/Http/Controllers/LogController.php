@@ -31,16 +31,16 @@ class LogController extends BaseController
      */
     public function loginLogs()
     {
-       $opeartionLogPaginator = LoginLog::query()->orderBy('sort')->paginate();
+        $loginLogPaginator = LoginLog::query()->orderBy('sort')->paginate();
 
-        $resources = $opeartionLogPaginator->getCollection();
+        $resources = $loginLogPaginator->getCollection();
 
-        $opeartionLogs = fractal()
+        $loginLogs = fractal()
                         ->collection($resources)
                         ->transformWith(new LoginLogTransformer())
                         ->serializeWith(new DataArraySerializer())
                         ->toArray();                 
 
-        return $this->success($opeartionLogs);
+        return $this->success($loginLogs);
     }
 }
