@@ -112,7 +112,7 @@ Trait HasRestfulResponse
      * @param int $option
      * @return \Illuminate\Http\JsonResponse|JsonResource
      */
-    public function success($data = [], string $message = '',int $status = Response::HTTP_OK, array $headers = [], $option = 0)
+    public function success($data = [], string $message = '',int $status = Response::HTTP_OK, array $headers = [], $options = 0)
     {
         $additionalData = $this->formatData($data, $message, $status);
 
@@ -122,7 +122,7 @@ Trait HasRestfulResponse
 
         return response()->json(array_merge($additionalData, [
             'status'    =>  $status,
-            'data'      => $data ?: (object) $data,
+            'data'      => $data,
             'success'   => true
         ]), $status, $headers, $option);
     }
@@ -133,9 +133,9 @@ Trait HasRestfulResponse
      * @param array $header
      * @param int $options
      */
-    public function failed(string $message = '', int $status = Response::HTTP_BAD_REQUEST, array $header = [], int $options = 0)
+    public function failed(string $message = '', int $status = Response::HTTP_BAD_REQUEST, array $headers = [], int $options = 0)
     {
-        $additionalData = $this->formatData($data,$message,$status);
+        $additionalData = $this->formatData(null,$message,$status);
        
         return response()->json(array_merge($additionalData,[
             'status'        =>  $status,
@@ -158,7 +158,6 @@ Trait HasRestfulResponse
         $message = !$message ? ( isset(Response::$statusTexts[$status]) ? Response::$statusTexts[$status] : 'Service error') : $message;
 
         return [
-
             'statusText'    =>  $status === 200 ? 'success':  $statusText,
             'message'       =>  $message
         ];
