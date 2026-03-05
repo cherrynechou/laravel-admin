@@ -1,7 +1,7 @@
 <?php
 namespace CherryneChou\Admin\Transformers;
 
-use CherryneChou\Admin\Models\Menu;
+use CherryneChou\Admin\Models\ConfigGroup;
 use Illuminate\Support\Carbon;
 use League\Fractal\TransformerAbstract;
 use Illuminate\Contracts\Support\Arrayable;
@@ -24,6 +24,7 @@ class ConfigGroupTransformer extends TransformerAbstract
      */
     protected array $availableIncludes = [
         //
+        'configs'
     ];
 
     /**
@@ -31,17 +32,26 @@ class ConfigGroupTransformer extends TransformerAbstract
      *
      * @return array
      */
-    public function transform(Menu $model)
+    public function transform(ConfigGroup $model)
     {
         return [
             //
             'id'            =>          $model->id,
             'name'          =>          $model->name,
-            'code'          =>          $model->code,
+            'key'           =>          $model->key,
             'sort'          =>          $model->sort,
             'created_at'    =>          Carbon::parse($model->created_at)->toDateTimeString(),
             'updated_at'    =>          Carbon::parse($model->updated_at)->toDateTimeString(),
         ];
+    }
+
+    /**
+     * @param ConfigGroup $model
+     * @return \League\Fractal\Resource\Collection
+     */
+    public function includeConfigs(ConfigGroup $model)
+    {
+        return $this->collection($model->configs, new ConfigTransformer(), '');
     }
 
 }

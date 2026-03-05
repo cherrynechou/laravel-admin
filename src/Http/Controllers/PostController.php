@@ -59,7 +59,7 @@ class PostController extends BaseController
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(string $id): \Illuminate\Http\JsonResponse|\Illuminate\Http\Resources\Json\JsonResource
     {
         //
         $resource =  Post::query()->find($id);
@@ -102,7 +102,7 @@ class PostController extends BaseController
     /**
      * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\Resources\Json\JsonResource
      */
-    public function all()
+    public function all(): \Illuminate\Http\JsonResponse|\Illuminate\Http\Resources\Json\JsonResource
     {
         $resources = Post::query()->get();
 

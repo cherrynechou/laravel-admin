@@ -94,7 +94,6 @@ class AuthController extends BaseController
      */
     public function getLogout()
     {
-
         // 撤销用于认证当前请求的令牌...
         request()->user()->currentAccessToken()->delete();
 

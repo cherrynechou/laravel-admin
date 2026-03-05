@@ -24,6 +24,10 @@ class ConfigGroup extends Model
         $connection = config('admin.database.connection') ?: config('database.default');
         $this->setConnection($connection);
         $this->setTable(config('admin.database.config_group_table'));
-     
+    }
+
+    public function configs()
+    {
+        return $this->hasMany(Config::class, 'group_id');
     }
 }

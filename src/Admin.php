@@ -175,8 +175,14 @@ class Admin
                 //所有岗位
                 $router->get('/post/all','PostController@all')->name('post.all');
 
+                //配置    
+                $router->resource('auth/config/groups', 'ConfigGroupController', ['except' => ['create','edit']])->names('auth.config.group');    
+                $router->resource('auth/config/datas', 'ConfigController', ['except' => ['create','edit']])->names('auth.config.data');   
+
+                //获取配置
+                $router->get('/setting/all','SettingController@all')->name('config.all');
                 //更新配置
-                $router->post('/config/update/{name}','ConfigController@update');
+                $router->post('/setting/update/{name}','SettingController@update');
              });
 
             //登录

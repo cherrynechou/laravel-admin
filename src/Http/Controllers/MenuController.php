@@ -16,7 +16,7 @@ class MenuController extends BaseController
     /**
      * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\Resources\Json\JsonResource
      */
-    public function index()
+    public function index(): \Illuminate\Http\JsonResponse|\Illuminate\Http\Resources\Json\JsonResource
     {
         $resources = Menu::query()->orderBy('sort')->get();
 
@@ -35,7 +35,7 @@ class MenuController extends BaseController
     /**
      * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\Resources\Json\JsonResource
      */
-    public function store()
+    public function store(): \Illuminate\Http\JsonResponse|\Illuminate\Http\Resources\Json\JsonResource
     {
         $validator = $this->validateForm();
 
@@ -74,7 +74,7 @@ class MenuController extends BaseController
      * @param $id
      * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\Resources\Json\JsonResource
      */
-    public function show($id)
+    public function show($id): \Illuminate\Http\JsonResponse|\Illuminate\Http\Resources\Json\JsonResource
     {
         $resource = Menu::query()->find($id);
 
@@ -92,7 +92,7 @@ class MenuController extends BaseController
      * @param $id
      * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\Resources\Json\JsonResource
      */
-    public function update($id)
+    public function update($id): \Illuminate\Http\JsonResponse|\Illuminate\Http\Resources\Json\JsonResource
     {
         $requestData = request()->all();
 
@@ -166,7 +166,7 @@ class MenuController extends BaseController
      * 更改菜单状态
      * @param $id
      */
-    public function switch($id)
+    public function switch($id): \Illuminate\Http\JsonResponse|\Illuminate\Http\Resources\Json\JsonResource
     {
         try {
             DB::beginTransaction();
@@ -192,7 +192,7 @@ class MenuController extends BaseController
      * @param $id
      * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\Resources\Json\JsonResource
      */
-    public function destroy($id)
+    public function destroy($id): \Illuminate\Http\JsonResponse|\Illuminate\Http\Resources\Json\JsonResource
     {
 
         try {

@@ -16,7 +16,7 @@ class PermissionController extends BaseController
     /**
      * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\Resources\Json\JsonResource
      */
-    public function index()
+    public function index(): \Illuminate\Http\JsonResponse|\Illuminate\Http\Resources\Json\JsonResource
     {
         $resources = Permission::query()->orderBy('sort')->get();
 
@@ -34,7 +34,7 @@ class PermissionController extends BaseController
     /**
      * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\Resources\Json\JsonResource
      */
-    public function store()
+    public function store(): \Illuminate\Http\JsonResponse|\Illuminate\Http\Resources\Json\JsonResource
     {
         $validator = $this->validateForm();
 
@@ -77,7 +77,7 @@ class PermissionController extends BaseController
      * 获取http_path路径
      * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\Resources\Json\JsonResource
      */
-    public function routes()
+    public function routes(): \Illuminate\Http\JsonResponse|\Illuminate\Http\Resources\Json\JsonResource
     {
         $prefix = (string) config('admin.route.prefix');
 
@@ -192,7 +192,7 @@ class PermissionController extends BaseController
      * @param $id
      * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\Resources\Json\JsonResource
      */
-    public function destroy($id)
+    public function destroy($id): \Illuminate\Http\JsonResponse|\Illuminate\Http\Resources\Json\JsonResource
     {
         try {
 

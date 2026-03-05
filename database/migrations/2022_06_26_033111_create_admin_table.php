@@ -226,7 +226,7 @@ return new class extends Migration
         Schema::create($this->config('database.config_group_table'), function (Blueprint $table) {
             $table->id();
             $table->string('name',100)->unique()->comment('配置的key');
-            $table->string('code',100)->nullable()->comment('配置设置的值');
+            $table->string('key',100)->nullable()->comment('配置设置的值');
             $table->integer("sort")->nullable()->default(0);
             $table->string('remark')->nullable()->default('');
             $table->timestamps();
@@ -235,7 +235,7 @@ return new class extends Migration
         Schema::create($this->config('database.config_table'), function (Blueprint $table) {
             $table->id();
             $table->bigInteger("group_id")->nullable()->default(0);
-            $table->string("group_code",100)->default("");
+            $table->string("group_key",100)->default("");
             $table->string('key')->unique()->comment('配置的key');
             $table->string('label')->comment('前端显示label');
             $table->text('value')->nullable()->comment('配置设置的值');
@@ -243,9 +243,9 @@ return new class extends Migration
             $table->string('placeholder')->nullable()->default('')->comment('输入提示');
             $table->boolean('is_required')->nullable()->default(0);
             $table->boolean('is_visible')->nullable()->default(0);
-            $table->json('options');
-            $table->json('rules');
-            $table->integer("sort")->nullable()->default(0);
+            $table->json('options')->nullable();
+            $table->json('rules')->nullable();
+            $table->integer('sort')->nullable()->default(0);
             $table->string('remark')->nullable()->default('');
             $table->index('group_id');
             $table->timestamps();
@@ -256,7 +256,7 @@ return new class extends Migration
             $table->string('name')->unique()->comment('分类名称');
             $table->integer('parent_id')->default(0)->comment('父级ID');
             $table->string('remark')->nullable()->default('');
-
+            $table->integer('sort')->nullable()->default(0);
             $table->bigInteger("created_id")->nullable()->default(0)->comment('创建id');
             $table->bigInteger("updated_id")->nullable()->default(0)->comment('更新id');
             $table->timestamps();
@@ -271,7 +271,7 @@ return new class extends Migration
             $table->string('filesize')->nullable()->comment('文件大小');
             $table->string('mimetype')->nullable()->comment('文件mimetype');
             $table->string('driver')->nullable()->comment('上传方式');
-
+            $table->integer('sort')->nullable()->default(0);
             $table->bigInteger("created_id")->nullable()->default(0)->comment('创建id');
             $table->bigInteger("updated_id")->nullable()->default(0)->comment('更新id');
             $table->timestamps();

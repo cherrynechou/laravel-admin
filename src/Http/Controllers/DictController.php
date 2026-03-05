@@ -27,13 +27,13 @@ class DictController extends BaseController
 
         $resources = $dictPaginator->getCollection();
 
-        $lines = fractal()
+        $dicts = fractal()
             ->collection($resources)
             ->transformWith(new DictTransformer())
             ->paginateWith(new IlluminatePaginatorAdapter($dictPaginator))
             ->toArray();
 
-        return $this->success($lines);
+        return $this->success($dicts);
     }
 
     /**
@@ -65,7 +65,7 @@ class DictController extends BaseController
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(string $id)\Illuminate\Http\JsonResponse|\Illuminate\Http\Resources\Json\JsonResource
     {
         //
         $resource =  Dict::query()->find($id);

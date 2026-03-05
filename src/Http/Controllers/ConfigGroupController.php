@@ -2,40 +2,39 @@
 
 namespace CherryneChou\Admin\Http\Controllers;
 
-use CherryneChou\Admin\Models\Config;
-use CherryneChou\Admin\Transformers\ConfigTransformer;
+use CherryneChou\Admin\Models\ConfigGroup;
+use CherryneChou\Admin\Transformers\ConfigGroupTransformer;
 use CherryneChou\Admin\Contracts\ValidatorInterface;
 use League\Fractal\Pagination\IlluminatePaginatorAdapter;
+use Illuminate\Support\Facades\DB;atePaginatorAdapter;
 use Illuminate\Support\Facades\DB;
 
-class ConfigController extends BaseController
+class ConfigGroupController extends BaseController
 {
-	protected $rules = [
+	 protected $rules = [
         ValidatorInterface::RULE_CREATE => [
+            'name'      => 'required',
             'key'       => 'required',
-            'label'     => 'required',
-            'type'      => 'required',
         ],
         ValidatorInterface::RULE_UPDATE => [
+            'name'      => 'required',
             'key'       => 'required',
-            'label'     => 'required',
-            'type'      => 'required',
         ]
     ];
 
 	public function index(): \Illuminate\Http\JsonResponse|\Illuminate\Http\Resources\Json\JsonResource
     {
-        $configPaginator = Config::query()->orderBy('sort')->paginate();
+        $groupPaginator = ConfigGroup::query()->orderBy('sort')->paginate();
 
-        $resources = $configPaginator->getCollection();
+        $resources = $groupPaginator->getCollection();
 
-        $configDatas = fractal()
+        $groupDatas = fractal()
             ->collection($resources)
-            ->transformWith(new ConfigTransformer())
-            ->paginateWith(new IlluminatePaginatorAdapter($configPaginator))
+            ->transformWith(new ConfigGroupTransformer())
+            ->paginateWith(new IlluminatePaginatorAdapter($groupPaginator))
             ->toArray();
 
-        return $this->success($configDatas);
+        return $this->success($groupDatas);
     }
 
 
@@ -49,7 +48,7 @@ class ConfigController extends BaseController
         $requestData = request()->all();
         try {
             DB::beginTransaction();
-            Config::create($requestData);
+            ConfigGroup::create($requestData);
             DB::commit();
             return $this->success([], trans('admin.save_succeeded'));
         }catch (\Exception $exception){
@@ -62,11 +61,11 @@ class ConfigController extends BaseController
     public function show(string $id): \Illuminate\Http\JsonResponse|\Illuminate\Http\Resources\Json\JsonResource
     {
         //获取资源
-        $resource =  Config::query()->find($id);
+        $resource =  ConfigGroup::query()->find($id);
 
         $config = fractal()
             ->item($resource)
-            ->transformWith(new ConfigTransformer())
+            ->transformWith(new ConfigGroupTransformer())
             ->serializeWith(new DataArraySerializer())
             ->toArray();
 
@@ -94,24 +93,7 @@ class ConfigController extends BaseController
             DB::commit();
             return $this->failed($exception->getMessage());
         }
-    }
 
-    /**
-     * @return \Illuminate\Validation\Validator
-     */
-    protected function validateForm($rule)
-    {
-        $message = [
-            'required'   => trans('validation.attribute_not_empty')
-        ];
-
-        $attributes = [
-            'key'       => trans('admin.config.label'),
-            'label'     => trans('admin.config.value'),
-            'type'      => trans('admin.config.type'),
-        ];
-
-        return Validator::make(request()->all(), $this->rules[$rule], $message, $attributes);
     }
 
     public function destroy(string $id): \Illuminate\Http\JsonResponse|\Illuminate\Http\Resources\Json\JsonResource
@@ -119,13 +101,14 @@ class ConfigController extends BaseController
         //
         try {
             DB::beginTransaction();
-            Config::destroy($id);
+            ConfigGroup::destroy($id);
             DB::commit();
             return $this->success();
         }catch (\Exception $exception){
             DB::rollBack();
             return $this->failed($exception->getTraceAsString());
         }
-    	
+
     }
+
 }

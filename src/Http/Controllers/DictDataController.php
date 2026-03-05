@@ -25,7 +25,7 @@ class DictDataController extends BaseController
         ]
     ];
 
-    public function index(DictDataFilter $filter)
+    public function index(DictDataFilter $filter): \Illuminate\Http\JsonResponse|\Illuminate\Http\Resources\Json\JsonResource
     {
         $dictDataPaginator = DictData::filter($filter)->paginate();
 
@@ -44,7 +44,7 @@ class DictDataController extends BaseController
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request): \Illuminate\Http\JsonResponse|\Illuminate\Http\Resources\Json\JsonResource
     {
         $validator = $this->validateForm(ValidatorInterface::RULE_CREATE);
 
@@ -64,17 +64,11 @@ class DictDataController extends BaseController
 
         try {
             DB::beginTransaction();
-
             DictData::create($requestData);
-
             DB::commit();
-
             return $this->success([], trans('admin.save_succeeded'));
-
         }catch (\Exception $exception){
-
             DB::commit();
-
             return $this->failed($exception->getMessage());
         }
     }
@@ -82,7 +76,7 @@ class DictDataController extends BaseController
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(string $id): \Illuminate\Http\JsonResponse|\Illuminate\Http\Resources\Json\JsonResource
     {
         //获取资源
         $resource =  DictData::query()->find($id);
@@ -100,7 +94,7 @@ class DictDataController extends BaseController
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, string $id): \Illuminate\Http\JsonResponse|\Illuminate\Http\Resources\Json\JsonResource
     {
         $validator = $this->validateForm(ValidatorInterface::RULE_UPDATE);
 
@@ -153,7 +147,7 @@ class DictDataController extends BaseController
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(string $id): \Illuminate\Http\JsonResponse|\Illuminate\Http\Resources\Json\JsonResource
     {
         //
         try {

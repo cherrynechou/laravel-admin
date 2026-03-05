@@ -12,7 +12,7 @@ class LogController extends BaseController
     /**
      * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\Resources\Json\JsonResource
      */
-    public function operationLogs()
+    public function operationLogs(): \Illuminate\Http\JsonResponse|\Illuminate\Http\Resources\Json\JsonResource
     {
         $opeartionLogPaginator = OperationLog::query()->orderBy('sort')->paginate();
 
@@ -30,7 +30,7 @@ class LogController extends BaseController
     /**
      * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\Resources\Json\JsonResource
      */
-    public function loginLogs()
+    public function loginLogs(): \Illuminate\Http\JsonResponse|\Illuminate\Http\Resources\Json\JsonResource
     {
         $loginLogPaginator = LoginLog::query()->orderBy('sort')->paginate();
 
