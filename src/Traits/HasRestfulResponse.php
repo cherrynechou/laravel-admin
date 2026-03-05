@@ -7,15 +7,68 @@ use Illuminate\Http\Resources\Json\JsonResource;
 use Symfony\Component\HttpFoundation\Response;
 
 Trait HasRestfulResponse
-{
+{   
+    /**
+     *
+     * @param string $message
+     * @return \Illuminate\Http\JsonResponse|JsonResource
+     */
+    public function errorNotFound($message = 'Not Found')
+    {
+        $this->fail($message, Response::HTTP_NOT_FOUND);
+    }
+
+
+    public function errorBadRequest(?string $message = 'Bad Request')
+    {
+        return $this->failed($message, Response::HTTP_BAD_REQUEST);
+    }
+
+    /**
+     * Return a 403 forbidden error.
+     *
+     * @param  string  $message
+     */
+    public function errorForbidden(string $message = 'Forbidden')
+    {
+        return $this->failed($message, Response::HTTP_FORBIDDEN);
+    }
+
+    /**
+     * 内部错误 状态码 401
+     *
+     * @param  string  $message
+     */
+    public function errorInternal($message = 'Internal Error')
+    {
+        $this->fail($message, Response::HTTP_INTERNAL_SERVER_ERROR);
+    }
+
+    /**
+     * 请求未认证响应 状态码 401
+     *
+     * @param  string  $message
+     */
+    public function errorUnauthorized(string $message = 'Unauthorized')
+    {
+        return $this->failed($message, Response::HTTP_UNAUTHORIZED);
+    }
+
+
+    public function errorMethodNotAllowed($message = 'Method Not Allowed')
+    {
+        return $this->fail($message, Response::HTTP_METHOD_NOT_ALLOWED);
+    }
+
+
     /**
      *
      * @param null $data
      * @param string $message
      * @param string $location
-     * @return mixed
+     * @return \Illuminate\Http\JsonResponse|JsonResource
      */
-    public function accepted($data = null, string $message = '', string $location = '')
+    public function accepted($data = null, string $message = 'Accepted', string $location = '')
     {
         $response = $this->success($data, $message, Response::HTTP_ACCEPTED);
         if ($location) {
@@ -31,7 +84,7 @@ Trait HasRestfulResponse
      * @param string $message
      * @return \Illuminate\Http\JsonResponse|JsonResource
      */
-    public function created($data = null, $message = '', string $location = '')
+    public function created($data = null, $message = 'Created', string $location = '')
     {
         $response =  $this->success($data, $message, Response::HTTP_CREATED);
 
@@ -51,31 +104,45 @@ Trait HasRestfulResponse
         return $this->success(null, $message, Response::HTTP_NO_CONTENT);
     }
 
-
-    public function errorBadRequest(?string $message = '')
+    /**
+     * @param array $data
+     * @param string $message
+     * @param int $status
+     * @param array $headers
+     * @param int $option
+     * @return \Illuminate\Http\JsonResponse|JsonResource
+     */
+    public function success($data = [], string $message = '',int $status = Response::HTTP_OK, array $headers = [], $option = 0)
     {
-        return $this->failed($message, Response::HTTP_BAD_REQUEST);
+        $additionalData = $this->formatData($data, $message, $status);
+
+        if ($data instanceof JsonResource) {
+            return $data->additional($additionalData);
+        }
+
+        return response()->json(array_merge($additionalData, [
+            'status'    =>  $status,
+            'data'      => $data ?: (object) $data,
+            'success'   => true
+        ]), $status, $headers, $option);
     }
 
     /**
-     * 请求未认证响应 状态码 401
-     *
-     * @param  string  $message
+     * @param string $message
+     * @param int $status
+     * @param array $header
+     * @param int $options
      */
-    public function errorUnauthorized(string $message = '')
+    public function failed(string $message = '', int $status = Response::HTTP_BAD_REQUEST, array $header = [], int $options = 0)
     {
-        return $this->failed($message, Response::HTTP_UNAUTHORIZED);
+        $additionalData = $this->formatData($data,$message,$status);
+       
+        return response()->json(array_merge($additionalData,[
+            'status'        =>  $status,
+            'success'       => false
+        ]), $status, $headers, $option);
     }
 
-    /**
-     * Return a 403 forbidden error.
-     *
-     * @param  string  $message
-     */
-    public function errorForbidden(string $message = '')
-    {
-        return $this->failed($message, Response::HTTP_FORBIDDEN);
-    }
 
     /**
      * 格式化数据
@@ -87,62 +154,14 @@ Trait HasRestfulResponse
      */
     protected function formatData($data, $message, $status): array
     {
-        $originalStatus = $status;
-        $status = (int) substr($status, 0, 3); // notice
-        if ($status >= 400 && $status <= 499) {// client error
-            $statusText = 'error';
-        } elseif ($status >= 500 && $status <= 599) {// service error
-            $statusText = 'fail';
-        } else {
-            $statusText = 'success';
-        }
-   
+        $statusText = ($status >= 400 && $status <= 499) ? 'error' : 'fail';
         $message = !$message ? ( isset(Response::$statusTexts[$status]) ? Response::$statusTexts[$status] : 'Service error') : $message;
 
         return [
-            'statusText'    => $statusText,
-            'status'        => $originalStatus,
-            'message'       => $message,
-            'data'          => $data,
+
+            'statusText'    =>  $status === 200 ? 'success':  $statusText,
+            'message'       =>  $message
         ];
-    }
-
-    /**
-     * 基本响应
-     *
-     * @param  mixed  $data
-     * @param  int  $status
-     * @param  array  $headers
-     * @param  int  $options
-     * @return JsonResponse
-     */
-    protected function response($data = [], $status = Response::HTTP_OK, array $headers = [], $options = 0): JsonResponse
-    {
-        return new JsonResponse($data, $status, $headers, $options);
-    }
-
-    /**
-     * @param array $data
-     * @param string $message
-     * @param int $status
-     * @param array $headers
-     * @param int $option
-     * @return \Illuminate\Http\JsonResponse|JsonResource
-     */
-    public function success($data = [], string $message = '',int $status = Response::HTTP_OK, array $headers = [], $option = 0)
-    {
-        return $this->response($this->formatData($data, $message, $status), $status, $headers, $option);
-    }
-
-    /**
-     * @param string $message
-     * @param int $status
-     * @param array $header
-     * @param int $options
-     */
-    public function failed(string $message = '', int $status = Response::HTTP_BAD_REQUEST, array $header = [], int $options = 0)
-    {
-        return  $this->response($this->formatData(null, $message, $status), $status, $header, $options);
     }
 
 }
