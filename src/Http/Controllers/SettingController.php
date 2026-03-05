@@ -23,6 +23,7 @@ class ConfigController extends BaseController
             ->collection($resources)
             ->transformWith(new ConfigGroupTransformer())
             ->serializeWith(new DataArraySerializer())
+            ->parseIncludes(['configs'])
             ->toArray();
 
         return $this->success($ConfigResources);
@@ -32,7 +33,13 @@ class ConfigController extends BaseController
     {
         $params = request()->all();
 
+        //需要更新数据
         $updates = $this->filterEmptyOrNullData($params);
+
+        //数据库中的数据
+        $oldDatas = Config::query()->where('group_key', $groupKey)->get();
+
+        //只更新改的值 
 
         try{
 
