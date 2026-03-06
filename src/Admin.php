@@ -81,6 +81,9 @@ class Admin
         $this->fireEvents();
     }
 
+    /**
+     * Bootstrap the admin event.
+     */
     protected function fireEvents()
     {
         Admin::callBooting();

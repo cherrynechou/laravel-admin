@@ -32,7 +32,12 @@ class AttachmentTransformer extends TransformerAbstract
     public function transform(Attachment $model)
     {
     	return [
-    		
-    	];
+            //
+            'id'            =>          $model->id,
+            'sort'          =>          $model->sort,
+            'remark'        =>          $model->remark,
+            'created_at'    =>          Carbon::parse($model->created_at)->toDateTimeString(),
+            'updated_at'    =>          Carbon::parse($model->updated_at)->toDateTimeString(),
+        ];
     }
 }
