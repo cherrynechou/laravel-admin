@@ -238,7 +238,7 @@ return new class extends Migration
             $table->string("group_key",100)->default("");
             $table->string('key')->unique()->comment('配置的key');
             $table->string('label')->comment('前端显示label');
-            $table->text('value')->nullable()->default('')->comment('配置设置的值');
+            $table->text('value')->nullable()->comment('配置设置的值');
             $table->string('style')->nullable()->default('')->comment('样式');
             $table->tinyInteger('rows')->nullable()->default(4)->comment('几行');
             $table->tinyInteger('type')->nullable()->default(0)->comment('1 input 2 switch 3 select 4 radio ');
