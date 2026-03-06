@@ -109,7 +109,7 @@ Trait HasRestfulResponse
      * @param string $message
      * @param int $status
      * @param array $headers
-     * @param int $option
+     * @param int $options
      * @return \Illuminate\Http\JsonResponse|JsonResource
      */
     public function success($data = [], string $message = '',int $status = Response::HTTP_OK, array $headers = [], $options = 0)
@@ -124,7 +124,7 @@ Trait HasRestfulResponse
             'status'    =>  $status,
             'data'      => $data,
             'success'   => true
-        ]), $status, $headers, $option);
+        ]), $status, $headers, $options);
     }
 
     /**
