@@ -179,10 +179,15 @@ class Admin
                 $router->resource('auth/config/groups', 'ConfigGroupController', ['except' => ['create','edit']])->names('auth.config.group');    
                 $router->resource('auth/config/datas', 'ConfigController', ['except' => ['create','edit']])->names('auth.config.data');   
 
-                //获取配置
-                $router->get('/setting/all','SettingController@all')->name('config.all');
+                //获取分组配置
+                $router->get('/setting/group/all','SettingController@groups')->name('config.group.all');
                 //更新配置
                 $router->post('/setting/update/{name}','SettingController@update');
+
+                //option 设置
+                $router->get('/setting/config/options/{id}','SettingController@options')->name('config.config.options');
+                $router->get('/setting/config/options/{id}/update','SettingController@saveOptions')->name('config.config.options.update');
+
              });
 
             //登录

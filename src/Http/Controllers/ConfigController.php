@@ -3,9 +3,11 @@
 namespace CherryneChou\Admin\Http\Controllers;
 
 use CherryneChou\Admin\Models\Config;
+use CherryneChou\Admin\Serializer\DataArraySerializer;
 use CherryneChou\Admin\Transformers\ConfigTransformer;
 use CherryneChou\Admin\Contracts\ValidatorInterface;
 use League\Fractal\Pagination\IlluminatePaginatorAdapter;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
 
 class ConfigController extends BaseController
@@ -42,10 +44,12 @@ class ConfigController extends BaseController
     public function store(): \Illuminate\Http\JsonResponse|\Illuminate\Http\Resources\Json\JsonResource
     {
         $validator = $this->validateForm(ValidatorInterface::RULE_CREATE);
+
         if($validator->fails()){
             $warning = $validator->messages()->first();
             return $this->failed($warning);
         }
+
         $requestData = request()->all();
         try {
             DB::beginTransaction();
@@ -86,8 +90,8 @@ class ConfigController extends BaseController
         $requestData = request()->all();
         try {
             DB::beginTransaction();
-            $dict = Config::query()->find($id);
-            $dict->update($requestData);
+            $config= Config::query()->find($id);
+            $config->update($requestData);
             DB::commit();
             return $this->success([], trans('admin.update_succeeded'));
         }catch (\Exception $exception){
@@ -114,6 +118,10 @@ class ConfigController extends BaseController
         return Validator::make(request()->all(), $this->rules[$rule], $message, $attributes);
     }
 
+    /**
+     * 删除
+     * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\Resources\Json\JsonResource
+     */
     public function destroy(string $id): \Illuminate\Http\JsonResponse|\Illuminate\Http\Resources\Json\JsonResource
     {
         //

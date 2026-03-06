@@ -213,7 +213,7 @@ return new class extends Migration
         Schema::create($this->config('database.dict_data_table'), function (Blueprint $table) {
             $table->id();
             $table->bigInteger("dict_id")->nullable()->default(0);
-            $table->string("code",100)->default("");
+            $table->string("dict_code",100)->default("");
             $table->string("label",100)->default("");
             $table->string("value")->default("");
             $table->tinyInteger("is_default")->nullable()->default(0);
@@ -238,7 +238,9 @@ return new class extends Migration
             $table->string("group_key",100)->default("");
             $table->string('key')->unique()->comment('配置的key');
             $table->string('label')->comment('前端显示label');
-            $table->text('value')->nullable()->comment('配置设置的值');
+            $table->text('value')->nullable()->default('')->comment('配置设置的值');
+            $table->string('style')->nullable()->default('')->comment('样式');
+            $table->tinyInteger('rows')->nullable()->default(4)->comment('几行');
             $table->tinyInteger('type')->nullable()->default(0)->comment('1 input 2 switch 3 select 4 radio ');
             $table->string('placeholder')->nullable()->default('')->comment('输入提示');
             $table->boolean('is_required')->nullable()->default(0);

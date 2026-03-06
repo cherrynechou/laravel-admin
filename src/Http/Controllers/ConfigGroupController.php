@@ -3,10 +3,10 @@
 namespace CherryneChou\Admin\Http\Controllers;
 
 use CherryneChou\Admin\Models\ConfigGroup;
+use CherryneChou\Admin\Serializer\DataArraySerializer;
 use CherryneChou\Admin\Transformers\ConfigGroupTransformer;
 use CherryneChou\Admin\Contracts\ValidatorInterface;
 use League\Fractal\Pagination\IlluminatePaginatorAdapter;
-use Illuminate\Support\Facades\DB;atePaginatorAdapter;
 use Illuminate\Support\Facades\DB;
 
 class ConfigGroupController extends BaseController

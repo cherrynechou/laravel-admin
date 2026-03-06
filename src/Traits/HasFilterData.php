@@ -6,23 +6,10 @@ namespace CherryneChou\Admin\Traits;
  */
 trait HasFilterData
 {
-    public function filterEmptyOrNullData(array $input=[])
+    public function filterNullData(array $input=[])
     {
-        $filtered = array_filter($input, function ($v) {
+        return array_filter($input, function ($v) {
             return !is_null($v);
         });
-
-        // 转换 null 字段为空字符串
-        foreach (array_keys($input) as $key) {
-            if (!isset($data[$key])) {
-                $data[$key] = '';
-                continue;
-            }
-            if (is_null($data[$key])) {
-                $data[$key] = '';
-            }
-        }
-
-        return $data;
     }
 }

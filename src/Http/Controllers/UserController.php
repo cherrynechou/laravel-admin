@@ -115,9 +115,7 @@ class UserController extends BaseController
         }
 
         $roleIds = request()->input('roleIds') ?: [];
-
         $permissions = request()->input('permissions') ?: '';
-
         try {
             DB::beginTransaction();
 
