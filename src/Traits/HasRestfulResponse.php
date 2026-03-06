@@ -140,7 +140,7 @@ Trait HasRestfulResponse
         return response()->json(array_merge($additionalData,[
             'status'        =>  $status,
             'success'       => false
-        ]), $status, $headers, $option);
+        ]), $status, $headers, $options);
     }
 
 
