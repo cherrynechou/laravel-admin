@@ -65,7 +65,7 @@ class DictController extends BaseController
     /**
      * Display the specified resource.
      */
-    public function show(string $id)\Illuminate\Http\JsonResponse|\Illuminate\Http\Resources\Json\JsonResource
+    public function show(string $id): \Illuminate\Http\JsonResponse|\Illuminate\Http\Resources\Json\JsonResource
     {
         //
         $resource =  Dict::query()->find($id);
