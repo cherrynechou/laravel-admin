@@ -13,7 +13,9 @@ use Illuminate\Validation\Rule;
 
 class PostController extends BaseController
 {
-
+    /**
+     * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\Resources\Json\JsonResource
+     */
 	public function index(PostFilter $filter): \Illuminate\Http\JsonResponse|\Illuminate\Http\Resources\Json\JsonResource
     {
         $postPaginator = Post::filter($filter)->orderBy('sort')->paginate();

@@ -27,6 +27,10 @@ return [
         'password'                   => '密码',
         'roleIds'                    => '角色',
     ],
+    'config'    =>[
+        'group_name'                =>  '分组名称',
+        'group_key'                 =>  '分组关键字',
+    ],
     'role'  => [
         'name'                      => '角色名称',
         'slug'                      => '角色标识'

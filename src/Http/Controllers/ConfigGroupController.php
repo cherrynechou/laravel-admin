@@ -6,6 +6,7 @@ use CherryneChou\Admin\Models\ConfigGroup;
 use CherryneChou\Admin\Serializer\DataArraySerializer;
 use CherryneChou\Admin\Transformers\ConfigGroupTransformer;
 use CherryneChou\Admin\Contracts\ValidatorInterface;
+use Illuminate\Support\Facades\Validator;
 use League\Fractal\Pagination\IlluminatePaginatorAdapter;
 use Illuminate\Support\Facades\DB;
 
@@ -28,13 +29,13 @@ class ConfigGroupController extends BaseController
 
         $resources = $groupPaginator->getCollection();
 
-        $groupDatas = fractal()
+        $groups = fractal()
             ->collection($resources)
             ->transformWith(new ConfigGroupTransformer())
             ->paginateWith(new IlluminatePaginatorAdapter($groupPaginator))
             ->toArray();
 
-        return $this->success($groupDatas);
+        return $this->success($groups);
     }
 
 
@@ -85,8 +86,8 @@ class ConfigGroupController extends BaseController
         $requestData = request()->all();
         try {
             DB::beginTransaction();
-            $dict = Config::query()->find($id);
-            $dict->update($requestData);
+            $group = ConfigGroup::query()->find($id);
+            $group->update($requestData);
             DB::commit();
             return $this->success([], trans('admin.update_succeeded'));
         }catch (\Exception $exception){
@@ -94,6 +95,23 @@ class ConfigGroupController extends BaseController
             return $this->failed($exception->getMessage());
         }
 
+    }
+
+    /**
+     * @return \Illuminate\Validation\Validator
+     */
+    protected function validateForm($rule)
+    {
+        $message = [
+            'required'   => trans('validation.attribute_not_empty')
+        ];
+
+        $attributes = [
+            'name'      => trans('admin.config.group_name'),
+            'key'      => trans('admin.config.group_key')    
+        ];
+
+        return Validator::make(request()->all(), $this->rules[$rule], $message, $attributes);
     }
 
     public function destroy(string $id): \Illuminate\Http\JsonResponse|\Illuminate\Http\Resources\Json\JsonResource

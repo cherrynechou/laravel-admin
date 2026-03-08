@@ -27,6 +27,10 @@ return [
         'password'                      => 'password',
         'role'                          => 'role',
     ],
+    'config'    =>[
+        'group_name'                =>  'group name',
+        'group_key'                 =>  'group key',
+    ],
     'role'  => [
         'name'                      => 'role name',
         'slug'                      => 'role slug'

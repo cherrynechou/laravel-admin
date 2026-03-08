@@ -241,7 +241,7 @@ return new class extends Migration
             $table->text('value')->nullable()->comment('配置设置的值');
             $table->string('style')->nullable()->default('')->comment('样式');
             $table->tinyInteger('rows')->nullable()->default(4)->comment('几行');
-            $table->tinyInteger('type')->nullable()->default(0)->comment('1 input 2 switch 3 select 4 radio ');
+            $table->string('type',50)->nullable()->default('')->comment('input switch select radio ');
             $table->string('placeholder')->nullable()->default('')->comment('输入提示');
             $table->boolean('is_required')->nullable()->default(0);
             $table->boolean('is_visible')->nullable()->default(0);
