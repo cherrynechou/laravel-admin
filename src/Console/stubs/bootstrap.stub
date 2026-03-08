@@ -1,4 +1,6 @@
 <?php
+use Illuminate\Support\Facades\Event;
+
 /**
  * laravel-admin - admin builder based on Laravel.
  * @author cherrynechou <https://github.com/cherrynechou>
@@ -9,3 +11,19 @@
  *
  *
  */
+//extend you admin
+//
+//Event::listen('admin:booted', function () {
+//
+//});
+//
+//Event::listen('admin:booting', function () {
+//
+//});
+
+//Event::listen('admin:config:changed', function () {
+//
+//});
+
+
+
