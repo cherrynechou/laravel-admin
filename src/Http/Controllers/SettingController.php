@@ -7,6 +7,7 @@ use CherryneChou\Admin\Traits\HasFilterData;
 use CherryneChou\Admin\Models\ConfigGroup;
 use CherryneChou\Admin\Models\Config;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Arr;
 use CherryneChou\Admin\Transformers\ConfigGroupTransformer;
 
@@ -62,6 +63,8 @@ class SettingController extends BaseController
                     Config::query()->where('id', $value['id'])->update(Arr::except($value, ['id']));
                 }
             });
+
+            Event::dispatch("admin:config:changed");
             return $this->success();
         } catch (\Exception $exception) {
             return $this->failed($exception->getMessage());
