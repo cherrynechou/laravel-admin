@@ -7,6 +7,8 @@ use CherryneChou\Admin\Support\Context;
 use CherryneChou\Admin\Events\UserLogined;
 use CherryneChou\Admin\Listeners\UserLoginRecord;
 use CherryneChou\Admin\Support\Helper;
+use CherryneChou\Admin\Contracts\AuthorizationServiceInterface;
+use CherryneChou\Admin\Services\AuthorizationService;
 use Illuminate\Support\Facades\Event;
 
 class AdminServiceProvider extends ServiceProvider
@@ -95,9 +97,12 @@ class AdminServiceProvider extends ServiceProvider
         );
     }
 
-    protected public registerContacts()
+    /**
+     * 绑定
+     */    
+    protected function registerContacts()
     {
-        $this->app->bind(\CherryneChou\Admin\Contracts\AuthorizationServiceInterface::class, \CherryneChou\Admin\Services\AuthorizationService::class);
+        $this->app->bind(AuthorizationServiceInterface::class, AuthorizationService::class);
     }
 
     /**

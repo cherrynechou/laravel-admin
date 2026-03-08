@@ -3,6 +3,7 @@
 namespace CherryneChou\Admin\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use CherryneChou\Admin\Abstracts\QueryFilter;
 
 class ConfigGroup extends Model 
 {
@@ -29,5 +30,10 @@ class ConfigGroup extends Model
     public function configs()
     {
         return $this->hasMany(Config::class, 'group_id');
+    }
+
+    public function scopeFilter($query, QueryFilter $filters)
+    {
+        return $filters->apply($query);
     }
 }
