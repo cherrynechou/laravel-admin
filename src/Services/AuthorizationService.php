@@ -2,8 +2,9 @@
 namespace CherryneChou\Admin\Services;
 
 use CherryneChou\Admin\Models\Menu;
+use CherryneChou\Admin\Contracts\AuthorizationServiceInterface;
 
-class AuthorizationService
+class AuthorizationService implements AuthorizationServiceInterface
 {
     /**
      * 根据用户过滤菜单

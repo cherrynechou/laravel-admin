@@ -27,7 +27,7 @@ class DictDataController extends BaseController
 
     public function index(DictDataFilter $filter): \Illuminate\Http\JsonResponse|\Illuminate\Http\Resources\Json\JsonResource
     {
-        $dictDataPaginator = DictData::filter($filter)->paginate();
+        $dictDataPaginator = DictData::filter($filter)->orderBy('sort')->paginate();
 
         $resources = $dictDataPaginator->getCollection();
 

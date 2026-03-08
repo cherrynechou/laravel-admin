@@ -65,6 +65,7 @@ class AdminServiceProvider extends ServiceProvider
         $this->bootApplication();
         $this->registerEvents();
         $this->registerPublishing();
+        $this->registerContacts();
     }
 
     protected function aliasAdmin()
@@ -92,6 +93,11 @@ class AdminServiceProvider extends ServiceProvider
             UserLogined::class,
             UserLoginRecord::class,
         );
+    }
+
+    protected public registerContacts()
+    {
+        $this->app->bind(\CherryneChou\Admin\Contracts\AuthorizationServiceInterface::class, \CherryneChou\Admin\Services\AuthorizationService::class);
     }
 
     /**

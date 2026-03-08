@@ -6,6 +6,7 @@ use CherryneChou\Admin\Models\ConfigGroup;
 use CherryneChou\Admin\Serializer\DataArraySerializer;
 use CherryneChou\Admin\Transformers\ConfigGroupTransformer;
 use CherryneChou\Admin\Contracts\ValidatorInterface;
+use CherryneChou\Admin\Filters\ConfigGroupFilter;
 use Illuminate\Support\Facades\Validator;
 use League\Fractal\Pagination\IlluminatePaginatorAdapter;
 use Illuminate\Support\Facades\DB;
@@ -23,9 +24,9 @@ class ConfigGroupController extends BaseController
         ]
     ];
 
-	public function index(): \Illuminate\Http\JsonResponse|\Illuminate\Http\Resources\Json\JsonResource
+	public function index(ConfigGroupFilter $filter): \Illuminate\Http\JsonResponse|\Illuminate\Http\Resources\Json\JsonResource
     {
-        $groupPaginator = ConfigGroup::query()->orderBy('sort')->paginate();
+        $groupPaginator = ConfigGroup::filter($filter)->orderBy('sort')->paginate();
 
         $resources = $groupPaginator->getCollection();
 

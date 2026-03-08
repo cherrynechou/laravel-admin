@@ -20,14 +20,14 @@ use Illuminate\Support\Facades\Event;
 class AuthController extends BaseController
 {
     /**
-     * @var AuthorizationService
+     * @var AuthorizationServiceInterface
      */
-    protected $authorizationService;
+    protected AuthorizationServiceInterface  $authorizationService;
 
     /**
-     * @param AuthorizationService $authorizationService
+     * @param AuthorizationServiceInterface $authorizationService
      */
-    public function __construct(AuthorizationService $authorizationService)
+    public function __construct(AuthorizationServiceInterface $authorizationService)
     {
         $this->authorizationService = $authorizationService;
     }
