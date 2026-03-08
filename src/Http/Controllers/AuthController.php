@@ -13,6 +13,7 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Carbon;
 use CherryneChou\Admin\Events\UserLogined;
 use Mews\Captcha\Facades\Captcha;
+use CherryneChou\Admin\Contracts\AuthorizationServiceInterface;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Event;
