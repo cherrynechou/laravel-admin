@@ -188,10 +188,15 @@ class Admin
                 $router->post('/setting/update/{name}','SettingController@update');
 
                 //option 设置
-                $router->get('/setting/config/options/{id}','SettingController@options')->name('config.config.options');
-                $router->get('/setting/config/options/{id}/update','SettingController@saveOptions')->name('config.config.options.update');
+                $router->get('/setting/config/options/{id}','SettingController@options')->name('config.options');
+                $router->get('/setting/config/options/{id}/update','SettingController@saveOptions')->name('config.options.update');
 
+                //获取网站配置
+                $router->get('/getWebConfig','SettingControoler@getWebConfig')->name('config.getWebConfig');
              });
+
+           
+
 
             //登录
             $authController = config('admin.auth.controller', AuthController::class);

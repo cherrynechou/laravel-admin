@@ -3,14 +3,13 @@ return [
     
     /*
     |--------------------------------------------------------------------------
-    | Laravel-admin name
+    | Laravel-admin html title
     |--------------------------------------------------------------------------
     |
-    | This value is the name of laravel-admin, This setting is displayed on the
-    | login page.
+    | Html title for all pages.
     |
     */
-    'name' => 'Laravel-admin',
+    'title' => 'Admin',
 
     /*
     |--------------------------------------------------------------------------
@@ -25,17 +24,6 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Laravel-admin mini logo
-    |--------------------------------------------------------------------------
-    |
-    | The logo of all admin pages when the sidebar menu is collapsed. You can
-    | also set it as an image by using a `img` tag, eg
-    | '<img src="http://logo-url" alt="Admin logo">'.
-    |
-    */
-    'logo-mini' => '<b>La</b>',
-    /*
-    |--------------------------------------------------------------------------
     | Laravel-admin bootstrap setting
     |--------------------------------------------------------------------------
     |
@@ -46,9 +34,14 @@ return [
 
     //版本一用于后台
     'route'     =>  [
+        'domain' => env('ADMIN_ROUTE_DOMAIN'),
+        
         'prefix' => env('ADMIN_ROUTE_PREFIX', 'admin'),
+
         'namespace' => 'App\\Admin\\Controllers',
+
         'middleware' => ['api'],
+
         'auth_middleware' => ['auth:sanctum','admin'],
     ],
 
@@ -62,15 +55,6 @@ return [
     */
     'directory' => app_path('Admin'),
 
-    /*
-    |--------------------------------------------------------------------------
-    | Laravel-admin html title
-    |--------------------------------------------------------------------------
-    |
-    | Html title for all pages.
-    |
-    */
-    'title' => 'Admin',
 
     /*
     |--------------------------------------------------------------------------

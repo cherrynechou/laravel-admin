@@ -16,6 +16,16 @@ class SettingController extends BaseController
     use HasFilterData;
 
     /**
+     * 获取网站配置
+     * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\Resources\Json\JsonResource
+     */
+    public function getWebConfig(): \Illuminate\Http\JsonResponse|\Illuminate\Http\Resources\Json\JsonResource
+    {
+        return $this->success();
+    }
+
+
+    /**
      * 所有配置
      * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\Resources\Json\JsonResource
      */
