@@ -42,7 +42,7 @@ class PostController extends BaseController
 
         if($validator->fails()){
             $warning =$validator->messages()->first();
-            return $this->failed($show_warning);
+            return $this->failed($warning);
         }
 
         $requestData = request()->all();

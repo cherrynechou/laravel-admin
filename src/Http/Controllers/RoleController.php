@@ -43,14 +43,19 @@ class RoleController extends BaseController
             return $this->failed($warning);
         }
 
-
         $requestData = request()->all();
+
+        $departmentIds = request()->input('departmentIds') ?: [];
 
         try {
 
             DB::beginTransaction();
 
             $role = Role::create($requestData);
+
+            if(count($departmentIds)>0){
+                $role->departments()->sync($departmentIds);
+            }
 
             DB::commit();
 
@@ -96,11 +101,17 @@ class RoleController extends BaseController
 
         $requestData = request()->all();
 
+        $departmentIds = request()->input('departmentIds') ?: [];
+
         try {
             DB::beginTransaction();
 
             $role = Role::query()->find($id);
             $role->update($requestData);
+
+            if(count($departmentIds)>0){
+                $role->departments()->sync($departmentIds);
+            }
 
             DB::commit();
 
@@ -151,17 +162,11 @@ class RoleController extends BaseController
     {
         try {
             DB::beginTransaction();
-
             Role::destroy($id);
-
             DB::commit();
-
             return $this->success();
-
         }catch (\Exception $exception){
-
             DB::rollBack();
-
             return $this->failed($exception->getTraceAsString());
         }
     }
@@ -190,7 +195,6 @@ class RoleController extends BaseController
     public function permissions($id)
     {
         $currentRole = Role::query()->find($id);
-
         return $this->success($currentRole->permissions ?? []);
     }
 
