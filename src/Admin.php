@@ -192,7 +192,7 @@ class Admin
                 $router->get('/setting/config/options/{id}/update','SettingController@saveOptions')->name('config.options.update');
 
                 //获取网站配置
-                $router->get('/getWebConfig','SettingControoler@getWebConfig')->name('config.getWebConfig');
+                $router->get('/getWebConfig','SettingController@getWebConfig')->name('config.getWebConfig');
              });
 
            
