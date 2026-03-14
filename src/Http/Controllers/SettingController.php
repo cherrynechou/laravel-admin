@@ -21,7 +21,8 @@ class SettingController extends BaseController
      */
     public function getWebConfig(): \Illuminate\Http\JsonResponse|\Illuminate\Http\Resources\Json\JsonResource
     {
-        $config['title'] = config('admin.title')
+        $
+        $config['title'] = config('admin.title');
         $config['logo'] = admin_asset(config('admin.logo') ?: '/vender/laravel-admin/dist/images/logo.png');
 
         return $this->success($config);
