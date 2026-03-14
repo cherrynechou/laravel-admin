@@ -142,7 +142,7 @@ return [
     */
     'default_avatar' => '/vendor/laravel-admin/dist/images/user2-160x160.png',
 
-    'default_logo'  => '/vendor/laravel-admin/dist/images/user2-160x160.png',
+    'default_logo'  => '/vendor/laravel-admin/dist/images/logo.png',
 
     /*
     |
@@ -236,7 +236,7 @@ return [
         'menu_model' => CherryneChou\Admin\Models\Menu::class,
 
         //Post table and model.
-        'posts_table' => 'admin_post',
+        'posts_table' => 'admin_posts',
         'posts_model' => CherryneChou\Admin\Models\Post::class,
 
         //Config group table and model

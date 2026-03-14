@@ -38,6 +38,7 @@ class PostTransformer extends TransformerAbstract
             //
             'id'            =>          $model->id,
             'name'          =>          $model->name,
+            'parent_id'     =>          $model->parent_id,
             'code'        	=>          $model->code,
             'sort'          =>          $model->sort,
             'status'		=>          $model->status,
