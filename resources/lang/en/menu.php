@@ -14,4 +14,6 @@ return [
   'admin.log'             => 'Log',
   'admin.log.login'       => 'Login',
   'admin.log.operation'   => 'operation',
+  'tool'                  => 'Tool',
+  'tool.config'           => 'Config',
 ];

@@ -14,4 +14,6 @@ return [
   'admin.log'               => '日志',
   'admin.log.login'         => '登录日志',
   'admin.log.operation'     => '操作日志',
+  'tool'                    => '系统工具',
+  'tool.config'             => '配置设计',
 ];
