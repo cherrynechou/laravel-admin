@@ -122,7 +122,7 @@ class ConfigGroupController extends BaseController
             DB::beginTransaction();
             ConfigGroup::destroy($id);
             DB::commit();
-            return $this->success();
+            return $this->success([], trans('admin.delete_succeeded'));
         }catch (\Exception $exception){
             DB::rollBack();
             return $this->failed($exception->getTraceAsString());

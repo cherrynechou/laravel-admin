@@ -178,7 +178,7 @@ class MenuController extends BaseController
 
             DB::commit();
 
-            return $this->success([],trans('admin.update_succeeded'));
+            return $this->success([],trans('admin.switch_succeeded'));
 
         }catch (\Exception $exception){
 
@@ -202,7 +202,7 @@ class MenuController extends BaseController
 
             DB::commit();
 
-            return $this->success();
+           return $this->success([], trans('admin.delete_succeeded'));
 
         }catch (\Exception $exception){
 

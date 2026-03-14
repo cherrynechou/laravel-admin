@@ -108,13 +108,13 @@ class PostController extends BaseController
     {
         $resources = Post::query()->get();
 
-        $departments = fractal()
+        $posts = fractal()
                         ->collection($resources)
                         ->transformWith(new PostTransformer())
                         ->serializeWith(new DataArraySerializer())
                         ->toArray();
 
-        return $this->success($departments);
+        return $this->success($posts);
     }
 
 
@@ -151,7 +151,7 @@ class PostController extends BaseController
             DB::beginTransaction();
             Post::destroy($id);
             DB::commit();
-            return $this->success();
+            return $this->success([], trans('admin.delete_succeeded'));
         }catch (\Exception $exception){
             DB::rollBack();
             return $this->failed($exception->getTraceAsString());

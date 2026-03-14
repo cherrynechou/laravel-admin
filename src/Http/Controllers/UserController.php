@@ -74,7 +74,7 @@ class UserController extends BaseController
 
             DB::commit();
 
-            return $this->success();
+            return $this->success([], trans('admin.save_succeeded'));
 
         }catch (\Exception $exception){
 
@@ -133,7 +133,7 @@ class UserController extends BaseController
 
             DB::commit();
 
-            return $this->success();
+            return $this->success([], trans('admin.update_succeeded'));
 
         }catch (\Exception $exception){
             DB::rollBack();
@@ -183,7 +183,7 @@ class UserController extends BaseController
             DB::beginTransaction();
             Administrator::destroy($id);
             DB::commit();
-            return $this->success();
+            return $this->success([], trans('admin.delete_succeeded'));
         }catch (\Exception $exception){
             DB::rollBack();
             return $this->failed($exception->getTraceAsString());
@@ -197,12 +197,17 @@ class UserController extends BaseController
      */
     public function block($id)
     {
-        $admin = Administrator::find($id);
+        try{
 
-        $admin->status = !$admin->status;
-        $admin->save();
+            $admin = Administrator::findOrFail($id);
 
-        return $this->success();
+            $admin->status = !$admin->status;
+            $admin->save();
+
+            return $this->success();
+        }catch (\Exception $exception){
+            return $this->failed($exception->getTraceAsString());
+        }
     }
 
     /**
@@ -228,7 +233,7 @@ class UserController extends BaseController
 
             DB::commit();
 
-            return $this->success();
+            return $this->success([], trans('admin.password.update_succeeded'));
 
         }catch (\Exception $exception){
             DB::rollBack();
@@ -244,11 +249,15 @@ class UserController extends BaseController
      */
     public function resetPassword($id): \Illuminate\Http\JsonResponse|\Illuminate\Http\Resources\Json\JsonResource
     {
-        $admin = Administrator::find($id);
-        $admin->password = Hash::make(config('admin.default_password'));
-        $admin->save();
+        try{
+            $admin = Administrator::findOrFail($id);
+            $admin->password = Hash::make(config('admin.default_password'));
+            $admin->save();
 
-        return $this->success();
+            return $this->success([], trans('admin.password.reset_succeeded'));
+        }catch(\Exception $exception){
+            return $this->failed($exception->getTraceAsString());
+        }
 
     }
 }

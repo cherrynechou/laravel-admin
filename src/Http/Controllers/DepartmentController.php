@@ -149,7 +149,7 @@ class DepartmentController extends BaseController
 
             DB::commit();
 
-            return $this->success();
+            return $this->success([], trans('admin.delete_succeeded'));
 
         }catch (\Exception $exception){
 

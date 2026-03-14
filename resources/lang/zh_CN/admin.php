@@ -7,6 +7,7 @@ return [
     'update_failed'                 => '更新失败 !',
     'upload_succeeded'              => '上传成功 !',
     'upload_failed'                 => '上传失败 !',
+    'switch_succeeded'              => '切换成功 ！',
     'logout_success'                => '退出成功',
     'save_succeeded'                => '保存成功 !',
     'save_failed'                   => '保存失败 !',
@@ -15,6 +16,10 @@ return [
     'user_no_permission'            => '无权限！',
     'username_or_password_is_wrong' => '用户名或者密码不正确',
     'origin_password_is_wrong'      => '原始密码不正确',
+    'password'=>[
+        'update_succeeded'          =>  '更新密码成功！',
+        'reset_succeeded'           =>  '重置密码成功！'
+    ],
     'client' => [
         '500' => '系统繁忙，请稍后再试！',
         '403' => '对不起，您没有权限访问，请与管理员联系。',

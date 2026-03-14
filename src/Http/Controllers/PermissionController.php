@@ -49,7 +49,7 @@ class PermissionController extends BaseController
             DB::beginTransaction();
             Permission::create($requestData);
             DB::commit();
-            return $this->success();
+            return $this->success([], trans('admin.save_succeeded'));
         }catch (\Exception $exception){
             DB::rollBack();
             return $this->failed($exception->getTraceAsString());
@@ -181,7 +181,7 @@ class PermissionController extends BaseController
             $permission = Permission::query()->find($id);
             $permission->update($requestData);
             DB::commit();
-            return $this->success();
+            return $this->success([], trans('admin.update_succeeded'));
         }catch (\Exception $exception){
             DB::rollBack();
             return $this->failed($exception->getTraceAsString());
@@ -199,7 +199,7 @@ class PermissionController extends BaseController
             DB::beginTransaction();
             Permission::destroy($id);
             DB::commit();
-            return $this->success();
+           return $this->success([], trans('admin.delete_succeeded'));
         }catch (\Exception $exception){
             DB::rollBack();
             return $this->failed($exception->getMessage());

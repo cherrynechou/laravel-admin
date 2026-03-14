@@ -20,7 +20,7 @@ return [
     | `img` tag, eg '<img src="http://logo-url" alt="Admin logo">'.
     |
     */
-    'logo' => '<b>Laravel</b> admin',
+    'logo' => '',
 
     /*
     |--------------------------------------------------------------------------
@@ -141,6 +141,8 @@ return [
     |
     */
     'default_avatar' => '/vendor/laravel-admin/dist/images/user2-160x160.png',
+
+    'default_logo'  => '/vendor/laravel-admin/dist/images/user2-160x160.png',
 
     /*
     |

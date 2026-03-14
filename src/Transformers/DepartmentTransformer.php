@@ -38,7 +38,7 @@ class DepartmentTransformer extends TransformerAbstract
             'id'                =>          $model->id,
             'parent_id'         =>          $model->parent_id,
             'name'              =>          $model->name,
-            'principal'			=>          $model->principal,
+            'principal'			=>          $model->principal,    //负责人 
             'email'				=>          $model->email,
             'telephone'         =>          $model->telephone,
             'status'            =>          $model->status,

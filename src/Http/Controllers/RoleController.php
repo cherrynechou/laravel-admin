@@ -59,7 +59,7 @@ class RoleController extends BaseController
 
             DB::commit();
 
-            return $this->success();
+            return $this->success([], trans('admin.save_succeeded'));
 
         }catch (\Exception $exception){
 
@@ -115,7 +115,7 @@ class RoleController extends BaseController
 
             DB::commit();
 
-            return $this->success();
+            return $this->success([], trans('admin.update_succeeded'));
 
         }catch (\Exception $exception){
             DB::rollBack();
@@ -164,7 +164,7 @@ class RoleController extends BaseController
             DB::beginTransaction();
             Role::destroy($id);
             DB::commit();
-            return $this->success();
+            return $this->success([], trans('admin.delete_succeeded'));
         }catch (\Exception $exception){
             DB::rollBack();
             return $this->failed($exception->getTraceAsString());
@@ -218,7 +218,7 @@ class RoleController extends BaseController
 
             DB::commit();
 
-            return $this->success();
+            return $this->success([], trans('admin.delete_succeeded'));
         }catch (\Exception $exception){
             DB::rollBack();
 
