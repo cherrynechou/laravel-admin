@@ -90,7 +90,7 @@ class Role extends Model
     {
         $pivotTable = config('admin.database.role_departments_table');
 
-        $relatedModel = config('admin.database.department_model');
+        $relatedModel = config('admin.database.departments_model');
 
         return $this->belongsToMany( $relatedModel,$pivotTable, 'role_id', 'department_id');
     }

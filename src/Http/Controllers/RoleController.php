@@ -45,17 +45,11 @@ class RoleController extends BaseController
 
         $requestData = request()->all();
 
-        $departmentIds = request()->input('departmentIds') ?: [];
-
         try {
 
             DB::beginTransaction();
 
             $role = Role::create($requestData);
-
-            if(count($departmentIds)>0){
-                $role->departments()->sync($departmentIds);
-            }
 
             DB::commit();
 
@@ -73,7 +67,7 @@ class RoleController extends BaseController
      * @param $id
      * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\Resources\Json\JsonResource
      */
-    public function show($id)
+    public function show(string $id)
     {
         $resource = Role::query()->find($id);
 
@@ -90,7 +84,7 @@ class RoleController extends BaseController
      * @param $id
      * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\Resources\Json\JsonResource
      */
-    public function update($id)
+    public function update(string $id)
     {
         $validator = $this->validateForm();
 
@@ -101,17 +95,11 @@ class RoleController extends BaseController
 
         $requestData = request()->all();
 
-        $departmentIds = request()->input('departmentIds') ?: [];
-
         try {
             DB::beginTransaction();
 
             $role = Role::query()->find($id);
             $role->update($requestData);
-
-            if(count($departmentIds)>0){
-                $role->departments()->sync($departmentIds);
-            }
 
             DB::commit();
 
@@ -249,7 +237,7 @@ class RoleController extends BaseController
     {
         $requestData = request()->all();
 
-        $departmentIds = request()->input('departmentIds') ?: [];
+        $departments = request()->input('departmentIds') ?: [];
 
         try{
             DB::beginTransaction();
