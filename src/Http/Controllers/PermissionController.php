@@ -60,7 +60,7 @@ class PermissionController extends BaseController
      * @param $id
      * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\Resources\Json\JsonResource
      */
-    public function show($id)
+    public function show(string $id)
     {
         $resource = Permission::query()->find($id);
 
@@ -165,7 +165,7 @@ class PermissionController extends BaseController
      * @param $id
      * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\Resources\Json\JsonResource
      */
-    public function update($id)
+    public function update(string $id)
     {
         $validator = $this->validateForm();
 
@@ -192,7 +192,7 @@ class PermissionController extends BaseController
      * @param $id
      * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\Resources\Json\JsonResource
      */
-    public function destroy($id): \Illuminate\Http\JsonResponse|\Illuminate\Http\Resources\Json\JsonResource
+    public function destroy(string $id): \Illuminate\Http\JsonResponse|\Illuminate\Http\Resources\Json\JsonResource
     {
         try {
 

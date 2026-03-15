@@ -44,7 +44,7 @@ class DictDataController extends BaseController
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request): \Illuminate\Http\JsonResponse|\Illuminate\Http\Resources\Json\JsonResource
+    public function store(): \Illuminate\Http\JsonResponse|\Illuminate\Http\Resources\Json\JsonResource
     {
         $validator = $this->validateForm(ValidatorInterface::RULE_CREATE);
 
@@ -94,7 +94,7 @@ class DictDataController extends BaseController
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id): \Illuminate\Http\JsonResponse|\Illuminate\Http\Resources\Json\JsonResource
+    public function update(string $id): \Illuminate\Http\JsonResponse|\Illuminate\Http\Resources\Json\JsonResource
     {
         $validator = $this->validateForm(ValidatorInterface::RULE_UPDATE);
 

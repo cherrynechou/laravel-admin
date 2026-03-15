@@ -38,7 +38,7 @@ class AttachmentController extends BaseController
         return $this->success($attachmnts);
     }
 
-    public function store(Request $request): \Illuminate\Http\JsonResponse|\Illuminate\Http\Resources\Json\JsonResource
+    public function store(): \Illuminate\Http\JsonResponse|\Illuminate\Http\Resources\Json\JsonResource
     {
         $validator = $this->validateForm(ValidatorInterface::RULE_CREATE);
 

@@ -88,7 +88,7 @@ class UserController extends BaseController
      * @param $id
      * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\Resources\Json\JsonResource
      */
-    public function show($id)
+    public function show(string $id)
     {
         $resource = Administrator::query()->find($id);
         $admin = fractal()
@@ -105,7 +105,7 @@ class UserController extends BaseController
      * @param $id
      * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\Resources\Json\JsonResource
      */
-    public function update($id)
+    public function update(string $id)
     {
         $requestData = request()->all();
         $password = request()->input('password');
@@ -177,7 +177,7 @@ class UserController extends BaseController
      * @param $id
      * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\Resources\Json\JsonResource
      */
-    public function destroy($id)
+    public function destroy(string $id)
     {
         try {
             DB::beginTransaction();
@@ -195,7 +195,7 @@ class UserController extends BaseController
      * 禁止登录
      * @param $id
      */
-    public function block($id)
+    public function block(string $id)
     {
         try{
 
@@ -247,7 +247,7 @@ class UserController extends BaseController
      * @param $id
      * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\Resources\Json\JsonResource
      */
-    public function resetPassword($id): \Illuminate\Http\JsonResponse|\Illuminate\Http\Resources\Json\JsonResource
+    public function resetPassword(string $id): \Illuminate\Http\JsonResponse|\Illuminate\Http\Resources\Json\JsonResource
     {
         try{
             $admin = Administrator::findOrFail($id);

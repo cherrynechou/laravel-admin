@@ -74,7 +74,7 @@ class MenuController extends BaseController
      * @param $id
      * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\Resources\Json\JsonResource
      */
-    public function show($id): \Illuminate\Http\JsonResponse|\Illuminate\Http\Resources\Json\JsonResource
+    public function show(string $id): \Illuminate\Http\JsonResponse|\Illuminate\Http\Resources\Json\JsonResource
     {
         $resource = Menu::query()->find($id);
 
@@ -92,7 +92,7 @@ class MenuController extends BaseController
      * @param $id
      * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\Resources\Json\JsonResource
      */
-    public function update($id): \Illuminate\Http\JsonResponse|\Illuminate\Http\Resources\Json\JsonResource
+    public function update(string $id): \Illuminate\Http\JsonResponse|\Illuminate\Http\Resources\Json\JsonResource
     {
         $requestData = request()->all();
 
@@ -166,7 +166,7 @@ class MenuController extends BaseController
      * 更改菜单状态
      * @param $id
      */
-    public function switch($id): \Illuminate\Http\JsonResponse|\Illuminate\Http\Resources\Json\JsonResource
+    public function switch(string $id): \Illuminate\Http\JsonResponse|\Illuminate\Http\Resources\Json\JsonResource
     {
         try {
             DB::beginTransaction();
@@ -192,7 +192,7 @@ class MenuController extends BaseController
      * @param $id
      * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\Resources\Json\JsonResource
      */
-    public function destroy($id): \Illuminate\Http\JsonResponse|\Illuminate\Http\Resources\Json\JsonResource
+    public function destroy(string $id): \Illuminate\Http\JsonResponse|\Illuminate\Http\Resources\Json\JsonResource
     {
 
         try {

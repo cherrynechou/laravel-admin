@@ -52,7 +52,7 @@ class SettingController extends BaseController
      * 更新分组配置
      * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\Resources\Json\JsonResource
      */
-    public function update($groupKey=''): \Illuminate\Http\JsonResponse|\Illuminate\Http\Resources\Json\JsonResource
+    public function update(string $groupKey): \Illuminate\Http\JsonResponse|\Illuminate\Http\Resources\Json\JsonResource
     {
         $params = request()->all();
         //需要更新数据
@@ -91,7 +91,7 @@ class SettingController extends BaseController
      * @param $id
      * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\Resources\Json\JsonResource
      */
-    public function options($id): \Illuminate\Http\JsonResponse|\Illuminate\Http\Resources\Json\JsonResource
+    public function options(string $id): \Illuminate\Http\JsonResponse|\Illuminate\Http\Resources\Json\JsonResource
     {
         try {
             $config = Config::query()->findOrFail($id);
@@ -114,7 +114,7 @@ class SettingController extends BaseController
      * @param $id
      * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\Resources\Json\JsonResource
      */
-    public function saveOptions($id): \Illuminate\Http\JsonResponse|\Illuminate\Http\Resources\Json\JsonResource
+    public function saveOptions(string $id): \Illuminate\Http\JsonResponse|\Illuminate\Http\Resources\Json\JsonResource
     {
         $params = request()->all();
 

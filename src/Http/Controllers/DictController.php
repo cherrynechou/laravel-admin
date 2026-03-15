@@ -108,7 +108,7 @@ class DictController extends BaseController
     /**
      * @return \Illuminate\Validation\Validator
      */
-    protected function validateForm($rule)
+    protected function validateForm(string $rule)
     {
         $message = [
             'required'  => trans('validation.attribute_not_empty'),

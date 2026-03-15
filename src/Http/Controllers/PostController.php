@@ -144,7 +144,7 @@ class PostController extends BaseController
      * @param $id
      * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\Resources\Json\JsonResource
      */
-    public function destroy($id)
+    public function destroy(string $id)
     {
 
         try {

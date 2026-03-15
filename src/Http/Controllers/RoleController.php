@@ -158,7 +158,7 @@ class RoleController extends BaseController
      * @param $id
      * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\Resources\Json\JsonResource
      */
-    public function destroy($id)
+    public function destroy(string $id)
     {
         try {
             DB::beginTransaction();
@@ -192,7 +192,7 @@ class RoleController extends BaseController
      * 角色所有权限列表
      * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\Resources\Json\JsonResource
      */
-    public function permissions($id)
+    public function permissions(string $id)
     {
         $currentRole = Role::query()->find($id);
         return $this->success($currentRole->permissions ?? []);
@@ -203,7 +203,7 @@ class RoleController extends BaseController
      * @param $id
      * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\Resources\Json\JsonResource
      */
-    public function updatePermissions($id)
+    public function updatePermissions(string $id)
     {
         $permissions = request()->input('permissionIds') ?: '';
 
@@ -225,4 +225,53 @@ class RoleController extends BaseController
             return $this->failed($exception->getTraceAsString());
         }
     }
+
+    /**
+     * 角色所有数据权限
+     * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\Resources\Json\JsonResource
+     */
+    public  function dataScopes(string $id)
+    {
+        $currentRole = Role::query()->find($id);
+        $return['departments'] = $currentRole->departments ?? [];
+        $return['name'] = $currentRole->name;
+        $return['slug'] = $currentRole->slug;
+        $return['data_scope'] = $currentRole->data_scope;
+        return $this->success($return);
+    }
+
+    /**
+     * 更新角色数据权限
+     * @param $id
+     * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\Resources\Json\JsonResource
+     */
+    public function updateDataScopes(string $id)
+    {
+        $requestData = request()->all();
+
+        $departmentIds = request()->input('departmentIds') ?: [];
+
+        try{
+            DB::beginTransaction();
+            $role = Role::query()->find($id);
+
+            $role->update($requestData);
+
+            if($departments){
+                $departmentIds = json_decode($departments,true);
+                $role->departments()->sync($departmentIds);
+            }
+
+            DB::commit();
+
+            return $this->success([], trans('admin.update_succeeded'));
+
+        }catch (\Exception $exception){
+            DB::rollBack();
+
+            return $this->failed($exception->getTraceAsString());
+        }
+    }
+
+
 }
