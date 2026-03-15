@@ -13,16 +13,7 @@ use League\Fractal\Pagination\IlluminatePaginatorAdapter;
 
 
 class AttachmentController extends BaseController
-{
-	protected $rules = [
-        ValidatorInterface::RULE_CREATE => [
-            'name'      => 'required',
-        ],
-        ValidatorInterface::RULE_UPDATE => [
-            'name'      => 'required',
-        ]
-    ];
-
+{   
  	public function index(): \Illuminate\Http\JsonResponse|\Illuminate\Http\Resources\Json\JsonResource
     {
         $attachmentPaginator = Attachment::query()->orderBy('sort')->paginate();
@@ -98,17 +89,21 @@ class AttachmentController extends BaseController
     /**
      * @return \Illuminate\Validation\Validator
      */
-    protected function validateForm($rule)
+    protected function validateForm()
     {
+        $rules =[
+            'name'          => 'required',
+        ];
+
         $message = [
-            'required'  => trans('validation.attribute_not_empty'),
+            'required'      => trans('validation.attribute_not_empty'),
         ];
 
         $attributes = [
             'name'      => trans('admin.attachment.name'),
         ];
 
-        return Validator::make(request()->all(), $this->rules[$rule], $message, $attributes);
+        return Validator::make(request()->all(), $this->rules, $message, $attributes);
     }
 
     public function destroy(string $id): \Illuminate\Http\JsonResponse|\Illuminate\Http\Resources\Json\JsonResource

@@ -6,20 +6,11 @@ use CherryneChou\Admin\Transformers\DictTransformer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
-use CherryneChou\Admin\Contracts\ValidatorInterface;
 use CherryneChou\Admin\Serializer\DataArraySerializer;
 use League\Fractal\Pagination\IlluminatePaginatorAdapter;
 
 class DictController extends BaseController
 {
-    protected $rules = [
-        ValidatorInterface::RULE_CREATE => [
-            'name'      => 'required',
-        ],
-        ValidatorInterface::RULE_UPDATE => [
-            'name'      => 'required',
-        ]
-    ];
 
     public function index(): \Illuminate\Http\JsonResponse|\Illuminate\Http\Resources\Json\JsonResource
     {
@@ -42,7 +33,7 @@ class DictController extends BaseController
     public function store(): \Illuminate\Http\JsonResponse|\Illuminate\Http\Resources\Json\JsonResource
     {
         //
-        $validator = $this->validateForm(ValidatorInterface::RULE_CREATE);
+        $validator = $this->validateForm();
 
         if($validator->fails()){
             $warning = $validator->messages()->first();
@@ -83,7 +74,7 @@ class DictController extends BaseController
      */
     public function update(string $id): \Illuminate\Http\JsonResponse|\Illuminate\Http\Resources\Json\JsonResource
     {
-        $validator = $this->validateForm( ValidatorInterface::RULE_UPDATE );
+        $validator = $this->validateForm();
 
         if($validator->fails()){
             $warning = $validator->messages()->first();
@@ -108,8 +99,13 @@ class DictController extends BaseController
     /**
      * @return \Illuminate\Validation\Validator
      */
-    protected function validateForm(string $rule)
+    protected function validateForm()
     {
+
+        $rules =[
+            'name'      => 'required',
+        ];
+
         $message = [
             'required'  => trans('validation.attribute_not_empty'),
         ];
@@ -118,7 +114,7 @@ class DictController extends BaseController
             'name'      => trans('admin.dict.name'),
         ];
 
-        return Validator::make(request()->all(), $this->rules[$rule], $message, $attributes);
+        return Validator::make(request()->all(), $rules, $message, $attributes);
     }
 
     /**

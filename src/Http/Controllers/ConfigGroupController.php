@@ -5,7 +5,6 @@ namespace CherryneChou\Admin\Http\Controllers;
 use CherryneChou\Admin\Models\ConfigGroup;
 use CherryneChou\Admin\Serializer\DataArraySerializer;
 use CherryneChou\Admin\Transformers\ConfigGroupTransformer;
-use CherryneChou\Admin\Contracts\ValidatorInterface;
 use CherryneChou\Admin\Filters\ConfigGroupFilter;
 use Illuminate\Support\Facades\Validator;
 use League\Fractal\Pagination\IlluminatePaginatorAdapter;
@@ -13,17 +12,7 @@ use Illuminate\Support\Facades\DB;
 
 class ConfigGroupController extends BaseController
 {
-	 protected $rules = [
-        ValidatorInterface::RULE_CREATE => [
-            'name'      => 'required',
-            'key'       => 'required',
-        ],
-        ValidatorInterface::RULE_UPDATE => [
-            'name'      => 'required',
-            'key'       => 'required',
-        ]
-    ];
-
+	 
 	public function index(ConfigGroupFilter $filter): \Illuminate\Http\JsonResponse|\Illuminate\Http\Resources\Json\JsonResource
     {
         $groupPaginator = ConfigGroup::filter($filter)->orderBy('sort')->paginate();
@@ -42,7 +31,7 @@ class ConfigGroupController extends BaseController
 
     public function store(): \Illuminate\Http\JsonResponse|\Illuminate\Http\Resources\Json\JsonResource
     {
-        $validator = $this->validateForm(ValidatorInterface::RULE_CREATE);
+        $validator = $this->validateForm();
         if($validator->fails()){
             $warning = $validator->messages()->first();
             return $this->failed($warning);
@@ -77,7 +66,7 @@ class ConfigGroupController extends BaseController
 
     public function update(string $id): \Illuminate\Http\JsonResponse|\Illuminate\Http\Resources\Json\JsonResource
     {
-        $validator = $this->validateForm(ValidatorInterface::RULE_UPDATE);
+        $validator = $this->validateForm();
 
         if($validator->fails()){
             $warning = $validator->messages()->first();
@@ -103,6 +92,12 @@ class ConfigGroupController extends BaseController
      */
     protected function validateForm(string $rule)
     {
+        $rules =[
+            'name'      => 'required',
+            'key'       => 'required',
+        ];
+
+
         $message = [
             'required'   => trans('validation.attribute_not_empty')
         ];
@@ -112,7 +107,7 @@ class ConfigGroupController extends BaseController
             'key'      => trans('admin.config.group_key')    
         ];
 
-        return Validator::make(request()->all(), $this->rules[$rule], $message, $attributes);
+        return Validator::make(request()->all(), $rules, $message, $attributes);
     }
 
     public function destroy(string $id): \Illuminate\Http\JsonResponse|\Illuminate\Http\Resources\Json\JsonResource

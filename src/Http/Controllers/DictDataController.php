@@ -6,7 +6,6 @@ use CherryneChou\Admin\Filters\DictDataFilter;
 use CherryneChou\Admin\Transformers\DictDataTransformer;
 use CherryneChou\Admin\Serializer\DataArraySerializer;
 use Illuminate\Http\Request;
-use CherryneChou\Admin\Contracts\ValidatorInterface;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use League\Fractal\Pagination\IlluminatePaginatorAdapter;
@@ -14,17 +13,6 @@ use League\Fractal\Pagination\IlluminatePaginatorAdapter;
 class DictDataController extends BaseController
 {
   
-    protected $rules = [
-        ValidatorInterface::RULE_CREATE => [
-            'label'      => 'required',
-            'value'      => 'required', 
-        ],
-        ValidatorInterface::RULE_UPDATE => [
-            'label'      => 'required',
-            'value'      => 'required', 
-        ]
-    ];
-
     public function index(DictDataFilter $filter): \Illuminate\Http\JsonResponse|\Illuminate\Http\Resources\Json\JsonResource
     {
         $dictDataPaginator = DictData::filter($filter)->orderBy('sort')->paginate();
@@ -46,7 +34,7 @@ class DictDataController extends BaseController
      */
     public function store(): \Illuminate\Http\JsonResponse|\Illuminate\Http\Resources\Json\JsonResource
     {
-        $validator = $this->validateForm(ValidatorInterface::RULE_CREATE);
+        $validator = $this->validateForm();
 
         if($validator->fails()){
             $warning = $validator->messages()->first();
@@ -96,7 +84,7 @@ class DictDataController extends BaseController
      */
     public function update(string $id): \Illuminate\Http\JsonResponse|\Illuminate\Http\Resources\Json\JsonResource
     {
-        $validator = $this->validateForm(ValidatorInterface::RULE_UPDATE);
+        $validator = $this->validateForm();
 
         if($validator->fails()){
             $warning = $validator->messages()->first();
@@ -130,6 +118,10 @@ class DictDataController extends BaseController
      */
     protected function validateForm($rule)
     {
+        $rules =[
+            'label'      => 'required',
+            'value'      => 'required', 
+        ];
 
         $message = [
             'required'   => trans('validation.attribute_not_empty')

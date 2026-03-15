@@ -44,21 +44,13 @@ class RoleController extends BaseController
         }
 
         $requestData = request()->all();
-
         try {
-
             DB::beginTransaction();
-
             $role = Role::create($requestData);
-
             DB::commit();
-
             return $this->success([], trans('admin.save_succeeded'));
-
         }catch (\Exception $exception){
-
             DB::rollBack();
-
             return $this->failed($exception->getMessage());
         }
     }
@@ -202,6 +194,8 @@ class RoleController extends BaseController
             if($permissions){
                 $permissionIds = json_decode($permissions,true);
                 $role->permissions()->sync($permissionIds);
+            }else{
+                $role->permissions()->sync([]);
             }
 
             DB::commit();
@@ -237,7 +231,7 @@ class RoleController extends BaseController
     {
         $requestData = request()->all();
 
-        $departments = request()->input('departmentIds') ?: [];
+        $departments = request()->input('departmentIds') ?: '';
 
         try{
             DB::beginTransaction();
@@ -248,6 +242,8 @@ class RoleController extends BaseController
             if($departments){
                 $departmentIds = json_decode($departments,true);
                 $role->departments()->sync($departmentIds);
+            }else{
+                $role->departments()->sync([]);
             }
 
             DB::commit();

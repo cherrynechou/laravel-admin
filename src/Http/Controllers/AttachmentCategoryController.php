@@ -13,14 +13,6 @@ use League\Fractal\Pagination\IlluminatePaginatorAdapter;
 
 class AttachmentCategoryController extends BaseController
 {
-	protected $rules = [
-        ValidatorInterface::RULE_CREATE => [
-            'name'      => 'required',
-        ],
-        ValidatorInterface::RULE_UPDATE => [
-            'name'      => 'required',
-        ]
-    ];
 
     public function index(): \Illuminate\Http\JsonResponse|\Illuminate\Http\Resources\Json\JsonResource
     {
@@ -99,12 +91,17 @@ class AttachmentCategoryController extends BaseController
      */
     protected function validateForm($rule)
     {
+
+        $rules =[
+            'name'          => 'required',
+        ];
+
         $message = [
-            'required'  => trans('validation.attribute_not_empty'),
+            'required'      => trans('validation.attribute_not_empty'),
         ];
 
         $attributes = [
-            'name'      => trans('admin.attachment.category.name'),
+            'name'          => trans('admin.attachment.category.name'),
         ];
 
         return Validator::make(request()->all(), $this->rules[$rule], $message, $attributes);

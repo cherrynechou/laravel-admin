@@ -14,7 +14,6 @@ use Illuminate\Validation\Rule;
 
 class UserController extends BaseController
 {
- 
     /**
      * @param AdministratorFilter $filter
      * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\Resources\Json\JsonResource

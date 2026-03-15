@@ -5,7 +5,6 @@ namespace CherryneChou\Admin\Http\Controllers;
 use CherryneChou\Admin\Models\Config;
 use CherryneChou\Admin\Serializer\DataArraySerializer;
 use CherryneChou\Admin\Transformers\ConfigTransformer;
-use CherryneChou\Admin\Contracts\ValidatorInterface;
 use CherryneChou\Admin\Filters\ConfigFilter;
 use League\Fractal\Pagination\IlluminatePaginatorAdapter;
 use Illuminate\Support\Facades\Validator;
@@ -13,18 +12,6 @@ use Illuminate\Support\Facades\DB;
 
 class ConfigController extends BaseController
 {
-	protected $rules = [
-        ValidatorInterface::RULE_CREATE => [
-            'key'       => 'required',
-            'label'     => 'required',
-            'type'      => 'required',
-        ],
-        ValidatorInterface::RULE_UPDATE => [
-            'key'       => 'required',
-            'label'     => 'required',
-            'type'      => 'required',
-        ]
-    ];
 
 	public function index(ConfigFilter $filter): \Illuminate\Http\JsonResponse|\Illuminate\Http\Resources\Json\JsonResource
     {
@@ -106,6 +93,12 @@ class ConfigController extends BaseController
      */
     protected function validateForm(string $rule)
     {
+        $rules =[
+            'key'       => 'required',
+            'label'     => 'required',
+            'type'      => 'required',
+        ];
+
         $message = [
             'required'   => trans('validation.attribute_not_empty')
         ];
@@ -116,7 +109,7 @@ class ConfigController extends BaseController
             'type'      => trans('admin.config.type'),
         ];
 
-        return Validator::make(request()->all(), $this->rules[$rule], $message, $attributes);
+        return Validator::make(request()->all(), $rules, $message, $attributes);
     }
 
     /**
