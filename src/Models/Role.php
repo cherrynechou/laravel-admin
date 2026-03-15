@@ -78,7 +78,7 @@ class Role extends Model
 
         $relatedModel = config('admin.database.menu_model');
 
-        return $this->belongsToMany($relatedModel, $pivotTable, 'role_id', 'menu_id');
+        return $this->belongsToMany($relatedModel, $pivotTable, 'role_id', 'menu_id')->withTimestamps();;
     }
 
     /**
@@ -92,7 +92,7 @@ class Role extends Model
 
         $relatedModel = config('admin.database.departments_model');
 
-        return $this->belongsToMany( $relatedModel,$pivotTable, 'role_id', 'department_id');
+        return $this->belongsToMany( $relatedModel,$pivotTable, 'role_id', 'department_id')->withTimestamps();;
     }
 
 
