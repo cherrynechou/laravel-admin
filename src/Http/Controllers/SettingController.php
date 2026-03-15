@@ -23,7 +23,7 @@ class SettingController extends BaseController
     {
         
         $config['title'] = config('admin.title');
-        $config['logo'] = admin_asset(config('admin.logo') ?: '/vender/laravel-admin/dist/images/logo.png');
+        $config['logo'] = admin_asset(config('admin.logo') ?: '/vendor/laravel-admin/dist/images/logo.png');
 
         return $this->success($config);
     }
