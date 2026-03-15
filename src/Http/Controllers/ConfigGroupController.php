@@ -90,7 +90,7 @@ class ConfigGroupController extends BaseController
     /**
      * @return \Illuminate\Validation\Validator
      */
-    protected function validateForm(string $rule)
+    protected function validateForm()
     {
         $rules =[
             'name'      => 'required',

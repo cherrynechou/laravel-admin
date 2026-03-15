@@ -31,7 +31,7 @@ class ConfigController extends BaseController
 
     public function store(): \Illuminate\Http\JsonResponse|\Illuminate\Http\Resources\Json\JsonResource
     {
-        $validator = $this->validateForm(ValidatorInterface::RULE_CREATE);
+        $validator = $this->validateForm();
 
         if($validator->fails()){
             $warning = $validator->messages()->first();
@@ -68,7 +68,7 @@ class ConfigController extends BaseController
 
     public function update(string $id): \Illuminate\Http\JsonResponse|\Illuminate\Http\Resources\Json\JsonResource
     {
-        $validator = $this->validateForm(ValidatorInterface::RULE_UPDATE);
+        $validator = $this->validateForm();
 
         if($validator->fails()){
             $warning = $validator->messages()->first();
@@ -91,7 +91,7 @@ class ConfigController extends BaseController
     /**
      * @return \Illuminate\Validation\Validator
      */
-    protected function validateForm(string $rule)
+    protected function validateForm()
     {
         $rules =[
             'key'       => 'required',
