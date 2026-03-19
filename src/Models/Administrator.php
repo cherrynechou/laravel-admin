@@ -17,7 +17,8 @@ use CherryneChou\Admin\Traits\HasPermissions;
 
 class Administrator extends Model implements AuthenticatableContract, Authorizable
 {
-    use HasFactory,
+    use Authenticatable,
+        HasFactory,
         HasApiTokens,
         HasPermissions,
         HasDateTimeFormatter,
@@ -126,7 +127,7 @@ class Administrator extends Model implements AuthenticatableContract, Authorizab
      */
     public function getAllPermissions()
     {
-        return $this->allPermissions()->pluck('slug');
+        return $this->isAdministrator() ? collect(['*.*.*']) : $this->allPermissions()->pluck('slug');
     }
 
 }
