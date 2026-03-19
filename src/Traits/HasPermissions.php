@@ -6,10 +6,7 @@ use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Support\Collection;
 
 trait HasPermissions
-{
-
-    protected $allPermissions = collect(['*.*.*']);
-    
+{   
     /**
      * Get all permissions of user.
      *
@@ -17,11 +14,11 @@ trait HasPermissions
      */
     public function allPermissions(): Collection
     {
-        if ($this->isAdministrator()) {
-           return $this->allPermissions;
-        }
-
-        return $this->roles->pluck('permissions')->flatten()->merge($this->permissions)->keyBy($this->getKeyName());
+        return $this->roles
+                ->pluck('permissions')
+                ->flatten()
+                ->merge($this->permissions)
+                ->keyBy($this->getKeyName());
     }
 
     /**
