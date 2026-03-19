@@ -31,7 +31,7 @@ class AttachmentCategoryController extends BaseController
 
     public function store(Request $request): \Illuminate\Http\JsonResponse|\Illuminate\Http\Resources\Json\JsonResource
     {
-        $validator = $this->validateForm(ValidatorInterface::RULE_CREATE);
+        $validator = $this->validateForm();
 
         if($validator->fails()){
             $warning = $validator->messages()->first();
@@ -64,7 +64,7 @@ class AttachmentCategoryController extends BaseController
 
     public function update(string $id): \Illuminate\Http\JsonResponse|\Illuminate\Http\Resources\Json\JsonResource
     {
-        $validator = $this->validateForm( ValidatorInterface::RULE_UPDATE );
+        $validator = $this->validateForm();
 
         if($validator->fails()){
             $warning = $validator->messages()->first();
@@ -89,7 +89,7 @@ class AttachmentCategoryController extends BaseController
     /**
      * @return \Illuminate\Validation\Validator
      */
-    protected function validateForm($rule)
+    protected function validateForm()
     {
 
         $rules =[
@@ -104,7 +104,7 @@ class AttachmentCategoryController extends BaseController
             'name'          => trans('admin.attachment.category.name'),
         ];
 
-        return Validator::make(request()->all(), $this->rules[$rule], $message, $attributes);
+        return Validator::make(request()->all(), $rules, $message, $attributes);
     }
 
     public function destroy(string $id): \Illuminate\Http\JsonResponse|\Illuminate\Http\Resources\Json\JsonResource

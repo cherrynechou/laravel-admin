@@ -97,7 +97,6 @@ class ConfigGroupController extends BaseController
             'key'       => 'required',
         ];
 
-
         $message = [
             'required'   => trans('validation.attribute_not_empty')
         ];

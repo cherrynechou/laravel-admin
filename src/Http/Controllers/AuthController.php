@@ -102,7 +102,6 @@ class AuthController extends BaseController
     }
 
 
-
     /**
      * 当前用户
      * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\Resources\Json\JsonResource

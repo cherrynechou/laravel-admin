@@ -5,9 +5,13 @@ namespace CherryneChou\Admin\Models;
 use CherryneChou\Admin\Abstracts\QueryFilter;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
+use CherryneChou\Admin\Traits\HssTreeAttributes;
+use CherryneChou\Admin\Traits\WithAttributes;
 
 class Department extends Model
 {
+    use HssTreeAttributes,WithAttributes;
+
  	/**
      * The attributes that are mass assignable.
      *
@@ -39,7 +43,7 @@ class Department extends Model
      */
     public function children()
     {
-        return $this->hasMany(Department::class, 'parent_id')->orderBy('sort')->with('children');
+        return $this->hasMany(Department::class, getParentColumn())->orderBy(getOrderColumn())->with('children');
     }
 
     /**
@@ -57,7 +61,7 @@ class Department extends Model
             $id = [$id];
         }
 
-        $followDepartmentIds = $this->whereIn('parent_id', $id)->pluck('id')->toArray();
+        $followDepartmentIds = $this->whereIn(getParentColumn(), $id)->pluck(getIdColumn())->toArray();
 
         if (! empty($followDepartmentIds)) {
             $followDepartmentIds = array_merge($followDepartmentIds, $this->findFollowDepartments($followDepartmentIds));

@@ -5,6 +5,8 @@ namespace CherryneChou\Admin\Models;
 use CherryneChou\Admin\Abstracts\QueryFilter;
 use CherryneChou\Admin\Traits\HasDateTimeFormatter;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
+use Illuminate\Contracts\Auth\Access\Authorizable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -13,7 +15,7 @@ use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Support\Facades\URL;
 use CherryneChou\Admin\Traits\HasPermissions;
 
-class Administrator extends Model
+class Administrator extends Model implements AuthenticatableContract, Authorizable
 {
     use HasFactory,
         HasApiTokens,

@@ -11,6 +11,7 @@ return [
   'admin.dict'            => 'Dictionary',
   'admin.department'      => 'Department',
   'admin.post'            => 'Post',
+  'admin.setting'         => 'Setting',
   'admin.log'             => 'Log',
   'admin.log.login'       => 'Login',
   'admin.log.operation'   => 'operation',

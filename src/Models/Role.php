@@ -147,6 +147,7 @@ class Role extends Model
         if (! $roleIds) {
             return collect();
         }
+        
         $related = config('admin.database.role_permissions_table');
 
         $model = new static();

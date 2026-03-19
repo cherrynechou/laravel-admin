@@ -7,8 +7,9 @@ use Illuminate\Support\Collection;
 
 trait HasPermissions
 {
-    protected $allPermissions;
 
+    protected $allPermissions = collect(['*.*.*']);
+    
     /**
      * Get all permissions of user.
      *
@@ -16,16 +17,11 @@ trait HasPermissions
      */
     public function allPermissions(): Collection
     {
-        if ($this->allPermissions) {
-            return $this->allPermissions;
+        if ($this->isAdministrator()) {
+           return $this->allPermissions;
         }
 
-        return $this->allPermissions =
-            $this->roles
-                ->pluck('permissions')
-                ->flatten()
-                ->merge($this->permissions)
-                ->keyBy($this->getKeyName());
+        return $this->roles->pluck('permissions')->flatten()->merge($this->permissions)->keyBy($this->getKeyName());
     }
 
     /**
@@ -46,10 +42,7 @@ trait HasPermissions
 
         $permissions = $this->allPermissions();
 
-        return $permissions->pluck('slug')->contains($ability) ?:
-            $permissions
-                ->pluck('id')
-                ->contains($ability);
+        return $permissions->pluck('slug')->contains($ability) ?:$permissions->pluck('id')->contains($ability);
     }
 
     /**
@@ -103,8 +96,7 @@ trait HasPermissions
 
         $roles = Helper::array($roles);
 
-        return $all->pluck('slug')->intersect($roles)->isNotEmpty() ?:
-            $all->pluck('id')->intersect($roles)->isNotEmpty();
+        return $all->pluck('slug')->intersect($roles)->isNotEmpty() ?: $all->pluck('id')->intersect($roles)->isNotEmpty();
     }
 
     /**

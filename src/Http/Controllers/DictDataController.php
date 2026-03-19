@@ -116,7 +116,7 @@ class DictDataController extends BaseController
     /**
      * @return \Illuminate\Validation\Validator
      */
-    protected function validateForm($rule)
+    protected function validateForm()
     {
         $rules =[
             'label'      => 'required',
@@ -133,7 +133,7 @@ class DictDataController extends BaseController
             'value'      => trans('admin.dict.value')    
         ];
 
-        return Validator::make(request()->all(), $this->rules[$rule], $message, $attributes);
+        return Validator::make(request()->all(), $rules, $message, $attributes);
     }
 
     /**

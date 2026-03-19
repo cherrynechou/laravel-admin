@@ -10,7 +10,7 @@ use CherryneChou\Admin\Models\Departments;
 
 trait HasDataScope
 {
-    protected $dataScopeRelations = [
+    protected array $dataScopeRelations = [
         'all' => 1,                 // 全部数据
         'custom' => 2,              // 自定义部门
         'department' => 3,          // 本部门数据
@@ -104,7 +104,6 @@ trait HasDataScope
         return $userIds->uniqid();
 
     }
-
 
 
     protected function getUserIdsByDepartmentId(array|Collection $departmentIds): Collection

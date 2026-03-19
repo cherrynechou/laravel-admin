@@ -29,6 +29,12 @@ class SettingController extends BaseController
     }
 
 
+    public public refreshCache()
+    {
+        // code...
+    }
+
+
     /**
      * 所有配置
      * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\Resources\Json\JsonResource
