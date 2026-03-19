@@ -29,7 +29,7 @@ class SettingController extends BaseController
     }
 
 
-    public public refreshCache()
+    public function refreshCache()
     {
         // code...
     }
