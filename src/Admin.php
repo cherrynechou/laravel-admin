@@ -197,6 +197,8 @@ class Admin
 
                 //获取网站配置
                 $router->get('/getWebConfig','SettingController@getWebConfig')->name('config.getWebConfig');
+                //刷新缓存    
+                $router->post('/refreshCache','SettingController@refreshCache')->name('config.refreshCache');
              });
 
            

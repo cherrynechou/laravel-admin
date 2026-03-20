@@ -16,6 +16,19 @@ class SettingController extends BaseController
     use HasFilterData;
 
     /**
+     * @var SysSettingServiceInterface
+     */
+    protected SysSettingServiceInterface  $settingService;
+
+    /**
+     * @param AuthorizationServiceInterface $authorizationService
+     */
+    public function __construct(SysSettingServiceInterface $settingService)
+    {
+        $this->settingService = $settingService;
+    }
+
+    /**
      * 获取网站配置
      * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\Resources\Json\JsonResource
      */
@@ -29,9 +42,15 @@ class SettingController extends BaseController
     }
 
 
+    /**
+     *  刷新缓存
+     * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\Resources\Json\JsonResource
+     */
     public function refreshCache()
     {
         // code...
+        $this->settingService->refreshCache();
+        return $this->success();
     }
 
 
@@ -63,20 +82,9 @@ class SettingController extends BaseController
         $params = request()->all();
         //需要更新数据
         $updates = $this->filterNullData($params);
-        //数据库中的数据
-        $oldConfigDatas = Config::query()->where('group_key', $groupKey)->get();
-
-        //更改的值
-        $updatedValues = [];
-        foreach ($updates as $key => $value) {
-            $found = $oldConfigDatas->where('key', $key)->first();
-            if($found->value != $value){
-                $changed['id'] = $found->id;
-                $changed['value'] = $value;
-                $updatedValues[] = $changed;
-            }
-        }
-
+        //更改的数据
+        $updatedValues = $this->settingService->getCurrentConfig($groupKey, $updates);
+        
         try{
             DB::transaction(function () use ($updatedValues) {
                 foreach ($updatedValues as $value) {

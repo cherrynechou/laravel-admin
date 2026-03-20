@@ -144,6 +144,8 @@ return [
 
     'default_logo'  => '/vendor/laravel-admin/dist/images/logo.png',
 
+    'config_cache_key'  => env('CONFIG_CACHE_KEY', 'app_config');
+
     /*
     |
     | Permission settings for all admin pages.

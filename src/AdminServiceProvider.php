@@ -7,6 +7,8 @@ use CherryneChou\Admin\Support\Context;
 use CherryneChou\Admin\Events\UserLogined;
 use CherryneChou\Admin\Listeners\UserLoginRecord;
 use CherryneChou\Admin\Support\Helper;
+use CherryneChou\Admin\Contracts\SysSettingServiceInterface;
+use CherryneChou\Admin\Services\SysSettingService;
 use CherryneChou\Admin\Contracts\AuthorizationServiceInterface;
 use CherryneChou\Admin\Services\AuthorizationService;
 use Illuminate\Support\Facades\Event;
@@ -103,6 +105,7 @@ class AdminServiceProvider extends ServiceProvider
     protected function registerContacts()
     {
         $this->app->bind(AuthorizationServiceInterface::class, AuthorizationService::class);
+        $this->app->bind(SysSettingServiceInterface::class, SysSettingService::class);
     }
 
     /**
