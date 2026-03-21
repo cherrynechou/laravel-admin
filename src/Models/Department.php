@@ -5,12 +5,12 @@ namespace CherryneChou\Admin\Models;
 use CherryneChou\Admin\Abstracts\QueryFilter;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
-use CherryneChou\Admin\Traits\HssTreeAttributes;
+use CherryneChou\Admin\Traits\HasTreeAttributes;
 use CherryneChou\Admin\Traits\WithAttributes;
 
 class Department extends Model
 {
-    use HssTreeAttributes,WithAttributes;
+    use HasTreeAttributes,WithAttributes;
 
  	/**
      * The attributes that are mass assignable.
