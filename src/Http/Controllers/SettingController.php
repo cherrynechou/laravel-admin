@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Arr;
 use CherryneChou\Admin\Transformers\ConfigGroupTransformer;
+use CherryneChou\Admin\Contracts\SysSettingServiceInterface;
 
 class SettingController extends BaseController
 {

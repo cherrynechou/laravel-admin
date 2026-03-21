@@ -3,6 +3,7 @@ namespace CherryneChou\Admin\Services;
 
 use CherryneChou\Admin\Models\Config;
 use CherryneChou\Admin\Models\ConfigGroup;
+use CherryneChou\Admin\Contracts\SysSettingServiceInterface;
 use Illuminate\Support\Facades\Log;
 
 class SysSettingService implements SysSettingServiceInterface
