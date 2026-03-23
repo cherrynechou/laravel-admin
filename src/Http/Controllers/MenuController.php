@@ -19,7 +19,7 @@ class MenuController extends BaseController
      */
     public function index(): \Illuminate\Http\JsonResponse|\Illuminate\Http\Resources\Json\JsonResource
     {
-        $resources = Menu::visible()->orderBy('sort')->->get();
+        $resources = Menu::visible()->orderBy('sort')->get();
 
         $menuResources = fractal()
                         ->collection($resources)

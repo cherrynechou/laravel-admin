@@ -3,7 +3,7 @@
 namespace CherryneChou\Admin\Models;
 
 use CherryneChou\Admin\Traits\HasDateTimeFormatter;
-use CherryneChou\Aadmin\Traits\HasModelTreeAttributes;
+use CherryneChou\Admin\Traits\HasModelTreeAttributes;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Builder;
