@@ -2,6 +2,8 @@
 
 namespace CherryneChou\Admin\Traits;
 
+use Spatie\EloquentSortable\SortableTrait;
+
 trait HasModelTreeAttributes
 {
     use SortableTrait;
@@ -89,6 +91,20 @@ trait HasModelTreeAttributes
     }
 
 
+
+    /**
+     * Get all elements.
+     *
+     * @return static[]|\Illuminate\Support\Collection
+     */
+    public function allNodes()
+    {
+        return $this->callQueryCallbacks(new static())
+            ->orderBy($this->getOrderColumn(), 'asc')
+            ->get();
+    }
+
+
     /**
      * Set the order of branches in the tree.
      *
@@ -129,5 +145,22 @@ trait HasModelTreeAttributes
                 static::saveOrder($branch['children'], $branch['id'], $depth + 1);
             }
         }
+    }
+
+
+    /**
+     * {@inheritdoc}
+     */
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::deleting(function ($model) {
+            static::query()
+                ->where($model->getParentColumn(), $model->getKey())
+                ->get()
+                ->each
+                ->delete();
+        });
     }
 }

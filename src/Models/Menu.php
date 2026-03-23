@@ -6,6 +6,7 @@ use CherryneChou\Admin\Traits\HasDateTimeFormatter;
 use CherryneChou\Aadmin\Traits\HasModelTreeAttributes;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Spatie\EloquentSortable\Sortable;
@@ -16,7 +17,7 @@ class Menu extends Model implements Sortable
         MenuCache,
         HasModelTreeAttributes {
             allNodes as treeAllNodes;
-            ModelTree::boot as treeBoot;
+            HasModelTreeAttributes::boot as treeBoot;
         }
 
     protected $guarded = ['id'];
@@ -93,6 +94,12 @@ class Menu extends Model implements Sortable
     public function allChildren()
     {
         return $this->children()->with('allChildren');
+    }
+
+
+    public function scopeVisible(Builder $query)
+    {
+        return $query->where('visible', 1);
     }
 
     /**

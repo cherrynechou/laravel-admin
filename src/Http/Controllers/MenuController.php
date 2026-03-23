@@ -7,6 +7,7 @@ use CherryneChou\Admin\Support\Helper;
 use CherryneChou\Admin\Transformers\MenuTransformer;
 use CherryneChou\Admin\Models\Menu;
 use CherryneChou\Admin\Traits\RestfulResponse;
+use CherryneChou\Admin\Enums\MenuVisible;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
@@ -18,7 +19,7 @@ class MenuController extends BaseController
      */
     public function index(): \Illuminate\Http\JsonResponse|\Illuminate\Http\Resources\Json\JsonResource
     {
-        $resources = Menu::query()->orderBy('sort')->get();
+        $resources = Menu::visible()->orderBy('sort')->->get();
 
         $menuResources = fractal()
                         ->collection($resources)
@@ -187,6 +188,59 @@ class MenuController extends BaseController
             return $this->failed($exception->getMessage());
         }
     }
+
+    /**
+     * 显示菜单
+     * @param $id
+     */
+    public function display(string $id)
+    {
+        try {
+            DB::beginTransaction();
+
+            $menu = Menu::query()->find($id);
+
+            $menu->visible = MenuVisible::display->value;
+            $menu->save();
+
+            DB::commit();
+
+            return $this->success([],trans('admin.switch_succeeded'));
+
+        }catch (\Exception $exception){
+
+            DB::rollBack();
+
+            return $this->failed($exception->getMessage());
+        }
+    }
+
+    /**
+     * 隐藏菜单
+     * @param $id
+     */
+    public function hide(string $id)
+    {
+        try {
+            DB::beginTransaction();
+
+            $menu = Menu::query()->find($id);
+
+            $menu->visible = MenuVisible::hide->value;
+            $menu->save();
+
+            DB::commit();
+
+            return $this->success([],trans('admin.switch_succeeded'));
+
+        }catch (\Exception $exception){
+
+            DB::rollBack();
+
+            return $this->failed($exception->getMessage());
+        }
+    }
+
 
     /**
      * @param $id

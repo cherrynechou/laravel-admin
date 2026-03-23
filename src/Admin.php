@@ -153,6 +153,11 @@ class Admin
 
                     //更改菜单的状态
                     $router->patch('/menu/{menu}/switch','MenuController@switch')->name('menu.switch');
+                    //显示菜单
+                    $router->patch('/menu/{menu}/display','MenuController@display')->name('menu.display');
+                    //隐藏菜单
+                    $router->patch('/menu/{menu}/hide','MenuController@hide')->name('menu.hide');
+
                     //重置用户密码
                     $router->patch('/user/{user}/resetPassword','UserController@resetPassword')->name('user.reset.password');
                     //更改用户密码
