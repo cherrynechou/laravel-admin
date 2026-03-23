@@ -3,16 +3,30 @@
 namespace CherryneChou\Admin\Models;
 
 use CherryneChou\Admin\Traits\HasDateTimeFormatter;
+use CherryneChou\Aadmin\Traits\HasModelTreeAttributes;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Spatie\EloquentSortable\Sortable;
 
-class Menu extends Model
+class Menu extends Model implements Sortable
 {
-    use HasDateTimeFormatter,MenuCache;
+    use HasDateTimeFormatter,
+        MenuCache,
+        HasModelTreeAttributes {
+            allNodes as treeAllNodes;
+            ModelTree::boot as treeBoot;
+        }
 
     protected $guarded = ['id'];
+
+    /**
+     * @var array
+     */
+    protected $sortable = [
+        'sort_when_creating' => true,
+    ];
 
     /**
      * Create a new Eloquent model instance.
@@ -79,6 +93,59 @@ class Menu extends Model
     public function allChildren()
     {
         return $this->children()->with('allChildren');
+    }
+
+    /**
+     * Get all elements.
+     *
+     * @param  bool  $force
+     * @return static[]|\Illuminate\Support\Collection
+     */
+    public function allNodes(bool $force = false)
+    {
+        if ($force || $this->queryCallbacks) {
+            return $this->fetchAll();
+        }
+
+        return $this->remember(function () {
+            return $this->fetchAll();
+        });
+    }
+
+    /**
+     * Fetch all elements.
+     *
+     * @return static[]|\Illuminate\Support\Collection
+     */
+    public function fetchAll()
+    {
+        return $this->withQuery(function ($query) {
+            if (static::withPermission()) {
+                $query = $query->with('permissions');
+            }
+
+            return $query->with('roles');
+        })->treeAllNodes();
+    }
+
+    /**
+     * Determine if enable menu bind permission.
+     *
+     * @return bool
+     */
+    public static function withPermission()
+    {
+        return config('admin.menu.bind_permission') && config('admin.permission.enable');
+    }
+
+    /**
+     * Determine if enable menu bind role.
+     *
+     * @return bool
+     */
+    public static function withRole()
+    {
+        return (bool) config('admin.permission.enable');
     }
  
     /**
