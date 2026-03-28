@@ -4,6 +4,7 @@ namespace CherryneChou\Admin\Models;
 
 use CherryneChou\Admin\Traits\HasDateTimeFormatter;
 use CherryneChou\Admin\Traits\HasModelTreeAttributes;
+use CherryneChou\Admin\Traits\WithAttributes;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Builder;
@@ -15,6 +16,7 @@ class Menu extends Model implements Sortable
 {
     use HasDateTimeFormatter,
         MenuCache,
+        WithAttributes,
         HasModelTreeAttributes {
             allNodes as treeAllNodes;
             HasModelTreeAttributes::boot as treeBoot;

@@ -147,6 +147,11 @@ trait HasModelTreeAttributes
         }
     }
 
+    protected function determineOrderColumnName()
+    {
+        return $this->getOrderColumn();
+    }
+
 
     /**
      * {@inheritdoc}

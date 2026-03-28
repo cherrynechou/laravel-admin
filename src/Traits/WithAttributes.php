@@ -16,7 +16,7 @@ trait WithAttributes
     /**
      * @var string
      */
-    protected string $orderColumn = 'order';
+    protected string $orderColumn = 'sort';
 
     /**
      * @var string
