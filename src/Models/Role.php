@@ -2,7 +2,7 @@
 
 namespace CherryneChou\Admin\Models;
 
-use CherryneChou\Admin\Abstracts\QueryFilter;
+use CherryneChou\Admin\Traits\HasScopeFilterable;
 use CherryneChou\Admin\Traits\HasDateTimeFormatter;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -11,7 +11,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Role extends Model
 {
-    use HasDateTimeFormatter;
+    use HasDateTimeFormatter,
+        HasScopeFilterable;
 
     const ADMINISTRATOR = 'administrator';
 
@@ -30,12 +31,6 @@ class Role extends Model
         $connection = config('admin.database.connection') ?: config('database.default');
         $this->setConnection($connection);
         $this->setTable(config('admin.database.roles_table'));
-    }
-
-
-    public function scopeFilter($query, QueryFilter $filters)
-    {
-        return $filters->apply($query);
     }
 
 

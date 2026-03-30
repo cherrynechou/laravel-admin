@@ -3,7 +3,7 @@
 namespace CherryneChou\Admin\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use CherryneChou\Admin\Abstracts\QueryFilter;
+use CherryneChou\Admin\Traits\HasScopeFilterable;
 
 /**
  * Class SystemConfig.
@@ -12,6 +12,8 @@ use CherryneChou\Admin\Abstracts\QueryFilter;
  */
 class Config extends Model 
 {
+    use HasScopeFilterable;
+
 	/**
      * The attributes that are mass assignable.
      *
@@ -30,10 +32,5 @@ class Config extends Model
         $connection = config('admin.database.connection') ?: config('database.default');
         $this->setConnection($connection);
         $this->setTable(config('admin.database.config_table'));
-    }
-
-    public function scopeFilter($query, QueryFilter $filters)
-    {
-        return $filters->apply($query);
     }
 }

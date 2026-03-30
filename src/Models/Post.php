@@ -1,12 +1,14 @@
 <?php
 namespace CherryneChou\Admin\Models;
 
-use CherryneChou\Admin\Abstracts\QueryFilter;
+use CherryneChou\Admin\Traits\HasScopeFilterable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
 
 class Post extends Model
 {
+    use HasScopeFilterable;
+
 	/**
      * The attributes that are mass assignable.
      *
@@ -25,11 +27,5 @@ class Post extends Model
         $connection = config('admin.database.connection') ?: config('database.default');
         $this->setConnection($connection);
         $this->setTable(config('admin.database.posts_table'));
-    }
-
-
-    public function scopeFilter($query, QueryFilter $filters)
-    {
-        return $filters->apply($query);
     }
 }

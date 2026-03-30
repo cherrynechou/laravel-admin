@@ -2,8 +2,8 @@
 
 namespace CherryneChou\Admin\Models;
 
-use CherryneChou\Admin\Abstracts\QueryFilter;
 use CherryneChou\Admin\Traits\HasDateTimeFormatter;
+use CherryneChou\Admin\Traits\HasScopeFilterable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
@@ -23,6 +23,7 @@ class Administrator extends Model implements AuthenticatableContract, Authorizab
         HasApiTokens,
         HasPermissions,
         HasDateTimeFormatter,
+        HasScopeFilterable,
         SoftDeletes;
 
     const DEFAULT_ID = 1;
@@ -61,16 +62,6 @@ class Administrator extends Model implements AuthenticatableContract, Authorizab
         $connection = config('admin.database.connection') ?: config('database.default');
         $this->setConnection($connection);
         $this->setTable(config('admin.database.users_table'));
-    }
-
-    /**
-     * @param $query
-     * @param QueryFilter $filters
-     * @return \Illuminate\Database\Eloquent\Builder
-     */
-    public function scopeFilter($query, QueryFilter $filters)
-    {
-        return $filters->apply($query);
     }
 
 

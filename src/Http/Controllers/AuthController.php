@@ -12,7 +12,6 @@ use CherryneChou\Admin\Admin;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Carbon;
 use CherryneChou\Admin\Events\UserLogined;
-use Mews\Captcha\Facades\Captcha;
 use CherryneChou\Admin\Contracts\AuthorizationServiceInterface;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -137,19 +136,6 @@ class AuthController extends BaseController
         $menus = Helper::listToTree($menuResources);
 
         return $this->success($menus);
-    }
-
-    /**
-     * 获取验证码
-     */
-    public function getCaptcha()
-    {
-        $captchaData = Captcha::create('default', true); // 第二个参数 true 表示以数组形式返回
-
-        return $this->success([
-            'key' => $captchaData['key'],
-            'img' => $captchaData['img'], // base64 图片
-        ]);
     }
 
 

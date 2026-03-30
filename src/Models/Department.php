@@ -2,15 +2,17 @@
 
 namespace CherryneChou\Admin\Models;
 
-use CherryneChou\Admin\Abstracts\QueryFilter;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
 use CherryneChou\Admin\Traits\HasModelTreeAttributes;
+use CherryneChou\Admin\Traits\HasScopeFilterable;
 use CherryneChou\Admin\Traits\WithAttributes;
 
 class Department extends Model
 {
-    use HasModelTreeAttributes,WithAttributes;
+    use HasModelTreeAttributes,
+        HasScopeFilterable,
+        WithAttributes;
 
  	/**
      * The attributes that are mass assignable.
@@ -32,11 +34,6 @@ class Department extends Model
         $this->setTable(config('admin.database.departments_table'));
     }
 
-
-    public function scopeFilter($query, QueryFilter $filters)
-    {
-        return $filters->apply($query);
-    }
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany

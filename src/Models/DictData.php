@@ -2,7 +2,7 @@
 
 namespace CherryneChou\Admin\Models;
 
-use CherryneChou\Admin\Abstracts\QueryFilter;
+use CherryneChou\Admin\Traits\HasScopeFilterable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
 
@@ -13,6 +13,8 @@ use Illuminate\Database\Eloquent\Builder;
  */
 class DictData extends Model 
 {
+    use HasScopeFilterable;
+
     /**
      * The attributes that are mass assignable.
      *
@@ -33,11 +35,6 @@ class DictData extends Model
         $this->setTable(config('admin.database.dict_data_table'));
     }
 
-
-    public function scopeFilter($query, QueryFilter $filters)
-    {
-        return $filters->apply($query);
-    }
 
     /**
      *  作用域限制为仅包含给定类型的用户

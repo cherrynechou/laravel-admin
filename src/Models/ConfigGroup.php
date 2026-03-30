@@ -3,10 +3,12 @@
 namespace CherryneChou\Admin\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use CherryneChou\Admin\Abstracts\QueryFilter;
+use CherryneChou\Admin\Traits\HasScopeFilterable;
 
 class ConfigGroup extends Model 
 {
+    use HasScopeFilterable;
+
 	/**
      * The attributes that are mass assignable.
      *
@@ -32,8 +34,4 @@ class ConfigGroup extends Model
         return $this->hasMany(Config::class, 'group_id');
     }
 
-    public function scopeFilter($query, QueryFilter $filters)
-    {
-        return $filters->apply($query);
-    }
 }

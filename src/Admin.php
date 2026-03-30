@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Auth;
 
 class Admin
 {
-    const VERSION = '2.3.0';
+    const VERSION = '3.0.0';
 
 
     /**
@@ -207,12 +207,8 @@ class Admin
              });
 
            
-
-
             //登录
             $authController = config('admin.auth.controller', AuthController::class);
-            //获取验证码
-            $router->get('/getCaptcha',$authController . '@getCaptcha')->name('getCaptcha');
             //当前用户
             $router->get('/currentUser', $authController . '@currentUser')->name('current.user');
             //菜单

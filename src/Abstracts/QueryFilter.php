@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 
 /**
  * Class QueryFilter
- * @package App\Abstracts
+ * @package CherryneChou\Admin\Abstracts
  */
 abstract class QueryFilter
 {
