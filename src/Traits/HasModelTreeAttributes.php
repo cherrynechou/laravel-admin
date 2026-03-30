@@ -23,7 +23,7 @@ trait HasModelTreeAttributes
      *
      * @return string
      */
-    public function getIdColumn()
+    public function getIdColumn(): string
     {
         return property_exists($this, 'idColumn') ? $this->idColumn : 'id';
     }
@@ -34,7 +34,7 @@ trait HasModelTreeAttributes
      *
      * @return string
      */
-    public function getTitleColumn()
+    public function getTitleColumn(): string
     {
         return property_exists($this, 'titleColumn') ? $this->titleColumn : 'title';
     }
@@ -43,7 +43,7 @@ trait HasModelTreeAttributes
 	/**
      * @return string
      */
-    public function getParentColumn()
+    public function getParentColumn(): string
     {
         return property_exists($this, 'parentColumn') ? $this->parentColumn : 'parent_id';
     }
@@ -54,7 +54,7 @@ trait HasModelTreeAttributes
      *
      * @return string
      */
-    public function getOrderColumn()
+    public function getOrderColumn(): string
     {
         return property_exists($this, 'orderColumn') ? $this->orderColumn : 'order';
     }
@@ -64,7 +64,7 @@ trait HasModelTreeAttributes
      *
      * @return string
      */
-    public function getDepthColumn()
+    public function getDepthColumn(): string
     {
         return property_exists($this, 'depthColumn') ? $this->depthColumn : '';
     }
@@ -72,7 +72,7 @@ trait HasModelTreeAttributes
     /**
      * @return string
      */
-    public function getDefaultParentId()
+    public function getDefaultParentId(): string
     {
         return property_exists($this, 'defaultParentId') ? $this->defaultParentId : '0';
     }
@@ -83,7 +83,7 @@ trait HasModelTreeAttributes
      * @param  \Closure|null  $query
      * @return $this
      */
-    public function withQuery(\Closure $query = null)
+    public function withQuery(?\Closure $query = null): self
     {
         $this->queryCallbacks[] = $query;
 

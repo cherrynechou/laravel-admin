@@ -70,7 +70,7 @@ class Administrator extends Model implements AuthenticatableContract, Authorizab
      *
      * @return mixed|string
      */
-    public function getAvatar()
+    public function getAvatar(): string
     {
         $avatar = $this->avatar;
 
