@@ -84,7 +84,7 @@ class SettingController extends BaseController
         //需要更新数据
         $updates = $this->filterNullData($params);
         //更改的数据
-        $updatedValues = $this->settingService->getCurrentConfig($groupKey, $updates);
+        $updatedValues = $this->settingService->getChangedConfig($groupKey, $updates);
         
         try{
             DB::transaction(function () use ($updatedValues) {
