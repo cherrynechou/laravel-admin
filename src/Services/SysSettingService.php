@@ -48,7 +48,7 @@ class SysSettingService implements SysSettingServiceInterface
 
         //更改的值
         $updatedValues = [];
-        foreach ($updates as $key => $value) {
+        foreach ($updated as $key => $value) {
             $found = $oldConfigDatas->where('key', $key)->first();
             if($found->value != $value){
                 $changed['id'] = $found->id;
